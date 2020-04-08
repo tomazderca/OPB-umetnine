@@ -1,4 +1,4 @@
-# OPB-kvaliteta-zivljenja
-OPB projekt na temo kvalitete življenja v Evropi
+# OPB-umetnine
+OPB projekt na temo umetnin in umetnikov
 
 ![picture](OPB_umetnine.png)
