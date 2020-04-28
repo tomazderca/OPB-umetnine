@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-</head>
-<body>
+{% extends "homepage/base.html" %}
+{% block content %}
     {% for post in izdelki %}
         <h1>{{ post.naslov }}</h1>
-        <p>Ustvaril nov {{ post.avtor }} {{ post.datum }} </p>
+        <p>Ustvaril nov {{ post.avtor }}, {{ post.datum }} </p>
         <p>{{ post.vsebina }}</p>
     {% endfor %}
-</body>
-</html>
+{% endblock content %}

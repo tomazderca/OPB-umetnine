@@ -23,5 +23,5 @@ def home(request):
 
 
 def about(request):
-    return render(request, 'homepage/about.html')
+    return render(request, 'homepage/about.html', {'naslov': 'About'})
 
