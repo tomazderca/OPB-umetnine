@@ -7,13 +7,14 @@ izdelki = [
         'vsebina': 'Slika',
         'datum': 'danes'
     },
-{
+    {
         'avtor': 'Tip2',
         'naslov': 'Rdeca Veja',
         'vsebina': 'Kip',
         'datum': 'vceraj'
     },
 ]
+
 
 def home(request):
     popularno = {
@@ -24,4 +25,3 @@ def home(request):
 
 def about(request):
     return render(request, 'homepage/about.html', {'naslov': 'About'})
-
