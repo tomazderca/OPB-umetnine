@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+    {% for post in izdelki %}
+        <h1>{{ post.naslov }}</h1>
+        <p>Ustvaril {{ post.avtor  }} {{ post.datum }}</p>
+        <p>{{ post.vsebina }}</p>
+    {% endfor %}
+</body>
+</html>
