@@ -34,3 +34,6 @@ def fresco(request):
 
 def madonna(request):
     return render(request, 'homepage/2.html', {'naslov': 'Madonna'})
+
+def artisti(request):
+    return render(request, 'homepage/artisti.html', {'naslov': 'artisti'})
