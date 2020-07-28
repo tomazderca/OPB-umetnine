@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView
 
 from .models import User
-from .forms import UserForm
+from .forms import UserForm, UserLoginForm
 
 # Create your views here.
 
@@ -25,5 +25,7 @@ class RegisterView(CreateView):
     template_name = 'account/register.html'
 
 
-# def user_view(request):
-#    usr =
+class LoginView(CreateView):
+    model = User
+    form_class = UserLoginForm
+    template_name = 'account/login.html'

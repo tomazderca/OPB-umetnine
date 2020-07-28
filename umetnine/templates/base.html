@@ -77,11 +77,16 @@
     </nav>
     {% endblock navbar %}
 
-    {% if naslov %}
+    {% block naslov %}
+    <title>Umetnie</title>
+    {% endblock naslov %}
+
+    <!-- {% if naslov %}
         <title>{{ naslov }}</title>
     {% else %}
         <title>Umetnine</title>
     {% endif %}
+    -->
 
 </head>
 

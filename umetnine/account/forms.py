@@ -51,7 +51,6 @@ class UserForm(forms.ModelForm):
             'password2',
         ]
 
-
     def clean_born(self, *args, **kwargs):
         born = self.cleaned_data.get('born')
         if 1900 < born < datetime.date.today().year:
@@ -65,3 +64,26 @@ class UserForm(forms.ModelForm):
         if not p1 == p2:
             raise forms.ValidationError('Passwords do not match.')
         return p1
+
+
+class UserLoginForm(forms.ModelForm):
+    email = forms.EmailField(
+                label='Email',
+                widget=forms.EmailInput(attrs={'class': 'form-control'})
+                )
+    password1 = forms.CharField(
+                label='Password',
+                widget=forms.PasswordInput(
+                    attrs={
+                        'placeholder': 'password',
+                        'class': 'form-control',
+                        }
+                    )
+                )
+
+    class Meta:
+        model = User
+        fields = [
+            'email',
+            'password1',
+        ]
