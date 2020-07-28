@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,12 +10,16 @@
     
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
     <!-- Awesome Fonts -->
     <script src="https://kit.fontawesome.com/198eb0a8ac.js" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
 
+    {% block css_import %}
+    {% endblock css_import %}
+
+    {% block navbar %}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Umetnine</a>
 
@@ -68,19 +74,18 @@
                 </li>
             </ul>
         </div>
-
-    {% block css_import %}
-
-    {% endblock %}
-
     </nav>
+    {% endblock navbar %}
 
     {% if naslov %}
         <title>{{ naslov }}</title>
     {% else %}
         <title>Umetnine</title>
     {% endif %}
+
 </head>
+
+
 <body>
 <div class="container">
     {% block content %}
