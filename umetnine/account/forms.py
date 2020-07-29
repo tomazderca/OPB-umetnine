@@ -7,7 +7,7 @@ from .models import User
 class UserForm(forms.ModelForm):
     name = forms.CharField(
                 label='Name', 
-                widget=forms.TextInput(attrs={'class': 'form-control'})
+                widget=forms.TextInput(attrs={'class': 'form-control', 'name':'name'})
                 )
     surname = forms.CharField(
                 label='Surname',
@@ -58,7 +58,7 @@ class UserForm(forms.ModelForm):
         else:
             raise forms.ValidationError("This is not a valid year.")
 
-    def clean_password(self, *args, **kwargs):
+    def clean_passwords(self, *args, **kwargs):
         p1 = self.cleaned_data.get('password1')
         p2 = self.cleaned_data.get('password2')
         if not p1 == p2:

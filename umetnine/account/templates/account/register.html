@@ -34,14 +34,14 @@
         <hr>
 
             <div class="form-group">
-                <form methond="POST">
+                <form action="data/" method="POST">
                     {% csrf_token %}
                     {{ form.as_p }}
+                    {{ form.errors }}
 
-                <button class="btn btn-secondary">Register</button>    
+                <button class="btn btn-secondary" type="submit">Register</button>    
                 </form>
             </div>
-            <!-- close -->
         </div>
     </div>
 </div>
