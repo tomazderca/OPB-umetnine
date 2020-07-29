@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block css_import %}
+<!-- {% load static %} -->
+<link rel="stylesheet" type="text/css" href="{% static 'account/style-login.css' %}">
+{% endblock css_import %}
+
+<!-- we do not want the navigation bar -->
+{% block navbar %}
+{% endblock navbar %}
+
+
+{% block naslov %}
+<title>Login</title>
+{% endblock naslov %}
+
+{% block content %}
+
+
+<div class="container">
+    <div class="row">
+        <!-- left side -->
+        <div class="col-md-7">
+            <h1 class="text-left">Happy to see you back</h1>
+            <div class="lefts">
+                <p clsass="text-left">We hope you are having a good time exploring the seas of art expression
+                    as well as contributing your art droplets in our ocean.
+                </p>
+            </div>
+        </div>
+
+        <!-- right side -->
+        <div class="col-md-5">
+            <div class="row">
+                <h1 class="text-right">Log in...</h1>
+            </div>
+           
+        <hr>
+
+            <div class="form-group">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+
+                <button class="btn btn-secondary" type="submit">Get to it</button>    
+                </form>
+            </div>
+
+            <a href="{% url 'register' %}" class="register">Not a member yet?</a>
+            
+        </div>
+    
+    </div>
+</div>
+
+{% endblock %}

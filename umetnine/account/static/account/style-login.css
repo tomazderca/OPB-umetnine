@@ -1,0 +1,102 @@
+
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    background-image: url('images/paint1.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: new time roman;
+}
+
+h1{
+    margin-top: 40px;
+    margin-left: 20px;
+    font-size: 40px;
+    color: white;
+    font-family: sans-serif;
+}
+
+p{
+    font-size: 17px;
+    color: white;
+    margin-bottom: 0em;
+}
+
+h3{
+    font-size: 25px;
+    color: white;
+}
+
+.col-md-5{
+    margin-top: 80px;
+    margin-bottom: 80px;
+    box-shadow: -1px 1px 60px 10px black;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+label{
+    font-weight: normal;
+    margin-top: 15px;
+    color: white;
+    font-size: 19px;
+    width: 23%;
+}
+
+.text-left{
+    margin-top: 170px;
+}
+
+.form-control{
+    background: transparent;
+    border-radius: 0px;
+    font-size: 20px;
+    height: 40px;
+    color: white;
+    margin-top: 10px;
+    float: right;
+    width: 76%;
+    border: none;
+    border-bottom: 1px white solid;
+}
+
+.btn{
+    width: 100%;
+    background: none;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 2px solid;
+    padding: 10px;
+    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
+    margin: 12px 0;
+    margin-bottom: 15px;
+    margin-top: 30px;
+
+}
+
+.lefts{
+    margin-right: 80px;
+}
+
+.register{
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    /* border-top: 3px black dotted; */
+    float: right;
+    background-image: linear-gradient(to right, black 60%, rgba(255,255,255,0) 0%);
+    background-position: top;
+    background-size: 20px 2px;
+    background-repeat: repeat-x;
+}
+
+a:hover{
+    color: orange;
+}

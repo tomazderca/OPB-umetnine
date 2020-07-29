@@ -9,6 +9,8 @@
 {% block navbar %}
 {% endblock navbar %}
 
+
+
 {% block content %}
 
 <div class="container">
@@ -34,12 +36,29 @@
         <hr>
 
             <div class="form-group">
-                <form action="data/" method="POST">
+                <!--<form action="data/" method="POST"> -->
+                <form action='{{ action }}' method="POST">
                     {% csrf_token %}
                     {{ form.as_p }}
-                    {{ form.errors }}
+                    
+                    <button class="btn btn-secondary" type="submit">Register</button>    
+                    
+                    <!-- obravnavamo mozne napacne vnose -->
+                    <!--{% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ error|escape }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                    {% endif %}-->
 
-                <button class="btn btn-secondary" type="submit">Register</button>    
                 </form>
             </div>
         </div>

@@ -79,3 +79,8 @@ label{
 .lefts{
     margin-right: 80px;
 }
+
+.errorlist li {
+    color: rgb(255, 218, 116);
+    margin-left: 15px;
+}
