@@ -1,7 +1,6 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView, TemplateView
-from django.urls import reverse
-from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.views.generic import CreateView, TemplateView
+
 
 from .models import User
 from .forms import UserForm, UserLoginForm
@@ -27,7 +26,7 @@ class RegisterView(CreateView):
     template_name = 'account/register.html'
 
     def post(self, request):
-        form = UserForm(request.POST)
+        form = UserForm(request.POST or None)
         if form.is_valid():
             name = form.cleaned_data['name']
             surname = form.cleaned_data['surname']
@@ -47,7 +46,7 @@ class RegisterView(CreateView):
             }
             form.save()
             form = UserForm()
-            return render(request, 'account/data.html', context)
+            return render(request, "account/profile.html", context)
 
         return render(request, 'account/register.html', {'form': form})
 
@@ -58,12 +57,12 @@ class LoginView(CreateView):
     template_name = 'account/login.html'
 
 
-class DataView(TemplateView):    
-    template_name = 'account/data.html'
+class ProfileView(TemplateView):
+    template_name = 'account/profile.html'
     form = UserForm()
 
 
-def data_view(request):
+def profile_view(request):
     form = UserForm(request.GET)
     context={
         'name': request.GET.get('name'),
@@ -72,7 +71,7 @@ def data_view(request):
         'country': request.GET.get('Country'),
         'password': request.GET.get('Password'),
         }
-    return render(request, 'account/data.html', context)
+    return render(request, 'account/profile.html', context)
 
 
 def user_list_view(request):

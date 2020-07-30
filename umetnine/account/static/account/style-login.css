@@ -82,7 +82,7 @@ label{
     margin-right: 80px;
 }
 
-.register{
+.to-register{
     color: white;
     text-align: center;
     font-size: 20px;
@@ -95,6 +95,17 @@ label{
     background-position: top;
     background-size: 20px 2px;
     background-repeat: repeat-x;
+}
+
+a{
+    float: right;
+    width: 100%;
+    text-align: center;
+    color: rgb(62, 122, 212);
+    font-size: 20px;
+    padding-bottom: 10px;
+
+
 }
 
 a:hover{
