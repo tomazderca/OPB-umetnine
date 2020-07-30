@@ -6,6 +6,7 @@ from django.utils import timezone
 
 # Create your models here.
 
+
 class Umetnik(models.Model):
     name = models.CharField(max_length=100)
     year_of_birth = models.DateField('birth')

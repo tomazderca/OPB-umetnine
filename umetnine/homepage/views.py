@@ -1,5 +1,9 @@
 from django.shortcuts import render
 
+from django.views import generic
+from artists.models import Umetnina
+
+
 izdelki = [
     {
         'avtor': 'Luigi Ademollo',
@@ -39,3 +43,10 @@ def madonna(request):
 
 def artisti(request):
     return render(request, 'homepage/artisti.html', {'naslov': 'artisti'})
+
+
+class DetailView(generic.DetailView):
+   model = Umetnina
+   template_name = 'homepage/detail.html'
+   def get_queryset(self):
+       return Umetnina.objects.order_by('-year')

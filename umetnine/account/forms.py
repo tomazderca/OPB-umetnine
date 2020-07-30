@@ -2,12 +2,13 @@ from django import forms
 import datetime
 
 from .models import User
+from artists.models import Umetnina
 
 
 class UserForm(forms.ModelForm):
     name = forms.CharField(
-                label='Name', 
-                widget=forms.TextInput(attrs={'class': 'form-control', 'name':'name'})
+                label='Name',
+                widget=forms.TextInput(attrs={'class': 'form-control', 'name': 'name'})
                 )
     surname = forms.CharField(
                 label='Surname',
@@ -51,7 +52,7 @@ class UserForm(forms.ModelForm):
             'password2',
         ]
 
-    def clean_born(self, *args, **kwargs):
+    def clean_born(self):
         born = self.cleaned_data.get('born')
         if 1900 < born < datetime.date.today().year:
             return born
@@ -87,3 +88,39 @@ class UserLoginForm(forms.ModelForm):
             'email',
             'password1',
         ]
+
+
+class AddArtForm(forms.ModelForm):
+    title = forms.CharField(
+                label='title',
+                widget=forms.TextInput(attrs={'class': 'form-control'}))
+    year = forms.IntegerField(
+                label='year',
+                widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    style = forms.CharField(
+                label='style',
+                widget=forms.TextInput(attrs={'class': 'form-control'}))
+    technique = forms.CharField(
+                label='technique',
+                widget=forms.TextInput(attrs={'class': 'form-control'}))
+    medium = forms.CharField(
+                label='medium',
+                widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = Umetnina
+        fields = [
+            'author',
+            'title',
+            'year',
+            'style',
+            'technique',
+            'medium',
+        ]
+
+    def clean_year(self):
+        made = self.cleaned_data.get('year')
+        if 1900 < made < datetime.date.today().year:
+            return made
+        else:
+            raise forms.ValidationError("This is not a valid year.")

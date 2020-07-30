@@ -8,24 +8,12 @@ from .forms import UserForm, UserLoginForm
 # Create your views here.
 
 
-# def new_user_view(request):
-#     form = UserForm(request.POST or None)
-#     if form.is_valid():
-#         form.save()
-#         form = UserForm()
-# 
-#     context = {
-#         'form': form, 
-#         'title': 'tle se vpises', 
-#     }
-#     return render(request, 'account/register.html', context)
-
 class RegisterView(CreateView):
     model = User
     form_class = UserForm
     template_name = 'account/register.html'
 
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         form = UserForm(request.POST or None)
         if form.is_valid():
             name = form.cleaned_data['name']
@@ -45,7 +33,6 @@ class RegisterView(CreateView):
                 'password2': password2, 
             }
             form.save()
-            form = UserForm()
             return render(request, "account/profile.html", context)
 
         return render(request, 'account/register.html', {'form': form})

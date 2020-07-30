@@ -11,36 +11,4 @@ E-mail: {{ mail }}<br>
 Country: {{ country }}<br>
 </p>
 
-<!--
-{% if form.errors %}
-    <H2>ERRRRORJIIII</H2>
-    {% for field in form %}
-        {% for error in field.errors %}
-            <div class="alert alert-danger">
-                <strong>{{ error|escape }}</strong>
-            </div>
-        {% endfor %}
-    {% endfor %}
-    {% for error in form.non_field_errors %}
-        <div class="alert alert-danger">
-            <strong>{{ error|escape }}</strong>
-        </div>
-    {% endfor %}
-{% endif %}
-kua
--->
-
-<!--
-podani podatki: <br>
-ime: {{ form.name.value }} <br>
-priimek: {{ form.surname.value }}<br>
-drzava: {{ form.country.value }}<br>
-geslo: {{ form.password1.value }}<br>
-mail: {{ form.email.value }}
--->
-
-
-
-
-
 {% endblock content %}
