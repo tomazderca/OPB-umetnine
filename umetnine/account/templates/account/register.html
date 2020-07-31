@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+
+
 {% block css_import %}
 <!-- {% load static %} -->
 <link rel="stylesheet" type="text/css" href="{% static 'account/style.css' %}">
@@ -39,7 +42,7 @@
                 <!--<form action="data/" method="POST"> -->
                 <form action='{{ action }}' method="POST">
                     {% csrf_token %}
-                    {{ form.as_p }}
+                    {{ form|crispy }}
                     
                     <button class="btn btn-secondary" type="submit">Register</button>    
                     

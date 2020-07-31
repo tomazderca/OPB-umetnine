@@ -42,8 +42,21 @@ label{
     font-weight: normal;
     margin-top: 15px;
     color: white;
-    font-size: 19px;
-    width: 23%;
+    font-size: 18px;
+}
+
+.text-muted{
+    display: none;
+}
+
+.asteriskField{
+    display: none;
+}
+
+.requiredField{
+    font-weight: normal;
+    color: white;
+    font-size: 18px;
 }
 
 .text-left{
@@ -56,12 +69,8 @@ label{
     font-size: 18px;
     height: 40px;
     color: white;
-    margin-top: 10px;
-    float: right;
-    width: 76%;
     border: none;
     border-bottom: 1px white solid;
-    font-size: 20px;
 }
 
 .btn{
@@ -80,7 +89,12 @@ label{
     margin-right: 80px;
 }
 
-.errorlist li {
+.invalid-feedback {
     color: rgb(255, 218, 116);
     margin-left: 15px;
+}
+
+.form-control.is-invalid, .was-validated .form-control:invalid{
+    border-color: rgb(255, 218, 116);
+    background-image: none;
 }
