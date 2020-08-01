@@ -1,3 +1,4 @@
+from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 # from django.views.generic import CreateView, TemplateView
 
@@ -15,8 +16,12 @@ def register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             print('ratal ti je. zdej si vpisana')
-            form.save()
-            return redirect('/')
+            new_user = form.save()
+            new_user = authenticate(username=form.cleaned_data['username'],
+                                    password=form.cleaned_data['password1'],
+                                    )
+            login(request, new_user)
+            return redirect('/about')
         else:
             print("neki ni vredi")
     else:
