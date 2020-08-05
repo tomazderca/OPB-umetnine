@@ -4,7 +4,7 @@
 
 
 {% if user.is_authenticated %}
-<h2> {{ user.get_username }}, welcome my friend!</h2>
+<h2> {{ user.get_username.capitalize }}, welcome my friend!</h2>
 {% else %}
 <h2>Ajde čau.</h2>
 <h3>Se mogoč še kej vidmo</h3>

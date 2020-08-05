@@ -19,9 +19,9 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-<h1 style="margin-top: 70px;"> {{ user.get_username }}, you are already logged in.</h1>
+<h1 style="margin-top: 70px;"> {{ user.get_username.capitalize }}, you are already logged in.</h1>
 <p>
-    <a href="/" style="text-align:left; padding-left: 20px; color: #d0c696; font-size: 25px; margin-top: 20px;">Go back.</a>
+    <a href="javascript:history.back();" style="text-align:left; padding-left: 20px; color: #d0c696; font-size: 25px; margin-top: 20px;">Go back.</a>
     <a href="/logout" style="text-align:left; padding-left: 20px; color: #d0c696; font-size: 25px;">Log out.</a>
 </p>
 {% else %}

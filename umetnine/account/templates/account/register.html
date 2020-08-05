@@ -22,10 +22,11 @@
         <div class="col-md-7">
             <h1 class="text-left">Join the community</h1>
             <div class="lefts">
-                <p clsass="text-left">Register to be able to add, vote, like, 
+                <p clsass="text-left">
+                    Register to be able to add, vote, like,
                     and comment on paintings from our ever-growing database. 
-                    Join a community full of old masterpieces to get you inspired 
-                    and show off your work for others to admire.
+                    Join a community full of old masterpieces and get yourself inspired!
+                    If you are an artist, show off your work for others to admire.
                 </p>
             </div>
         </div>
@@ -35,8 +36,6 @@
             <div class="row">
                 <h1 class="text-right">Register...</h1>
             </div>
-           
-        <hr>
 
             <div class="form-group">
                 <!--<form action="data/" method="POST"> -->
@@ -45,22 +44,6 @@
                     {{ form|crispy }}
                     
                     <button class="btn btn-secondary" type="submit">Register</button>    
-                    
-                    <!-- obravnavamo mozne napacne vnose -->
-                    <!--{% if form.errors %}
-                    {% for field in form %}
-                        {% for error in field.errors %}
-                            <div class="alert alert-danger">
-                                <strong>{{ error|escape }}</strong>
-                            </div>
-                        {% endfor %}
-                    {% endfor %}
-                    {% for error in form.non_field_errors %}
-                        <div class="alert alert-danger">
-                            <strong>{{ error|escape }}</strong>
-                        </div>
-                    {% endfor %}
-                    {% endif %}-->
 
                 </form>
             </div>

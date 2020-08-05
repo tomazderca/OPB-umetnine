@@ -1,14 +1,27 @@
 {% extends 'base.html' %}
 
+{% block css_import %}
+{% endblock css_import %}
+{% block naslov %}
+<title>Profile</title>
+{% endblock naslov %}
+
+
 {% block content %}
 
-<h1>Welcome {{ name }}!</h1>
-<p>Here is your information:</p>
-<p>
-Name: {{ name }} <br>
-Surname: {{ surname }}<br>
-E-mail: {{ mail }}<br>
-Username: {{ username }}<br>
-</p>
+<h1>Welcome {{ user.get_username }}!</h1>
+<h3>Here is your information:</h3>
+
+<p>Username: {{ user.get_username }}<br></p>
+<p>E-mail: {{ user.email }}<br></p>
+{% if user.first_name %}
+    <p>Name: {{ user.first_name }}<br></p>
+{% endif %}
+{% if user.last_name %}
+    <p>Surame: {{ user.last_name }}<br></p>
+{% endif %}
+
+<a href="/user/profile/edit">Edit information...</a>
 
 {% endblock content %}
+

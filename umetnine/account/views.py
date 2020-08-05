@@ -1,13 +1,13 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 # from django.views.generic import CreateView, TemplateView
 
-# from django.contrib import messages
 
-
-from .forms import RegisterForm
+from .forms import RegisterForm, EditProfileFrom
 
 # Create your views here.
+from .models import UserArtwork
 
 
 def register(request):
@@ -16,7 +16,7 @@ def register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             print('ratal ti je. zdej si vpisana')
-            new_user = form.save()
+            form.save()
             new_user = authenticate(username=form.cleaned_data['username'],
                                     password=form.cleaned_data['password1'],
                                     )
@@ -31,104 +31,41 @@ def register(request):
     return render(request, 'account/register.html', {'form': form})
 
 
+def profile(request):
+    if not request.user.is_authenticated:
+        html = "<h1>You are not logged in.</h1><a href='/login'>Log in.</a>"
+        return HttpResponse(html)
+    # za vpisane uporabnike pripravim pravi view
+    if request.method == "POST":
+        form = UserArtwork(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'account/profile.html', {'form': form})
+    else:
+        form = UserArtwork()
+    return render(request, 'account/profile.html', {'form': form})
+
+
+def edit_profile(request):
+    if not request.user.is_authenticated:
+        html = "<h1>You are not logged in.</h1><a href='/login'>Log in.</a>"
+        return HttpResponse(html)
+    # za vpisane uporabnike pripravim pravi view
+    if request.method == 'POST':
+        form = EditProfileFrom(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('/user/profile')
+    else:
+        form = EditProfileFrom(instance=request.user)
+        context = {'form': form}
+        return render(request, 'account/edit_profile.html', context)
+
+    return render(request, 'account/edit_profile.html', {})
 
 # ------------------------------
 
-# class RegisterView(CreateView):
-#     model = User
-#     form_class = UserForm
-#     template_name = 'account/register.html'
-#
-#     def post(self, request, *args, **kwargs):
-#         form = UserForm(request.POST or None)
-#         if form.is_valid():
-#             name = form.cleaned_data['name']
-#             surname = form.cleaned_data['surname']
-#             username = form.cleaned_data['username']
-#             mail = form.cleaned_data['email']
-#             password = form.cleaned_data['password1']
-#             password2 = form.cleaned_data['password2']
-#
-#             context = {
-#                 'form': form,
-#                 'name': name,
-#                 'surname': surname,
-#                 'mail': mail,
-#                 'username': username,
-#                 'password': password,
-#                 'password2': password2,
-#             }
-#             form.save()
-#             return render(request, "account/profile.html", context)
-#
-#         return render(request, 'account/register.html', {'form': form})
-#
-#
-# class LoginView(CreateView):
-#     model = User
-#     form_class = UserLoginForm
-#     template_name = 'account/login.html'
-#
-#     def get(self, request, *args, **kwargs):
-#         print("poskusamo z: ", request.method)
-#         print(request.body)
-#
-#     def post(self, request, *args, **kwargs):
-#         print("poskusamo z: ", request.method)
-#         print(request.body)
-#         form = UserLoginForm(request.POST)
-#         if form.is_valid():
-#             username = form.cleaned_data['username']
-#             password = form.cleaned_data['password1']
-#
-#             user = authenticate(request, username=username, password=password)
-#
-#             if user is not None:
-#                 login(request, user)
-#                 print("NASLIII")
-#                 return redirect('homepage')
-#             else:
-#                 print("NE OBSTAJAS, ZAL")
-#                 messages.info(request, "User does not exist!")
-#
-#
-# def login_page_view(request):
-#     if request.method == "POST":
-#         username = request.POST.get('username')
-#         password = request.POST.get('password')
-#         user = authenticate(request, username=username, password=password)
-#
-#         if user is not None:
-#             login(request, user)
-#             print("LOGIRAN SI, jej!")
-#             return redirect('homepage')
-#         else:
-#             messages.info(request, 'Username OR password is incorrect.')
-#
-#         context = {}
-#         return render(request, 'account/login.html', context)
-#
-#
-#
-#
-#
-# class ProfileView(TemplateView):
-#     template_name = 'account/profile.html'
-#     form = UserForm()
-#
-#
-# def profile_view(request):
-#     form = UserForm(request.GET)
-#     context={
-#         'name': request.GET.get('name'),
-#         'surname': request.GET.get('surname'),
-#         'mail': request.GET.get('Email'),
-#         'username': request.GET.get('Username'),
-#         'password': request.GET.get('Password'),
-#         }
-#     return render(request, 'account/profile.html', context)
-#
-# #
+
 # # def user_list_view(request):
 # #     queryset = User.objects.all()
 # #     context = {

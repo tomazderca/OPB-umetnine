@@ -1,0 +1,55 @@
+
+h1{
+    margin-top: 40px;
+    margin-left: 20px;
+    font-size: 40px;
+    font-family: sans-serif;
+}
+
+p{
+    font-size: 17px;
+    margin-bottom: 0em;
+}
+
+.form-control{
+    background: transparent;
+    border: 2px solid #efcc8d;
+    /*border-radius: 0px;
+    font-size: 18px;
+    height: 40px;
+    border: none;
+    border-bottom: 1px solid;*/
+}
+
+/* ker uporabljam crispy forms mi spremeni tudi iskanje v navigation bar - popravi */
+
+.btn{
+    width: 49%;
+    float: left;
+    border: 10px;
+    background: none;
+    border: 2px solid;
+    padding: 10px;
+    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
+    margin: 12px 0;
+}
+
+#submit{
+    float: left;
+    background: #9fe49f;
+}
+
+#cancel{
+    float: right;
+    background: #b9b8b8;
+}
+
+.text-muted{
+    display: none;
+}
+
+#search-bar{
+    margin-bottom: -10px;
+}
