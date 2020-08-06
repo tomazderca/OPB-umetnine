@@ -1,12 +1,9 @@
 from django import forms
 import datetime
 
-# from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 
-# from .models import User
-# from artists.models import Umetnina
 from .models import UserArtwork
 
 
@@ -17,6 +14,7 @@ class RegisterForm(UserCreationForm):
                 label='Email',
                 widget=forms.EmailInput(attrs={'class': 'form-control'})
                )
+
     class Meta:
         model = User
         fields = [
@@ -41,7 +39,7 @@ class EditProfileFrom(UserChangeForm):
 # ----------------------------
 
 
-class AddArtForm(UserArtwork):
+class AddArtForm(forms.ModelForm):
     title = forms.CharField(
                 label='title',
                 widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -50,32 +48,52 @@ class AddArtForm(UserArtwork):
                 widget=forms.NumberInput(attrs={'class': 'form-control'}))
     style = forms.CharField(
                 label='style',
-                widget=forms.TextInput(attrs={'class': 'form-control'}))
+                widget=forms.TextInput(attrs={
+                    'class': 'form-control',
+                    'placeholder': "e.g. abstract art, pop art, realism...",
+                    }))
     technique = forms.CharField(
                 label='technique',
-                widget=forms.TextInput(attrs={'class': 'form-control'}))
+                required=False,
+                widget=forms.TextInput(attrs={
+                    'class': 'form-control',
+                    'placeholder': "e. g. oil on canvas, print...",
+                     }))
     medium = forms.CharField(
                 label='medium',
-                widget=forms.TextInput(attrs={'class': 'form-control'}))
+                required=False,
+                widget=forms.TextInput(attrs={
+                    'class': 'form-control',
+                    'placeholder': "e. g. acrylic, aquatint, collage...",
+                    }))
     genre = forms.CharField(
-                label='medium',
+                label='genre',
+                required=False,
+                widget=forms.TextInput(attrs={
+                    'class': 'form-control',
+                    'placeholder': "e. g. portrait, nude, veduta...",
+                    }))
+    source = forms.CharField(
+                label='image source (url)',
+                required=False,
                 widget=forms.TextInput(attrs={'class': 'form-control'}))
 
-    # class Meta:
-    #     model = UserArtwork
-    #     fields = [
-    #         'author',
-    #         'title',
-    #         'year',
-    #         'style',
-    #         'technique',
-    #         'medium',
-    #         'genre',
-    #     ]
+    class Meta:
+        model = UserArtwork
+        fields = [
+            'title',
+            'year',
+            'style',
+            'technique',
+            'medium',
+            'genre',
+            'source',
+        ]
+
 
     def clean_year(self):
         made = self.cleaned_data.get('year')
-        if 1900 < made < datetime.date.today().year:
+        if 1900 < made <= datetime.date.today().year:
             return made
         else:
             raise forms.ValidationError("This is not a valid year.")

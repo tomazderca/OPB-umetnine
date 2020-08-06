@@ -4,7 +4,7 @@ from django.http import HttpResponse
 # from django.views.generic import CreateView, TemplateView
 
 
-from .forms import RegisterForm, EditProfileFrom
+from .forms import RegisterForm, EditProfileFrom, AddArtForm
 
 # Create your views here.
 from .models import UserArtwork
@@ -12,20 +12,15 @@ from .models import UserArtwork
 
 def register(request):
     if request.method == "POST":
-        print('post')
         form = RegisterForm(request.POST)
         if form.is_valid():
-            print('ratal ti je. zdej si vpisana')
             form.save()
             new_user = authenticate(username=form.cleaned_data['username'],
                                     password=form.cleaned_data['password1'],
                                     )
             login(request, new_user)
             return redirect('/about')
-        else:
-            print("neki ni vredi")
     else:
-        print('request je get')
         form = RegisterForm()
 
     return render(request, 'account/register.html', {'form': form})
@@ -37,12 +32,15 @@ def profile(request):
         return HttpResponse(html)
     # za vpisane uporabnike pripravim pravi view
     if request.method == "POST":
-        form = UserArtwork(request.POST)
+        form = AddArtForm(request.POST)
         if form.is_valid():
-            form.save()
-            return render(request, 'account/profile.html', {'form': form})
+            new_art = form.save(commit=False)
+            new_art.author = request.user.username
+            new_art.save()
+            context = {'form': AddArtForm(), 'new_art': new_art}
+            return render(request, 'account/profile.html', context)
     else:
-        form = UserArtwork()
+        form = AddArtForm()
     return render(request, 'account/profile.html', {'form': form})
 
 
