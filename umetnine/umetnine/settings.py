@@ -83,8 +83,12 @@ WSGI_APPLICATION = 'umetnine.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'sem2020_tomazd',
+        'USER': 'tomazd',
+        'PASSWORD': 'Pohojen2.slon',
+        'HOST': 'baza.fmf.uni-lj.si',
+        'PORT': '5432'
     }
 }
 

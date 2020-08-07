@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="db.sqlite3" uuid="bec13947-1a75-430c-98c7-10ee62cee7fc">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/umetnine/db.sqlite3</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="postgres@baza.fmf.uni-lj.si" uuid="d284eba2-3080-48b0-87ba-5a742bdc115c">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://baza.fmf.uni-lj.si:5432/postgres</jdbc-url>
+    </data-source>
+  </component>
+</project>
