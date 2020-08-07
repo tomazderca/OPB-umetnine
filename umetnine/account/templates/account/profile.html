@@ -12,6 +12,12 @@
 
 {% block content %}
 
+{% if new_art %}
+<script>
+    alert("Thank you for adding {{ new_art }} to our base!");
+</script>
+{% endif %}
+
 <div class="container">
     <div class="row">
 
@@ -21,13 +27,13 @@
             <h3>Here is your information:</h3>
 
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">Username: {{ user.get_username }}</li>
-              <li class="list-group-item">E-mail: {{ user.email }}</li>
+                <li class="list-group-item">Username: <b>{{ user.get_username }}</b></li>
+                <li class="list-group-item">E-mail: <b>{{ user.email }}</b></li>
             {% if user.first_name %}
-              <li class="list-group-item">Name: {{ user.first_name }}</li>
+                <li class="list-group-item">Name: <b>{{ user.first_name }}</b></li>
             {% endif %}
             {% if user.last_name %}
-              <li class="list-group-item">Surame: {{ user.last_name }}</li>
+                <li class="list-group-item">Surame: <b>{{ user.last_name }}</b></li>
             {% endif %}
             </ul>
 

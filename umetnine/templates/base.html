@@ -67,11 +67,13 @@
                         <i class="fa fa-user fa-lg"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="/login">Log in</a>
                         <!-- atensn!!!!! tule dej raj lepe povezave -->
-                        <a class="dropdown-item" href="/logout">Log out</a>
                         {% if user.is_authenticated %}
                         <a class="dropdown-item" href="/user/profile">Profile</a>
+                        <a class="dropdown-item" href="/logout">Log out</a>
+                        {% else %}
+                        <a class="dropdown-item" href="/login">Log in</a>
+                        <a class="dropdown-item" href="/register">Register</a>
                         {% endif %}
                     </div>
                 </li>

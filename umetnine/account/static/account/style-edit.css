@@ -32,13 +32,13 @@ p{
 #submit{
     width: 49%;
     float: left;
-    background: #9fe49f;
+    background: #55b755;
 }
 
 #cancel{
     width: 49%;
     float: right;
-    background: #b9b8b8;
+    background: #777777;
 }
 
 .text-muted{
@@ -62,5 +62,8 @@ a.button-edit{
     cursor: pointer;
     margin: 12px 0;
     border-radius: .25rem;
+}
 
+.ul{
+    background: gold;
 }
