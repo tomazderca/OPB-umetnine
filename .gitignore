@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Personal data
+user-data.txt
+
 # C extensions
 *.so
 
@@ -58,7 +61,7 @@ coverage.xml
 # Django stuff:
 *.log
 local_settings.py
-
+db.squlite3
 db.sqlite3-journal
 
 # Flask stuff:
