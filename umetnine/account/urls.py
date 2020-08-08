@@ -15,5 +15,4 @@ urlpatterns = [
 
     #path('profile/', views.profile_view, name='login'),
     #path('profile/', views.ProfileView.as_view(), name='profile'),
-    #path('list/', views.user_list_view, name='list'),
 ]
