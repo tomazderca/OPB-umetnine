@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS drzave CASCADE;
 DROP TABLE IF EXISTS galerije CASCADE;
 DROP TABLE IF EXISTS slike CASCADE;
 DROP TABLE IF EXISTS stili CASCADE;
+DROP TABLE IF EXISTS umetniki_umetnine CASCADE;
 
 CREATE TABLE tehnike(
     id SERIAL PRIMARY KEY,
@@ -66,6 +67,22 @@ CREATE TABLE izdelki (
     slika INTEGER REFERENCES slike(id),
     stil INTEGER REFERENCES stili(id)
 );
+
+CREATE TABLE umetniki_umetnine (
+    id SERIAL PRIMARY KEY,
+    avtor TEXT,
+    rojstvosmrt TEXT,
+    umetnina TEXT,
+    datum TEXT,
+    tehnika TEXT,
+    lokacija TEXT,
+    URL TEXT,
+    tip TEXT,
+    zvrst TEXT,
+    sola TEXT,
+    obdobje TEXT
+);
+
 
 GRANT ALL ON DATABASE sem2020_tomazd TO tomazd;
 GRANT ALL ON SCHEMA public TO tomazd;
