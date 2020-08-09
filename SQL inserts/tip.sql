@@ -1,0 +1,13 @@
+INSERT INTO stili (id, stil) VALUES ('0', 'painting');
+INSERT INTO stili (id, stil) VALUES ('1', 'ceramics');
+INSERT INTO stili (id, stil) VALUES ('2', 'sculpture');
+INSERT INTO stili (id, stil) VALUES ('3', 'graphics');
+INSERT INTO stili (id, stil) VALUES ('4', 'architecture');
+INSERT INTO stili (id, stil) VALUES ('5', 'stained-glass');
+INSERT INTO stili (id, stil) VALUES ('6', 'metalwork');
+INSERT INTO stili (id, stil) VALUES ('7', 'illumination');
+INSERT INTO stili (id, stil) VALUES ('8', 'mosaic');
+INSERT INTO stili (id, stil) VALUES ('9', 'others');
+INSERT INTO stili (id, stil) VALUES ('10', 'furniture');
+INSERT INTO stili (id, stil) VALUES ('11', 'tapestry');
+INSERT INTO stili (id, stil) VALUES ('12', 'glassware');
