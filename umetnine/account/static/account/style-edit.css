@@ -51,7 +51,7 @@ p{
 }
 
 a.button-edit{
-    width: 50%;
+    width: 100%;
     float: left;
     color: white;
     border: 10px;
@@ -62,6 +62,12 @@ a.button-edit{
     cursor: pointer;
     margin: 12px 0;
     border-radius: .25rem;
+    margin-bottom: 50px;
+}
+
+a:hover{
+    background-color: dimgrey;
+    text-decoration: none;
 }
 
 .ul{

@@ -31,17 +31,19 @@ def profile(request):
         html = "<h1>You are not logged in.</h1><a href='/login'>Log in.</a>"
         return HttpResponse(html)
     # za vpisane uporabnike pripravim pravi view
+    queryset = UserArtwork.objects.all()  # list of objects
     if request.method == "POST":
         form = AddArtForm(request.POST)
         if form.is_valid():
             new_art = form.save(commit=False)
             new_art.author = request.user.username
             new_art.save()
-            context = {'form': AddArtForm(), 'new_art': new_art}
+            context = {'form': AddArtForm(), 'new_art': new_art, 'object_list': queryset}
             return render(request, 'account/profile.html', context)
     else:
         form = AddArtForm()
-    return render(request, 'account/profile.html', {'form': form})
+        context = {'object_list': queryset, 'form': form}
+    return render(request, 'account/profile.html', context)
 
 
 def edit_profile(request):
@@ -62,11 +64,3 @@ def edit_profile(request):
     return render(request, 'account/edit_profile.html', {})
 
 # ------------------------------
-
-
-# # def user_list_view(request):
-# #     queryset = User.objects.all()
-# #     context = {
-# #         'object_list': queryset
-# #     }
-# #     return render(request, 'account/list.html', context)

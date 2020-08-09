@@ -80,13 +80,24 @@ WSGI_APPLICATION = 'umetnine.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+# ----> ce zelis uporabljati privzeto bazo sqlite3:
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
+with open('user-data.txt', 'r') as data:
+    username, password = data.readline().split()
+
+# ----> PostgreSQL na solskem serverju:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'sem2020_tomazd',
-        'USER': 'javnost',
-        'PASSWORD': 'javnogeslo',
+        'USER': username,
+        'PASSWORD': password,
         'HOST': 'baza.fmf.uni-lj.si',
         'PORT': '5432'
     }

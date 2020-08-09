@@ -38,6 +38,22 @@
             </ul>
 
             <a href="/user/profile/edit" class="button-edit">Edit information...</a>
+
+            {% if object_list %}
+            <h3>List of artworks added by you:</h3>
+
+            <ul class="list-group list-group-flush">
+            {% for instance in object_list %}
+                {% if instance.author == user.username %}
+                <li class="list-group-item"><b>{{ instance }}</b><br>
+                {{ instance.year }}</li>
+                {% endif %}
+            {% endfor %}
+            </ul>
+
+
+            {% endif %}
+
         </div>
 
         <!-- right side -->
