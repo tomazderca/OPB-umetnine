@@ -85,8 +85,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'sem2020_tomazd',
-        'USER': 'tomazd',
-        'PASSWORD': 'Pohojen2.slon',
+        'USER': 'javnost',
+        'PASSWORD': 'javnogeslo',
         'HOST': 'baza.fmf.uni-lj.si',
         'PORT': '5432'
     }
