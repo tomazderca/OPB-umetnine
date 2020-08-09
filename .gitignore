@@ -4,7 +4,7 @@ __pycache__/
 *$py.class
 
 # Personal data
-user-data.txt
+umetnine/user-data.txt
 
 # C extensions
 *.so
