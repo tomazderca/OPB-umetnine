@@ -54,6 +54,10 @@ label{
     margin-top: 170px;
 }
 
+.small-text-left{
+    margin-top: 80px;
+}
+
 .form-control{
     background: transparent;
     border-radius: 0px;

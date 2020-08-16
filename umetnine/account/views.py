@@ -40,7 +40,10 @@ def profile(request):
             new_art.save()
             context = {'form': AddArtForm(), 'new_art': new_art, 'object_list': queryset}
             return render(request, 'account/profile.html', context)
-    else:
+        else:
+            print("zajebu")
+            return render(request, 'account/profile.html', {'form': AddArtForm()})
+    else:  # request je get
         form = AddArtForm()
         context = {'object_list': queryset, 'form': form}
     return render(request, 'account/profile.html', context)
@@ -62,5 +65,9 @@ def edit_profile(request):
         return render(request, 'account/edit_profile.html', context)
 
     return render(request, 'account/edit_profile.html', {})
+
+
+def logout(request):
+    return render(request, 'account/logout.html', {})
 
 # ------------------------------

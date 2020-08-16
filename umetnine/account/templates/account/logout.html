@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+
+{% block css_import %}
+<!-- {% load static %} -->
+<link rel="stylesheet" type="text/css" href="{% static 'account/style-edit.css' %}">
+{% endblock css_import %}
+
+
+{% block naslov %}
+<title>Logout</title>
+{% endblock naslov %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <!-- left side -->
+        <div class="col-md-7">
+            <h1 class="text-left">You are logged out. <br> Thank you for your visit.</h1>
+            <div class="lefts">
+                <p class="text-left">
+                    You can log in again <a href="{% url 'login' %}" class="register">here.</a><br>
+                    Or create <a href="{% url 'register' %}" class="register">a new account.</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- right side -->
+        <div class="col-md-5">
+            <div class="row">
+                <h1 class="text-right">Daily qoute</h1>
+                <p>
+                    <blockquote cite="https://www.goodreads.com/quotes/tag/art">
+                <hr>
+                “Art is the lie that enables us to realize the truth.”<br>
+                <hr>
+                ~ Pablo Picasso
+            </blockquote>
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
