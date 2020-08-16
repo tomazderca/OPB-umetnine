@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from django.views import generic
-from artists.models import Umetnina
+from artists.models import Umetnina, Umetnik
 
 
 izdelki = [
@@ -43,6 +43,10 @@ def madonna(request):
 
 def artisti(request):
     return render(request, 'homepage/artisti.html', {'naslov': 'artisti'})
+
+
+def test(request):
+    return render(request, 'homepage/test.html', {'naslov': 'test', 'vsebina': Umetnik.objects.all()})
 
 
 class DetailView(generic.DetailView):

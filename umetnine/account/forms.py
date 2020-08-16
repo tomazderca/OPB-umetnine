@@ -46,12 +46,18 @@ class AddArtForm(forms.ModelForm):
     year = forms.IntegerField(
                 label='year',
                 widget=forms.NumberInput(attrs={'class': 'form-control'}))
-    style = forms.CharField(
-                label='style',
-                widget=forms.TextInput(attrs={
-                    'class': 'form-control',
-                    'placeholder': "e.g. abstract art, pop art, realism...",
-                    }))
+    style = forms.ChoiceField(choices=UserArtwork.choices,
+                              label='style',
+                              widget=forms.Select(attrs={
+                                  'class': 'form-control',
+                              }))
+
+    # style = forms.CharField(
+    #             label='style',
+    #             widget=forms.TextInput(attrs={
+    #                 'class': 'form-control',
+    #                 'placeholder': "e.g. abstract art, pop art, realism...",
+    #                 }))
     technique = forms.CharField(
                 label='technique',
                 required=False,

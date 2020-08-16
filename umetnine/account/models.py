@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 
 # Create your models here.
+from artists.models import Stili
 
 
 class UserArtwork(models.Model):
@@ -14,6 +15,11 @@ class UserArtwork(models.Model):
     style = models.CharField(default='unspecified', max_length=100)
     genre = models.CharField(default='unspecified', max_length=100)
     source = models.CharField(default='None', max_length=300)
+
+    choices = []
+    for stil in Stili.objects.all():
+        choices.append((stil.stil, stil.stil))
+
 
     def __str__(self):
         return self.title

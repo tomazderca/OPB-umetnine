@@ -18,6 +18,14 @@ class Umetnik(models.Model):
         return self.name
 
 
+class Stili(models.Model):
+    id = models.IntegerField(primary_key=True, null=False)
+    stil = models.CharField(max_length=150, unique=True)
+
+    def __str__(self):
+        return self.stil
+
+
 class Umetnina(models.Model):
     title = models.CharField(max_length=100)
     year = models.IntegerField(null=True, validators=[MaxValueValidator(timezone.now().year)])
