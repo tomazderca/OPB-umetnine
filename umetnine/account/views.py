@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 # from django.views.generic import CreateView, TemplateView
@@ -24,6 +25,11 @@ def register(request):
         form = RegisterForm()
 
     return render(request, 'account/register.html', {'form': form})
+
+
+def user_list(request):
+    queryset = User.objects.all()  # list of objects
+    return render(request, 'account/userList.html', {'object_list': queryset})
 
 
 def profile(request):
