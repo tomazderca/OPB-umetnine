@@ -1,10 +1,48 @@
 from django.db import models
+from django.conf import settings
 
 from django.core.validators import MaxValueValidator
 from django.utils import timezone
 
 
 # Create your models here.
+
+class Arts(models.Model):
+    id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
+    timestamp = models.DateTimeField()
+    url = models.URLField()
+    likes = models.IntegerField()
+
+    def __str__(self):
+        return self.title
+
+
+class Comments(models.Model):
+    id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    artwork_id = models.ForeignKey(Arts, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField()
+    content = models.TextField()
+
+    def __str__(self):
+        return self.content
+
+
+class Tags(models.Model):
+    id = models.AutoField(primary_key=True)
+    tag = models.CharField(max_length=25)
+
+    def __str__(self):
+        return self.tag
+
+
+class ArtworksTags(models.Model):
+    artwork_id = models.ForeignKey(Arts, on_delete=models.CASCADE)
+    tag_id = models.ForeignKey(Tags, on_delete=models.CASCADE)
+
+# --------------------------------------- staro, pustil zato, da mi ne javlja errorjev
 
 
 class Umetnik(models.Model):
