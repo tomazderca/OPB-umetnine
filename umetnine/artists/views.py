@@ -19,9 +19,10 @@ def uporabniki(request):
     return render(request, 'artists/uporabniki.html', context)
 
 class PostListView(ListView):
-    model = User
+    model = Arts
     template_name = 'artists/uporabniki.html'
-    context_object_name = 'users'
+    context_object_name = 'artworks'
+    ordering = ['-timestamp']
     paginate_by = 10
 
 # def uporabniki2(request):

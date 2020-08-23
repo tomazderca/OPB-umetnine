@@ -1,20 +1,38 @@
 {% extends "base.html" %}
 {% block content %}
-    {% for user in users %}
-        {% if user.arts.exists %}
+
+    {% for art in artworks %}
         <article class="media content-section">
             <div class="media-body">
                 <div class="article-metadata">
-                    <a class="mr-2" href="#">{{ user.username }}</a>
-                 </div>
-                {% for art in user.arts.all %}
-                        <h2><a class="article-title" href="#">{{ art.title }}</a></h2>
-                        <small class="text-muted">{{ art.timestamp }}</small>
-                        <p class="article-content"><img src={{ art.url }} alt="slika"></p>
-                {% endfor %}
+                    <a class="mr-2" href="#">{{ art.user_id }}</a>
+                </div>
+                <h2><a class="article-title" href="#">{{ art.title }}</a></h2>
+                <small class="text-muted">{{ art.timestamp }}</small>
+                <p class="article-content">
+                    {% if art.url %}
+                        <img src={{ art.url }} alt="slika">
+                    {% else %}
+                        <img src="https://img.icons8.com/ios/50/000000/error.png" alt="error">
+                    {% endif %}
+                </p>
             </div>
         </article>
-        {% endif %}
+
+{#    {% for user in users %}#}
+{#        {% if user.arts.exists %}#}
+{#        <article class="media content-section">#}
+{#            <div class="media-body">#}
+{#                <div class="article-metadata">#}
+{#                    <a class="mr-2" href="#">{{ user.username }}</a>#}
+{#                 </div>#}
+{#                {% for art in user.arts.all %}#}
+{#                        <h2><a class="article-title" href="#">{{ art.title }}</a></h2>#}
+{#                        <small class="text-muted">{{ art.timestamp }}</small>#}
+{#                        <p class="article-content"><img src={{ art.url }} alt="slika"></p>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#        </article>#}
     {% endfor %}
     {% if is_paginated %}
         {% if page_obj.has_previous %}
