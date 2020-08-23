@@ -1,6 +1,7 @@
-from django.conf import settings
-from django.core.validators import MaxValueValidator
 from django.db import models
+from django.conf import settings
+
+from django.core.validators import MaxValueValidator
 from django.utils import timezone
 
 
@@ -11,7 +12,7 @@ class Arts(models.Model):
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, unique=False)
     title = models.CharField(max_length=100)
     description = models.TextField(unique=False, null=False, blank=True)
-    timestamp = models.DateTimeField()
+    timestamp = models.DateTimeField(default=timezone.now)
     url = models.URLField()
     likes = models.IntegerField(default=0)
 
@@ -30,7 +31,7 @@ class UserDescription(models.Model):
 class Comments(models.Model):
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     artwork_id = models.ForeignKey(Arts, on_delete=models.CASCADE)
-    timestamp = models.DateTimeField()
+    timestamp = models.DateTimeField(default=timezone.now)
     content = models.TextField()
 
     def __str__(self):

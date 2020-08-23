@@ -1,28 +1,33 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from datetime import datetime
-
-from artists.forms import NewArtForm
-
+from .models import Arts
+from django.contrib.auth.models import User
+from django.views.generic import ListView
 #
-# def profile_view(request):
-#     if not request.user.is_authenticated:
-#         html = "<h1>You are not logged in.</h1><a href='/login'>Log in.</a>"
-#         return HttpResponse(html)
-#     # za vpisane uporabnike pripravim pravi view
-#     if request.method == "POST":
-#         form = NewArtForm(request.POST)
-#         if form.is_valid():
-#             new_art = form.save(commit=False)
-#             new_art.author = request.user.id
-#             new_art.timestamp = datetime.now()
-#             new_art.save()
-#             context = {'form': NewArtForm(), 'new_art': new_art}
-#             return render(request, 'account/profile.html', context)
-#         else:
-#             return render(request, 'account/profile.html', {'form': NewArtForm()})
-#     else:  # request je get
-#         form = NewArtForm()
-#         context = {'form': form}
-#     return render(request, 'account/profile.html', context)
+# def home(request):
+#     return HttpResponse('<h1>Domaca stran</h1>')
 #
+#
+# def about(request):
+#     return HttpResponse('<h1>Artists About</h1>')
+
+def uporabniki(request):
+    context = {
+        'users': User.objects.all(),
+        'artworks': Arts.objects.all()
+    }
+    return render(request, 'artists/uporabniki.html', context)
+
+class PostListView(ListView):
+    model = Arts
+    template_name = 'artists/uporabniki.html'
+    context_object_name = 'artworks'
+    ordering = ['-timestamp']
+    paginate_by = 10
+
+# def uporabniki2(request):
+#     users = User.objects.all()
+#     artworks = Arts.objects.all()
+#     paginator = Paginator(users, 10)
+#     page_number = request.GET.get('page')
+#     page_obj = paginator.get_page(page_number)
+#     return render(request, 'artists/uporabniki.html', {'page_obj': page_obj, 'users': users, 'artwor'})

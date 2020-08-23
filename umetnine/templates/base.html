@@ -10,6 +10,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'artists/main.css' %}">
     
     <!-- Awesome Fonts -->
     <script src="https://kit.fontawesome.com/198eb0a8ac.js" crossorigin="anonymous"></script>
@@ -20,7 +22,7 @@
 
     {% block navbar %}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">Umetnine</a>
+        <a class="navbar-brand" href={% url 'artists:artists-uporabnik' %}>Umetnine</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -82,18 +84,45 @@
     {% endblock navbar %}
 
     {% block naslov %}
-    <title>Umetnie</title>
+        {% if title %}
+            <title>{{ title }}</title>
+        {% else %}
+            <title>Brez Naslova - popravi</title>
+        {% endif %}
     {% endblock naslov %}
 
 </head>
 
 
 <body>
-<div class="container">
-    {% block content %}
+{#<div class="container">#}
+{#    {% block content %}#}
+{##}
+{#    {% endblock %}#}
+{#</div>#}
 
-    {% endblock %}
-</div>
+<main role="main" class="container">
+  <div class="row">
+    <div class="col-md-8">
+      {% block content %}{% endblock %}
+    </div>
+
+    <!-- Desni Meni -->
+    <div class="col-md-4">
+      <div class="content-section">
+        <h3>Our Sidebar</h3>
+        <p class='text-muted'>You can put any information here you'd like.
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-light">Latest Posts</li>
+            <li class="list-group-item list-group-item-light">Announcements</li>
+            <li class="list-group-item list-group-item-light">Calendars</li>
+            <li class="list-group-item list-group-item-light">etc</li>
+          </ul>
+        </p>
+      </div>
+    </div>
+  </div>
+</main>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
