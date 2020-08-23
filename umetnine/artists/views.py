@@ -8,3 +8,6 @@ from django.http import HttpResponse
 #
 # def about(request):
 #     return HttpResponse('<h1>Artists About</h1>')
+
+def uporabniki(request):
+    return render(request, 'artists/uporabniki.html', {'title': 'Userbase'})
