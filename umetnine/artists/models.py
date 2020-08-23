@@ -1,34 +1,33 @@
-from django.db import models
 from django.conf import settings
-
 from django.core.validators import MaxValueValidator
+from django.db import models
 from django.utils import timezone
 
 
 # Create your models here.
 
+
 class Arts(models.Model):
-    id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, unique=False)
     title = models.CharField(max_length=100)
     description = models.TextField(unique=False, null=False, blank=True)
     timestamp = models.DateTimeField()
     url = models.URLField()
-    likes = models.IntegerField()
+    likes = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
 
+
 class UserDescription(models.Model):
-    id = models.AutoField(primary_key=True)
     user_id = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     description = models.TextField(unique=False, null=False, blank=True)
 
     def __str__(self):
         return self.description
 
+
 class Comments(models.Model):
-    id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     artwork_id = models.ForeignKey(Arts, on_delete=models.CASCADE)
     timestamp = models.DateTimeField()
@@ -39,8 +38,7 @@ class Comments(models.Model):
 
 
 class Tags(models.Model):
-    id = models.AutoField(primary_key=True)
-    tag = models.CharField(max_length=25)
+    tag = models.CharField(max_length=200)
 
     def __str__(self):
         return self.tag
@@ -49,6 +47,7 @@ class Tags(models.Model):
 class ArtworksTags(models.Model):
     artwork_id = models.ForeignKey(Arts, on_delete=models.CASCADE)
     tag_id = models.ForeignKey(Tags, on_delete=models.CASCADE)
+
 
 # --------------------------------------- staro, pustil zato, da mi ne javlja errorjev
 

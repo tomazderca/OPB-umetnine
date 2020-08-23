@@ -3,8 +3,10 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 # from django.views.generic import CreateView, TemplateView
+from datetime import datetime
 
-
+from artists.forms import NewArtForm, TagForm
+from artists.models import ArtworksTags, Tags
 from .forms import RegisterForm, EditProfileFrom, AddArtForm
 
 # Create your views here.
@@ -52,6 +54,35 @@ def profile(request):
     else:  # request je get
         form = AddArtForm()
         context = {'object_list': queryset, 'form': form}
+    return render(request, 'account/profile.html', context)
+
+
+def profile_view(request):
+    if not request.user.is_authenticated:
+        html = "<h1>You are not logged in.</h1><a href='/login'>Log in.</a>"
+        return HttpResponse(html)
+    # za vpisane uporabnike pripravim pravi view
+    if request.method == "POST":
+        form = NewArtForm(request.POST)
+        form2 = TagForm(request.POST)
+        if form.is_valid() and form2.is_valid():
+            new_art = form.save(commit=False)
+            new_art.user_id = request.user
+            new_art.timestamp = datetime.now()
+            new_art.save()
+            tags_input = form2.cleaned_data['tag']
+            all_tags = set(tags_input.split(", "))
+            for tg in all_tags:
+                new_tag = Tags.objects.create(tag=tg)
+                ArtworksTags.objects.create(tag_id=new_tag, artwork_id=new_art)
+            context = {'form': NewArtForm(), 'new_art': new_art, "form2": form2}
+            return render(request, 'account/profile.html', context)
+        else:
+            return render(request, 'account/profile.html', {'form': NewArtForm(), "form2": TagForm()})
+    else:  # request je get
+        form = NewArtForm()
+        form2 = TagForm()
+        context = {'form': form, "form2": form2}
     return render(request, 'account/profile.html', context)
 
 

@@ -46,7 +46,7 @@ def artisti(request):
 
 
 def test(request):
-    return render(request, 'homepage/test.html', {'naslov': 'test', 'vsebina': Umetnik.objects.all()})
+    return render(request, 'homepage/userList.html', {'naslov': 'test', 'vsebina': Umetnik.objects.all()})
 
 
 class DetailView(generic.DetailView):

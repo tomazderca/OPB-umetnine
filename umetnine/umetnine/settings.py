@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'crispy_forms',
 
     # custom
-    # 'loginpage.apps.LoginpageConfig',
     'artists.apps.ArtistsConfig',
     'account.apps.AccountConfig',
 ]

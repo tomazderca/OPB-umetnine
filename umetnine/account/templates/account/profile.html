@@ -33,7 +33,7 @@
                 <li class="list-group-item">Name: <b>{{ user.first_name }}</b></li>
             {% endif %}
             {% if user.last_name %}
-                <li class="list-group-item">Surame: <b>{{ user.last_name }}</b></li>
+                <li class="list-group-item">Surname: <b>{{ user.last_name }}</b></li>
             {% endif %}
             </ul>
 
@@ -61,6 +61,7 @@
             <h1>Here you can add your art: </h1>
                 <form method="post" action=""> {% csrf_token %}
                     {{ form|crispy }}
+                    {{ form2|crispy }}
 
                 <button class="btn btn-secondary" type="submit">Add artwork</button>
                 </form>
