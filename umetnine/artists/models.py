@@ -21,8 +21,11 @@ class Arts(models.Model):
 
 class UserDescription(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user_id = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     description = models.TextField(unique=False, null=False, blank=True)
+
+    def __str__(self):
+        return self.description
 
 class Comments(models.Model):
     id = models.AutoField(primary_key=True)
