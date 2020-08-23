@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from .models import Arts
+from django.contrib.auth.models import User
 
 #
 # def home(request):
@@ -10,4 +11,8 @@ from django.http import HttpResponse
 #     return HttpResponse('<h1>Artists About</h1>')
 
 def uporabniki(request):
-    return render(request, 'artists/uporabniki.html', {'title': 'Userbase'})
+    context = {
+        'users': User.objects.all(),
+        'artworks': Arts.objects.all()
+    }
+    return render(request, 'artists/uporabniki.html', context)

@@ -9,7 +9,7 @@ from django.utils import timezone
 
 class Arts(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='arts')
     title = models.CharField(max_length=100)
     description = models.TextField(unique=False, null=False, blank=True)
     timestamp = models.DateTimeField(default=timezone.now)
