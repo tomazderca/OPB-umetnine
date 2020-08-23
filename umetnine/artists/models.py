@@ -11,6 +11,7 @@ class Arts(models.Model):
     id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
+    description = models.TextField(unique=False, null=False, blank=True)
     timestamp = models.DateTimeField()
     url = models.URLField()
     likes = models.IntegerField()
@@ -18,6 +19,10 @@ class Arts(models.Model):
     def __str__(self):
         return self.title
 
+class UserDescription(models.Model):
+    id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    description = models.TextField(unique=False, null=False, blank=True)
 
 class Comments(models.Model):
     id = models.AutoField(primary_key=True)
