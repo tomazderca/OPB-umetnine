@@ -12,7 +12,7 @@ class Arts(models.Model):
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     description = models.TextField(unique=False, null=False, blank=True)
-    timestamp = models.DateTimeField()
+    timestamp = models.DateTimeField(default=timezone.now)
     url = models.URLField()
     likes = models.IntegerField()
 
@@ -31,7 +31,7 @@ class Comments(models.Model):
     id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     artwork_id = models.ForeignKey(Arts, on_delete=models.CASCADE)
-    timestamp = models.DateTimeField()
+    timestamp = models.DateTimeField(default=timezone.now)
     content = models.TextField()
 
     def __str__(self):
