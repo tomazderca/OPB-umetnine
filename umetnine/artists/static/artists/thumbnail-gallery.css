@@ -23,14 +23,19 @@ body {
 }
 
 .tz-gallery .thumbnail {
-    background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
+    /*background-image: linear-gradient(to top, #eef1f5 0%, #f8f9fa 100%);*/
     padding: 0;
+    margin: 5px;
     margin-bottom: 30px;
     background-color: #fff;
-    border-radius: 4px;
+    background-color: #eaeaea;
+    border-radius: 6px;
     border: none;
+    /*border: 2px solid lightsteelblue;*/
     transition: 0.15s ease-in-out;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.06);
+    box-shadow: -10px -10px 1px rgba(0, 0, 0, 0.1), -10px 10px 1px rgba(0, 0, 0, 0.1), 10px 10px 1px rgba(0, 0, 0, 0.1), 10px -10px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: -10px -10px 5px #eaeaea, -10px 10px 5px #eaeaea, 10px 10px 5px #eaeaea, 10px -10px 5px #eaeaea;
 }
 
 .tz-gallery .thumbnail:hover {
@@ -42,7 +47,7 @@ body {
 }
 
 .tz-gallery .caption{
-    padding: 26px 30px;
+    padding: 6px 30px;
     text-align: center;
 }
 
