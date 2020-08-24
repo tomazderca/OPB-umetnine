@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 # from django.views.generic import CreateView, TemplateView
 from datetime import datetime
@@ -38,6 +38,15 @@ def all_user_works(request):
     queryset = Arts.objects.filter(user_id=request.user.id)  # list of objects
     context = {'object_list': queryset, 'username': request.user.username}
     return render(request, 'account/all_user_works.html', context)
+
+
+def art_delete(request, pk):
+    art_to_delete = get_object_or_404(Arts, pk=pk)
+    try:
+        art_to_delete.delete()
+    finally:
+        return redirect("/user/myworks")
+        # return redirect("{% url 'account:all_user_works %}")
 
 
 def profile(request):
