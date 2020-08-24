@@ -27,6 +27,13 @@ class PostListView(ListView):
 def dynamic_artwork_lookup_view(request, id):
     art = Arts.objects.get(id=id)
     context = {
-        'art':art
+        'art': art
     }
     return render(request, 'artists/artwork.html', context)
+
+def dynamic_user_lookup_view(request, id):
+    user = User.objects.get(id=id)
+    context = {
+        'user': user
+    }
+    return render(request, 'artists/user.html', context)
