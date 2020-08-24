@@ -36,7 +36,7 @@
 {#                {% endfor %}#}
 {#            </div>#}
 {#        </article>#}
-    <div class="paginator">
+    <p class="paginator">
     {% if is_paginated %}
         {% if page_obj.has_previous %}
             <a class="btn btn-outline-info mb-4" href="?page=1"><<</a>
@@ -54,6 +54,6 @@
             <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">>></a>
         {% endif %}
     {% endif %}
-        </div>
+        </p>
 
 {% endblock content %}

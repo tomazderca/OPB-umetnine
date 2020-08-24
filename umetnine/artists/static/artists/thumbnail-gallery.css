@@ -1,5 +1,4 @@
 body {
-    background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
     min-height: 100vh;
     font: normal 16px sans-serif;
 }
@@ -24,6 +23,7 @@ body {
 }
 
 .tz-gallery .thumbnail {
+    background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
     padding: 0;
     margin-bottom: 30px;
     background-color: #fff;
