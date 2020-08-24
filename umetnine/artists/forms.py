@@ -5,8 +5,8 @@ from artists.models import Arts, Tags
 
 class TagForm(forms.ModelForm):
     tag = forms.CharField(
-        label='tagggs',
-        widget=forms.TextInput(attrs={'class': 'form-control'}))
+        label='tags',
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'E. g. painting, oil, realism'}))
 
     class Meta:
         model = Tags
