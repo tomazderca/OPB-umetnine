@@ -1,11 +1,12 @@
 from django.contrib import admin
 from django.urls import path, include
 from . import views
-from .views import PostListView
+from .views import PostListView, dynamic_artwork_lookup_view
 
 app_name = 'artists'
 
 urlpatterns = [
-    path('uporabniki/', PostListView.as_view(), name='artists-uporabnik')
+    path('uporabniki/', PostListView.as_view(), name='artists-uporabnik'),
+    path('uporabniki/<int:id>/', dynamic_artwork_lookup_view, name='artwork')
 
 ]

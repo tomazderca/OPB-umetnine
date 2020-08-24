@@ -24,10 +24,9 @@ class PostListView(ListView):
     ordering = ['-timestamp']
     paginate_by = 9
 
-# def uporabniki2(request):
-#     users = User.objects.all()
-#     artworks = Arts.objects.all()
-#     paginator = Paginator(users, 10)
-#     page_number = request.GET.get('page')
-#     page_obj = paginator.get_page(page_number)
-#     return render(request, 'artists/uporabniki.html', {'page_obj': page_obj, 'users': users, 'artwor'})
+def dynamic_artwork_lookup_view(request, id):
+    art = Arts.objects.get(id=id)
+    context = {
+        'art':art
+    }
+    return render(request, 'artists/artwork.html', context)
