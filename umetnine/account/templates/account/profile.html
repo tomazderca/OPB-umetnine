@@ -37,7 +37,9 @@
             {% endif %}
             </ul>
 
-            <a href="{% url 'account:edit_profile' %}" class="button-edit">Edit information...</a>
+
+            <button class="btn btn-secondary" onclick="location.href='{% url 'account:edit_profile' %}'" type="button">
+                Edit information</button>
 
             {% if object_list %}
             <h3>List of artworks added by you:</h3>
