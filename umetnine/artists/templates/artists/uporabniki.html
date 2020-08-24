@@ -1,23 +1,26 @@
-{% extends "base.html" %}
+{% extends "artists/base.html" %}
 {% block content %}
+    <div class="gallery-container">
+        <h1>Freshly made</h1>
+    </div>
 
-    {% for art in artworks %}
-        <article class="media content-section">
-            <div class="media-body">
-                <div class="article-metadata">
-                    <a class="mr-2" href="#">{{ art.user_id }}</a>
+    <div class="tz-gallery">
+        <div class="row">
+        {% for art in artworks %}
+            <div class="col-sm-6 col-md-4" align="center">
+                <div class="thumbnail">
+                    <a class="lightbox" href={{ art.url }}>
+                        <img src={{ art.url }} alt="" class="img-thumbnail">
+                    </a>
+                    <div class="caption">
+                        <a class="mr-2" href="#">{{ art.user_id }}</a>
+                        <small class="text-muted">{{ art.timestamp }}</small>
+                    </div>
                 </div>
-                <h2><a class="article-title" href="#">{{ art.title }}</a></h2>
-                <small class="text-muted">{{ art.timestamp }}</small>
-                <p class="article-content">
-                    {% if art.url %}
-                        <img src={{ art.url }} alt="slika">
-                    {% else %}
-                        <img src="https://img.icons8.com/ios/50/000000/error.png" alt="error">
-                    {% endif %}
-                </p>
             </div>
-        </article>
+        {% endfor %}
+        </div>
+    </div>
 
 {#    {% for user in users %}#}
 {#        {% if user.arts.exists %}#}
@@ -33,11 +36,11 @@
 {#                {% endfor %}#}
 {#            </div>#}
 {#        </article>#}
-    {% endfor %}
+    <div class="paginator">
     {% if is_paginated %}
         {% if page_obj.has_previous %}
-            <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
-            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            <a class="btn btn-outline-info mb-4" href="?page=1"><<</a>
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}"><</a>
         {% endif %}
         {% for num in page_obj.paginator.page_range %}
             {% if page_obj.number == num %}
@@ -46,9 +49,11 @@
                 <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
             {% endif %}
         {% endfor %}
-        {% if page_obj.has_nexz %}
-            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
-            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+        {% if page_obj.has_next %}
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">></a>
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">>></a>
         {% endif %}
     {% endif %}
+        </div>
+
 {% endblock content %}

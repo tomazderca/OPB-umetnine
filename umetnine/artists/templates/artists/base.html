@@ -9,13 +9,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <!-- Awesome Fonts -->
-    <script src="https://kit.fontawesome.com/198eb0a8ac.js" crossorigin="anonymous"></script>
-    <meta charset="UTF-8">
-
-    <!-- Dodano za all-arts page -->
     <link rel="stylesheet" type="text/css" href="{% static 'artists/main.css' %}">
 
     <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
@@ -23,6 +18,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.css">
     <link rel="stylesheet" href="{% static 'artists/thumbnail-gallery.css' %}">
 
+    <!-- Awesome Fonts -->
+    <script src="https://kit.fontawesome.com/198eb0a8ac.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
 
     {% block css_import %}
     {% endblock css_import %}
@@ -31,8 +29,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href={% url 'artists:artists-uporabnik' %}>Umetnine</a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -62,20 +59,18 @@
                 </li>
             </ul>
             <form class="mx-2 my-auto d-inline w-100">
-                <div class="input-group">
-                    <input type="text" id="search-bar" class="form-control border border-right-0"
-                           placeholder="Search...">
-                    <span class="input-group-append">
+            <div class="input-group">
+                <input type="text" id="search-bar" class="form-control border border-right-0" placeholder="Search...">
+                <span class="input-group-append">
                     <button class="btn btn-outline-secondary border border-left-0" type="button">
                         <i class="fas fa-search"></i>
                     </button>
                 </span>
-                </div>
+            </div>
             </form>
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-user fa-lg"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
@@ -93,22 +88,19 @@
     </nav>
     {% endblock navbar %}
 
-    {% block naslov %}
-    <title>Umetnine</title>
-    {% endblock naslov %}
-
 </head>
 
 
 <body>
-<div class="container">
-    {% block content %}
 
+    {% block content %}
     {% endblock %}
-</div>
+
 
 <!-- Optional JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+
+
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -119,5 +111,9 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+{#<script>#}
+{#    baguetteBox.run('.tz-gallery')#}
+{#</script>#}
 </body>
 </html>
+

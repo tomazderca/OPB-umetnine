@@ -22,7 +22,7 @@ class PostListView(ListView):
     template_name = 'artists/uporabniki.html'
     context_object_name = 'artworks'
     ordering = ['-timestamp']
-    paginate_by = 10
+    paginate_by = 9
 
 # def uporabniki2(request):
 #     users = User.objects.all()
