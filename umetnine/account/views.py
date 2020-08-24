@@ -36,7 +36,8 @@ def user_list(request):
 
 def all_user_works(request):
     queryset = Arts.objects.filter(user_id=request.user.id)  # list of objects
-    return render(request, 'account/all_user_works.html', {'object_list': queryset})
+    context = {'object_list': queryset, 'username': request.user.username}
+    return render(request, 'account/all_user_works.html', context)
 
 
 def profile(request):

@@ -1,29 +1,45 @@
-{% extends 'base.html' %}
-
-
-{% block naslov %}
-<title>My artworks</title>
-{% endblock naslov %}
-
+{% extends "artists/base.html" %}
 {% block content %}
+    <div class="gallery-container">
+        <h1>Art by {{ username }}</h1>
+    </div>
 
-<h1>Artworks added by you:</h1>
+    <div class="tz-gallery">
+        <div class="row">
+        {% for art in object_list %}
+            <div class="col-sm-6 col-md-4" align="center">
+                <div class="thumbnail">
+                    <a class="lightbox" href="{{ art.url }}">
+                        <img src="{{ art.url }}" alt="" class="img-thumbnail">
+                    </a>
+                    <div class="caption">
+                        <a class="mr-2" href="#">{{ art.title }}</a>
+                        <small class="text-muted">{{ art.timestamp }}</small>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
 
-{% for instance in object_list %}
-<ul class="list-group list-group-flush">
-    <li class="list-group-item">Title: <b>{{ instance.title }}</b></li>
-    <li class="list-group-item">Description: <b>{{ instance.description }}</b></li>
-    {% if user.first_name %}
-    <li class="list-group-item">Time: <b>{{ instance.timestamp }}</b></li>
+    <p class="paginator">
+    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+            <a class="btn btn-outline-info mb-4" href="?page=1"><<</a>
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}"><</a>
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">></a>
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">>></a>
+        {% endif %}
     {% endif %}
-    {% if user.last_name %}
-    <li class="list-group-item">Url: <b>{{ instance.url }}</b></li>
-    {% endif %}
-    <li class="list-group-item">Likes: <b>{{ instance.likes }}</b></li>
-    <hr>
-</ul>
-
-{% endfor %}
-
+        </p>
 
 {% endblock content %}
