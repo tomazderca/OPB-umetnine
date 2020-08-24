@@ -40,6 +40,8 @@
 
             <button class="btn btn-secondary" onclick="location.href='{% url 'account:edit_profile' %}'" type="button">
                 Edit information</button>
+            <button class="btn btn-secondary" onclick="location.href='{% url 'account:all_user_works' %}'" type="button">
+                List of artwork added by me</button>
 
             {% if object_list %}
             <h3>List of artworks added by you:</h3>
