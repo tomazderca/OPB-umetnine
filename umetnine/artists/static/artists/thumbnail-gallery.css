@@ -18,6 +18,8 @@ body {
     color: #85878c;
 }
 
+/*---galerija---*/
+
 .tz-gallery {
     padding: 40px;
 }
@@ -34,8 +36,8 @@ body {
     /*border: 2px solid lightsteelblue;*/
     transition: 0.15s ease-in-out;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.06);
-    box-shadow: -10px -10px 1px rgba(0, 0, 0, 0.1), -10px 10px 1px rgba(0, 0, 0, 0.1), 10px 10px 1px rgba(0, 0, 0, 0.1), 10px -10px 1px rgba(0, 0, 0, 0.1);
-    box-shadow: -10px -10px 5px #eaeaea, -10px 10px 5px #eaeaea, 10px 10px 5px #eaeaea, 10px -10px 5px #eaeaea;
+    /*box-shadow: -10px -10px 1px rgba(0, 0, 0, 0.1), -10px 10px 1px rgba(0, 0, 0, 0.1), 10px 10px 1px rgba(0, 0, 0, 0.1), 10px -10px 1px rgba(0, 0, 0, 0.1);*/
+    /*box-shadow: -10px -10px 5px #eaeaea, -10px 10px 5px #eaeaea, 10px 10px 5px #eaeaea, 10px -10px 5px #eaeaea;*/
 }
 
 .tz-gallery .thumbnail:hover {
@@ -67,3 +69,40 @@ body {
     background-color: transparent !important;
 }
 
+
+/*--- desni nav bar  na artworku---*/
+
+
+.sidenav {
+  width: 500px;
+  position: absolute;
+  z-index: 1;
+  top: 100px;
+  right: 10px;
+  background: #eee;
+  overflow-x: hidden;
+  padding: 8px 0;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #2196F3;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #064579;
+}
+
+.main {
+  margin-left: 140px; /* Same width as the sidebar + left position in px */
+  font-size: 28px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
