@@ -9,7 +9,7 @@
         {% for art in artworks %}
             <div class="col-sm-6 col-md-4" align="center">
                 <div class="thumbnail">
-                    <a class="lightbox" href={{ art.url }}>
+                    <a class="lightbox" href={{ art.id }}>
                         <img src={{ art.url }} alt="" class="img-thumbnail">
                     </a>
                     <div class="caption">
@@ -36,7 +36,7 @@
 {#                {% endfor %}#}
 {#            </div>#}
 {#        </article>#}
-    <p class="paginator">
+    <p class="paginator" align="center">
     {% if is_paginated %}
         {% if page_obj.has_previous %}
             <a class="btn btn-outline-info mb-4" href="?page=1"><<</a>
