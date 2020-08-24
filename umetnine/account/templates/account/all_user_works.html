@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+{% block naslov %}
+<title>My artworks</title>
+{% endblock naslov %}
+
+{% block content %}
+
+<h1>Artworks added by you:</h1>
+
+{% for instance in object_list %}
+<ul class="list-group list-group-flush">
+    <li class="list-group-item">Title: <b>{{ instance.title }}</b></li>
+    <li class="list-group-item">Description: <b>{{ instance.description }}</b></li>
+    {% if user.first_name %}
+    <li class="list-group-item">Time: <b>{{ instance.timestamp }}</b></li>
+    {% endif %}
+    {% if user.last_name %}
+    <li class="list-group-item">Url: <b>{{ instance.url }}</b></li>
+    {% endif %}
+    <li class="list-group-item">Likes: <b>{{ instance.likes }}</b></li>
+    <hr>
+</ul>
+
+{% endfor %}
+
+
+{% endblock content %}

@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from datetime import datetime
 
 from artists.forms import NewArtForm, TagForm
-from artists.models import ArtworksTags, Tags
+from artists.models import ArtworksTags, Tags, Arts
 from .forms import RegisterForm, EditProfileFrom, AddArtForm
 
 # Create your views here.
@@ -32,6 +32,11 @@ def register(request):
 def user_list(request):
     queryset = User.objects.all()  # list of objects
     return render(request, 'account/userList.html', {'object_list': queryset})
+
+
+def all_user_works(request):
+    queryset = Arts.objects.filter(user_id=request.user.id)  # list of objects
+    return render(request, 'account/all_user_works.html', {'object_list': queryset})
 
 
 def profile(request):
