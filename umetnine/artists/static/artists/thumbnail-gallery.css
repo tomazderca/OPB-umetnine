@@ -91,10 +91,10 @@ body {
 
 
 .main {
-  margin-left: 140px; /* Same width as the sidebar + left position in px */
+  margin: 40px 140px 0 140px; /* Same width as the sidebar + left position in px */
   font-size: 28px; /* Increased text to enable scrolling */
   padding: 0px 10px;
-  margin-left: 0;
+  /*margin-left: 0;*/
   margin-top: 40px;
 }
 
@@ -132,7 +132,7 @@ a.btn.btn-like:hover{
   padding: 5px 5px 5px 5px;
   max-width: 920px;
     background: #eee;
-    transition: transform 10s;
+    transition: transform 1s;
 }
 
 .sr-only {
@@ -145,6 +145,7 @@ a.btn.btn-like:hover{
   white-space: nowrap;
   clip-path: inset(50%);
   border: 0;
+    transition: transform 1s;
 }
 
 .image-bg {
@@ -155,6 +156,7 @@ a.btn.btn-like:hover{
           flex: 0 0 auto;
   margin: 5px;
   width: calc(25% - 10px);
+    transition: transform 500ms;
 }
 .image-bg-placeholder {
   height: 100%;
@@ -168,5 +170,5 @@ a.btn.btn-like:hover{
 }
 
 .image-grid .rounded:hover {
-    transform: translateY(-1px) scale(1.10);
+    transform: translateY(-1px) scale(1.06);
 }

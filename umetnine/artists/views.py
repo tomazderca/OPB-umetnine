@@ -3,9 +3,9 @@ from datetime import datetime
 from django.shortcuts import render, redirect, get_object_or_404
 
 from .forms import CommentForm
-from .models import Arts
+from .models import Arts, Comments
 from django.contrib.auth.models import User
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 
 def uporabniki(request):
@@ -66,3 +66,10 @@ def all_certain_user_works(request, pk):
     queryset = Arts.objects.filter(user_id=pk)  # list of objects
     context = {'object_list': queryset, 'username': request.user.username}
     return render(request, 'account/all_user_works.html', context)
+
+class KomentarjiArtworkListView(ListView):
+    model = Comments
+    template_name = 'artists/komentarji.html'
+    context_object_name = 'komentarji'
+    ordering = ['-timestamp']
+

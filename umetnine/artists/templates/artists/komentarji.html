@@ -1,0 +1,16 @@
+{% extends "artists/base.html" %}
+{% block content %}
+    <div class="gallery-container">
+        <h1>Freshly made</h1>
+    </div>
+
+    <div class="tz-gallery">
+        <div class="row">
+        {% for komentar in komentarji %}
+            <div class="col-sm-6 col-md-4" align="center">
+                <a class="mr-2" href="#">{{ komentar.content }}</a>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}
