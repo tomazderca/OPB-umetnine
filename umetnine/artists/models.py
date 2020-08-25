@@ -49,6 +49,10 @@ class ArtworksTags(models.Model):
     artwork_id = models.ForeignKey(Arts, on_delete=models.CASCADE)
     tag_id = models.ForeignKey(Tags, on_delete=models.CASCADE)
 
+class ArtworkLikes(models.Model):
+    artwork_id = models.ForeignKey(Arts, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
 
 # --------------------------------------- staro, pustil zato, da mi ne javlja errorjev
 
