@@ -9,10 +9,7 @@
                 <img src="{{ art.url }}" alt="" class="img-thumbnail">
             </a>
         </div>
-        {% endblock content %}
-
-        {% block sidebar %}
-        <div class="col-md-7">
+    <div class="col-md-7">
             <!-- Side navigation -->
             <div class="sidenav">
                 <a href="#"><b>{{ art.title }}</b></a>
@@ -27,18 +24,17 @@
 <!--                <a href="#">Services</a>-->
 <!--                <a href="#">Clients</a>-->
 <!--                <a href="#">Contact</a>-->
-                <form method="POST">{% csrf_token %}
+            </div>
+
+        </div>
+    <div class="=col-md-12">
+            <!-- Page content -->
+            <div class="main">
+            <form method="POST">{% csrf_token %}
                     {{ form|crispy }}
                     <button id="submit" class="btn btn-secondary" type="submit">Comment</button>
 
                 </form>
-            </div>
-
-        </div>
-
-        <div class="=col-md-12">
-            <!-- Page content -->
-            <div class="main">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer interdum tortor at urna vehicula
                 accumsan.
                 Vestibulum lobortis lacinia dapibus. In et viverra nibh. Nulla facilisi. Vestibulum nec est ut nulla
@@ -148,7 +144,8 @@
                 suscipit lorem
                 eros eu purus. Etiam malesuada, turpis imperdiet venenatis euismod, eros
             </div>
-            {% endblock sidebar %}
+        {% endblock content %}
+
 
         </div>
     </div>

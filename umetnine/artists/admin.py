@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Arts, Comments, Tags, ArtworksTags, Stili, Umetnina, Umetnik
+from .models import Arts, Comments, Tags, ArtworksTags, Stili, Umetnina, Umetnik, ArtworkLikes
 
 # Register your models here.
 
@@ -11,3 +11,4 @@ admin.site.register(Arts)
 admin.site.register(Comments)
 admin.site.register(Tags)
 admin.site.register(ArtworksTags)
+admin.site.register(ArtworkLikes)
