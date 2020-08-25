@@ -58,3 +58,4 @@ def dynamic_user_lookup_view(request, id):
         'user': user
     }
     return render(request, 'artists/user.html', context)
+
