@@ -22,11 +22,7 @@ def art_like(request, id):
         art_to_like.likes += 1
         art_to_like.save()
     finally:
-        context = {
-            'art': art_to_like,
-            'id': id,
-        }
-        return render(request, 'artists/artwork.html', context)
+        return redirect("/artworks/{}".format(id))
 
 
 class PostListView(ListView):
