@@ -68,23 +68,14 @@ body {
 }
 
 .sidenav {
-  /*width: 500px;*/
-  /*width: 400px;*/
-  /*  -ms-flex: 0 0 300px;*/
-  /*  flex: 0 0 300px;*/
-  text-align: right;
-    z-index: 1;
-  /*top: 65px;*/
-  right: 10px;
+  text-align: left;
   background: #eee;
-  overflow-x: hidden;
-  padding: 8px 0;
 }
 
 .sidenav a {
-  padding: 6px 8px 6px 16px;
+  padding: 6px 8px 6px 6px;
   text-decoration: none;
-  font-size: 25px;
+  font-size: 16px;
   color: #2196F3;
   display: block;
 }
@@ -138,8 +129,10 @@ a.btn.btn-like:hover{
   -webkit-flex-wrap: wrap;
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
-  margin: 0 auto 35px;
+  padding: 5px 5px 5px 5px;
   max-width: 920px;
+    background: #eee;
+    transition: transform 10s;
 }
 
 .sr-only {
@@ -167,4 +160,13 @@ a.btn.btn-like:hover{
   height: 100%;
   visibility: hidden;
   width: 100%;
+}
+
+.img-fluid2 {
+  max-width: 1000px;
+  height: auto;
+}
+
+.image-grid .rounded:hover {
+    transform: translateY(-1px) scale(1.10);
 }

@@ -59,3 +59,10 @@ def dynamic_user_lookup_view(request, id):
     }
     return render(request, 'artists/user.html', context)
 
+
+def all_certain_user_works(request, pk):
+    print("zdej gledam sam enga userja")
+    print(pk)
+    queryset = Arts.objects.filter(user_id=pk)  # list of objects
+    context = {'object_list': queryset, 'username': request.user.username}
+    return render(request, 'account/all_user_works.html', context)
