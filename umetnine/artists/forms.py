@@ -1,6 +1,6 @@
 from django import forms
 
-from artists.models import Arts, Tags
+from artists.models import Arts, Tags, Comments
 
 
 class TagForm(forms.ModelForm):
@@ -11,6 +11,20 @@ class TagForm(forms.ModelForm):
     class Meta:
         model = Tags
         fields = ['tag']
+
+
+class CommentForm(forms.ModelForm):
+    content = forms.CharField(
+        label='',
+        widget=forms.TextInput(
+            attrs={'class': 'form-control',
+                   'placeholder': 'Comment...',
+                   'style': "text-align: right;"})
+    )
+
+    class Meta:
+        model = Comments
+        fields = ['content']
 
 
 class NewArtForm(forms.ModelForm):

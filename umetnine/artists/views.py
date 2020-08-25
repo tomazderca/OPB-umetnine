@@ -1,4 +1,8 @@
+from datetime import datetime
+
 from django.shortcuts import render, redirect, get_object_or_404
+
+from .forms import CommentForm
 from .models import Arts
 from django.contrib.auth.models import User
 from django.views.generic import ListView
@@ -35,10 +39,20 @@ class PostListView(ListView):
 
 def dynamic_artwork_lookup_view(request, id):
     art = Arts.objects.get(id=id)
-    context = {
-        'art': art,
-        'id': id,
-    }
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid() and request.user.is_authenticated:
+            new_comment = form.save(commit=False)
+            new_comment.timestamp = datetime.now()
+            new_comment.artwork_id = art
+            new_comment.user_id = request.user
+            new_comment.save()
+            context = {'art': art, 'id': id, 'form': CommentForm(), 'new_comment': new_comment}
+            # return render(request, 'artists/artwork.html', context)
+        else:  # ne mores komentirati, če nisi prijavljen
+            context = {'art': art, 'form': CommentForm(), 'id': id}
+    else:  # request je get
+        context = {'art': art, 'form': CommentForm(), 'id': id}
     return render(request, 'artists/artwork.html', context)
 
 

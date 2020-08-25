@@ -10,7 +10,7 @@
             <div class="col-sm-6 col-md-4" align="center">
                 <div class="thumbnail">
                     <a class="lightbox" href="artworks/{{ art.id }}">
-                        <img src={{ art.url }} alt="" class="img-thumbnail">
+                        <img src="{{ art.url }}" alt="" class="img-thumbnail">
                     </a>
                     <div class="caption">
                         <a class="mr-2" href="#">{{ art.user_id }}</a>
@@ -32,7 +32,7 @@
 {#                {% for art in user.arts.all %}#}
 {#                        <h2><a class="article-title" href="#">{{ art.title }}</a></h2>#}
 {#                        <small class="text-muted">{{ art.timestamp }}</small>#}
-{#                        <p class="article-content"><img src={{ art.url }} alt="slika"></p>#}
+{#                        <p class="article-content"><img src="{{ art.url }}" alt="slika"></p>#}
 {#                {% endfor %}#}
 {#            </div>#}
 {#        </article>#}
