@@ -69,7 +69,10 @@ body {
 
 .sidenav {
   width: 400px;
+  width: 100%;
+  text-align: right;
   position: absolute;
+  position: initial;
   z-index: 1;
   top: 65px;
   right: 10px;
@@ -99,4 +102,13 @@ body {
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
+}
+
+a.btn.btn-like{
+    color: #fb5858;
+    font-size: 2em;
+}
+
+a.btn.btn-like:hover{
+    color: red;
 }
