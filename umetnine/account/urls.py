@@ -10,5 +10,8 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
     path('list/', views.user_list, name='user_list'),
     path('myworks/', views.all_user_works, name='all_user_works'),
+
+    # spodnja vrstica za url:
+    path('<int:pk>/works/', views.all_certain_user_works, name='all_certain_user_works'),
     path('delete/(<pk>)/', views.art_delete, name='art_delete'),
 ]
