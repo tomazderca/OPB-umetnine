@@ -1,0 +1,88 @@
+.be-comment-block {
+    margin-bottom: 50px !important;
+    border: 1px solid #edeff2;
+    border-radius: 2px;
+    padding: 50px 70px;
+}
+
+.comments-title {
+    font-size: 16px;
+    color: #262626;
+    margin-bottom: 15px;
+}
+
+.be-img-comment {
+    width: 60px;
+    height: 60px;
+    float: left;
+    margin-bottom: 15px;
+}
+
+.be-ava-comment {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.be-comment-content {
+    margin-left: 0;
+}
+
+.be-comment-content span {
+    display: inline-block;
+    width: 49%;
+    margin-bottom: 15px;
+}
+
+.be-comment-name {
+    font-size: 13px;
+}
+
+.be-comment-content a {
+    color: #383b43;
+}
+
+.be-comment-content span {
+    display: inline-block;
+    width: 49%;
+    margin-bottom: 15px;
+}
+
+.be-comment-time {
+    text-align: right;
+}
+
+.be-comment-time {
+    font-size: 11px;
+    color: #b4b7c1;
+}
+
+.be-comment-text {
+    font-size: 13px;
+    line-height: 18px;
+    color: #7a8192;
+    display: block;
+    background: #eaeaea;
+    border: 1px solid #edeff2;
+    padding: 15px 20px 20px 20px;
+}
+
+.collapse-content .fa.fa-heart:hover {
+  color: #f44336 !important;
+}
+.collapse-content .fa.fa-share-alt:hover {
+  color: #0d47a1 !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

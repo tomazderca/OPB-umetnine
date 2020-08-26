@@ -1,7 +1,7 @@
-body {
-    min-height: 100vh;
-    font: normal 16px sans-serif;
-}
+/*body {*/
+/*    min-height: 100vh;*/
+/*    font: normal 16px sans-serif;*/
+/*}*/
 
 .gallery-container h1 {
     text-align: center;
@@ -166,6 +166,7 @@ a.btn.btn-like:hover{
 
 .img-fluid2 {
   max-width: 1000px;
+    max-height: 800px;
   height: auto;
 }
 

@@ -4,32 +4,95 @@
 {% block content %}
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-10 text-center">
-                <a class="lightbox" href="{{ art.url }}">
-                    <img src="{{ art.url }}" alt="" class="img-thumbnail img-fluid2">
-                </a>
 
-                <div class="row">
+            <div class="col-md-10">
+            <div class="row">
                     <div class="col-lg-12 text-center">
-                        <form method="POST">{% csrf_token %}
-                            {{ form|crispy }}
-                            <button id="submit" class="btn btn-secondary" type="submit">Comment</button>
+                        <a class="lightbox" href="{{ art.url }}">
+                            <img src="{{ art.url }}" alt="" class="img-thumbnail img-fluid2">
+                        </a>
+                    </div>
+                </div>
 
-                        </form>
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="card booking-card border-0">
+                            <div class="card-body">
 
-                        {% for komentar in comments %}
-                            {{ komentar }}
+                                <!-- Title -->
+                                <h4 class="card-title font-weight-bold"><a>{{ art.title }}</a></h4>
+                                <h6 class="mb-2">by {{ art.user_id }}</h6>
+                                <!-- Data -->
+                                <ul class="list-unstyled list-inline rating mb-0">
+                                    <li class="list-inline-item"><i class="fa fa-heart"></i></li>
+                                    <li class="list-inline-item"><p class="text-muted">{{ art.likes }}</p></li>
+                                </ul>
+                                <!-- Text -->
+                                <p class="card-text">{{ art.description }}</p>
+                                <hr class="my-4">
+                                <ul class="list-unstyled list-inline d-flex justify-content-between mb-0">
+                                    <li class="list-inline-item mr-0">
+                                        <div class="chip mr-0">TAG</div>
+                                    </li>
+                                    <li class="list-inline-item mr-0">
+                                        <div class="chip mr-0">TAG</div>
+                                    </li>
+                                    <li class="list-inline-item mr-0">
+                                        <div class="chip mr-0">TAG</div>
+                                    </li>
+                                </ul>
+                                <hr class="my-4">
 
 
+                            </div>
 
-                        {% endfor %}
+                        </div>
+                        <!-- Card -->
 
                     </div>
 
                 </div>
 
+
+                <div class="row">
+                    <div class="col-md-8">
+
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-md-8 text-center">
+                        <form method="POST">{% csrf_token %}
+                            {{ form|crispy }}
+                            <button id="submit" class="btn btn-secondary" type="submit">Comment</button>
+                        </form>
+                    </div>
+                </div>
+                {% for komentar in comments %}
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="be-comment">
+                                <div class="be-comment-content">
+
+				<span class="be-comment-name">
+					<a href="#">{{ komentar.user_id }}</a>
+					</span>
+                                    <span class="be-comment-time">
+					<i class="fa fa-clock-o"></i>
+					{{ komentar.timestamp|date:"D, j M Y H:i:s" }}
+				</span>
+
+                                    <p class="be-comment-text">
+                                        {{ komentar.content }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
-            <div class="col-lg-2">
+
+            <div class="col-md-2 d-none d-lg-block">
                 <div class="row">
                     <div class="col-lg-12 sidenav">
                         <!-- Side navigation -->

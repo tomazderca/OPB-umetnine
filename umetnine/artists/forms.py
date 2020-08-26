@@ -19,7 +19,7 @@ class CommentForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={'class': 'form-control',
                    'placeholder': 'Comment...',
-                   'style': "text-align: right;"})
+                   'style': "text-align: left;"})
     )
 
     class Meta:
