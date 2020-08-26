@@ -16,13 +16,13 @@ def uporabniki(request):
     return render(request, 'artists/uporabniki.html', context)
 
 
-def art_like(request, id):
-    art_to_like = get_object_or_404(Arts, pk=id)
+def art_like(request, user_id, artwork_id):
+    art_to_like = get_object_or_404(Arts, pk=artwork_id)
     try:
         art_to_like.likes += 1
         art_to_like.save()
     finally:
-        return redirect("/artworks/{}".format(id))
+        return redirect("/{}/{}".format(user_id, artwork_id))
 
 
 class PostListView(ListView):

@@ -8,7 +8,7 @@ app_name = 'artists'
 urlpatterns = [
     path('', PostListView.as_view(), name='artists-uporabnik'),
     path('artworks/<int:id>/', dynamic_artwork_lookup_view, name='artwork'),
-    path('like/<int:id>/', art_like, name='art_like'),
+    path('like/<int:user_id>/<int:artwork_id>/', art_like, name='art_like'),
     path('<int:user_id>/<int:artwork_id>/', dynamic_artwork_lookup_view2, name='user-artwork'),
 
 ]

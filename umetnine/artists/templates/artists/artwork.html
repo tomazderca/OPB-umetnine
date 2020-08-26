@@ -35,7 +35,7 @@
                         <!-- Side navigation -->
                         <a href="#"><b>{{ art.title }}</b></a>
                         <!-- like button -->
-                        <a href="{% url 'artists:art_like' artwork_id %}">
+                        <a href="{% url 'artists:art_like' user_id artwork_id %}">
                             <i class="fa fa-heart" aria-hidden="true"></i>
                             {{ art.likes }}
                         </a>
@@ -53,7 +53,7 @@
 
                     {#                    tle bi rad mel for zanko, ki gre ćez vse slike, ki jih je ta user naredu (do nekega maximuma, recimo 9)#}
 
-                    <a href="{% url 'artists:artwork' artwork_id %}" class="rounded image-bg"
+                    <a href="" class="rounded image-bg"
                        style="background-image:url(https://images.pexels.com/photos/443446/pexels-photo-443446.jpeg)"
                        target="_blank">
                         <img class="image-bg-placeholder"
