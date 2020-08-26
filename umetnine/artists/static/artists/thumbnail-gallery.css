@@ -27,15 +27,15 @@
     padding: 0;
     margin: 5px;
     margin-bottom: 30px;
-    background-color: #fff;
-    background-color: #eaeaea;
+    /*background-color: #fff;*/
+    /*background-color: #eaeaea;*/
     border-radius: 6px;
     border: none;
     /*border: 2px solid lightsteelblue;*/
     transition: 0.15s ease-in-out;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.06);
-    box-shadow: -10px -10px 1px rgba(0, 0, 0, 0.1), -10px 10px 1px rgba(0, 0, 0, 0.1), 10px 10px 1px rgba(0, 0, 0, 0.1), 10px -10px 1px rgba(0, 0, 0, 0.1);
-    box-shadow: -10px -10px 5px #eaeaea, -10px 10px 5px #eaeaea, 10px 10px 5px #eaeaea, 10px -10px 5px #eaeaea;
+    /*box-shadow: 0 8px 15px rgba(0, 0, 0, 0.06);*/
+    /*box-shadow: -10px -10px 1px rgba(0, 0, 0, 0.1), -10px 10px 1px rgba(0, 0, 0, 0.1), 10px 10px 1px rgba(0, 0, 0, 0.1), 10px -10px 1px rgba(0, 0, 0, 0.1);*/
+    /*box-shadow: -10px -10px 5px #eaeaea, -10px 10px 5px #eaeaea, 10px 10px 5px #eaeaea, 10px -10px 5px #eaeaea;*/
 }
 
 .tz-gallery .thumbnail:hover {
