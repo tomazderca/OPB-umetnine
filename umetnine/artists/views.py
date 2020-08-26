@@ -120,6 +120,7 @@ def dynamic_artwork_lookup_view(request, user_id, artwork_id):
                    'user_id': user_id,
                    'user_art': user_art,
                    'tagi': tagi,
-                   'num_likes': num_likes
+                   'num_likes': num_likes,
+                   'liked': liked
                    }
     return render(request, 'artists/artwork.html', context)
