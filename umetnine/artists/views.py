@@ -3,7 +3,7 @@ from datetime import datetime
 from django.shortcuts import render, redirect, get_object_or_404
 
 from .forms import CommentForm
-from .models import Arts, Comments, ArtworksTags
+from .models import Arts, Comments, ArtworksTags, UserDescription
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView
 
@@ -53,20 +53,23 @@ class PostListView(ListView):
 #     return render(request, 'artists/artwork.html', context)
 
 
-def dynamic_user_lookup_view(request, id):
-    user = User.objects.get(id=id)
+def dynamic_user_lookup_view(request, user_id):
+    user_art = Arts.objects.filter(user_id=user_id)
+    try:
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        user = None
+    try:
+        opis = UserDescription.objects.get(user_id=user_id)
+    except UserDescription.DoesNotExist:
+        opis = ''
     context = {
-        'user': user
+        'user': user,
+        'user_art': user_art,
+        'opis': opis
     }
     return render(request, 'artists/user.html', context)
 
-
-# def all_certain_user_works(request, pk):
-#     print("zdej gledam sam enga userja")
-#     print(pk)
-#     queryset = Arts.objects.filter(user_id=pk)  # list of objects
-#     context = {'object_list': queryset, 'username': request.user.username}
-#     return render(request, 'account/all_user_works.html', context)
 
 def dynamic_artwork_lookup_view(request, user_id, artwork_id):
     art = Arts.objects.get(id=artwork_id)
