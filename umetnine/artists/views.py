@@ -33,24 +33,24 @@ class PostListView(ListView):
     paginate_by = 9
 
 
-def dynamic_artwork_lookup_view(request, id):
-    art = Arts.objects.get(id=id)
-    comments = Comments.objects.filter(artwork_id=id)
-    if request.method == 'POST':
-        form = CommentForm(request.POST)
-        if form.is_valid() and request.user.is_authenticated:
-            new_comment = form.save(commit=False)
-            new_comment.timestamp = datetime.now()
-            new_comment.artwork_id = art
-            new_comment.user_id = request.user
-            new_comment.save()
-            context = {'art': art, 'id': id, 'form': CommentForm(), 'new_comment': new_comment, 'comments': comments}
-            # return render(request, 'artists/artwork.html', context)
-        else:  # ne mores komentirati, če nisi prijavljen
-            context = {'art': art, 'form': CommentForm(), 'id': id, 'comments': comments}
-    else:  # request je get
-        context = {'art': art, 'form': CommentForm(), 'id': id, 'comments': comments}
-    return render(request, 'artists/artwork.html', context)
+# def dynamic_artwork_lookup_view(request, id):
+#     art = Arts.objects.get(id=id)
+#     comments = Comments.objects.filter(artwork_id=id)
+#     if request.method == 'POST':
+#         form = CommentForm(request.POST)
+#         if form.is_valid() and request.user.is_authenticated:
+#             new_comment = form.save(commit=False)
+#             new_comment.timestamp = datetime.now()
+#             new_comment.artwork_id = art
+#             new_comment.user_id = request.user
+#             new_comment.save()
+#             context = {'art': art, 'id': id, 'form': CommentForm(), 'new_comment': new_comment, 'comments': comments}
+#             # return render(request, 'artists/artwork.html', context)
+#         else:  # ne mores komentirati, če nisi prijavljen
+#             context = {'art': art, 'form': CommentForm(), 'id': id, 'comments': comments}
+#     else:  # request je get
+#         context = {'art': art, 'form': CommentForm(), 'id': id, 'comments': comments}
+#     return render(request, 'artists/artwork.html', context)
 
 
 def dynamic_user_lookup_view(request, id):
@@ -61,14 +61,14 @@ def dynamic_user_lookup_view(request, id):
     return render(request, 'artists/user.html', context)
 
 
-def all_certain_user_works(request, pk):
-    print("zdej gledam sam enga userja")
-    print(pk)
-    queryset = Arts.objects.filter(user_id=pk)  # list of objects
-    context = {'object_list': queryset, 'username': request.user.username}
-    return render(request, 'account/all_user_works.html', context)
+# def all_certain_user_works(request, pk):
+#     print("zdej gledam sam enga userja")
+#     print(pk)
+#     queryset = Arts.objects.filter(user_id=pk)  # list of objects
+#     context = {'object_list': queryset, 'username': request.user.username}
+#     return render(request, 'account/all_user_works.html', context)
 
-def dynamic_artwork_lookup_view2(request, user_id, artwork_id):
+def dynamic_artwork_lookup_view(request, user_id, artwork_id):
     art = Arts.objects.get(id=artwork_id)
     comments = Comments.objects.filter(artwork_id=artwork_id)
     user_art = Arts.objects.filter(user_id=user_id)
