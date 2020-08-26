@@ -1,6 +1,13 @@
 {% extends "artists/base.html" %}
 {% load crispy_forms_tags %}
 
+
+{% block css_import %}
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+{% endblock css_import %}
+
+
 {% block content %}
     <div class="container-fluid">
         <div class="row">
@@ -57,10 +64,14 @@
                 <!-- dodajanje komentarjev -->
                 <div class="row justify-content-center">
                     <div class="col-md-8 text-center">
+                        {% if user.is_authenticated %}
                         <form method="POST">{% csrf_token %}
                             {{ form|crispy }}
                             <button id="submit" class="btn btn-secondary" type="submit">Comment</button>
+                        {% else %}
+                            <a class="card-title font-weight-bold mb-1" href="{% url 'login' %}">Log in to post a comment.</a>
                         </form>
+                        {% endif %}
                     </div>
                 </div>
 
@@ -92,10 +103,13 @@
                 <div class="row">
                     <div class="col-lg-12 sidenav">
                         <a href="#"><b>{{ art.title }}</b></a>
+                        {% if user.is_authenticated %}
                         <a href="{% url 'artists:art_like' art.user_id.id artwork_id %}">
                             <i class="fa fa-heart" aria-hidden="true"></i>
                             {{ art.likes }}
                         </a>
+                        {% else %}
+                        {% endif %}
 
                         <a href="#"><span style="color: grey;">Author:</span> {{ art.user_id }}</a>
                         <a href="#"><span style="color: grey;">Posted:</span> {{ art.timestamp }}</a>
