@@ -7,6 +7,7 @@ from rest_framework.response import Response
 
 from .forms import CommentForm
 from .models import Arts, Comments, ArtworksTags, Like
+from .models import Arts, Comments, ArtworksTags, UserDescription
 from django.contrib.auth.models import User
 from django.views.generic import ListView
 
@@ -55,10 +56,20 @@ def artwork_like_api_toggle(request, artwork_id):
     return Response({"message": "error"})
 
 
-def dynamic_user_lookup_view(request, id):
-    user = User.objects.get(id=id)
+def dynamic_user_lookup_view(request, user_id):
+    user_art = Arts.objects.filter(user_id=user_id)
+    try:
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        user = None
+    try:
+        opis = UserDescription.objects.get(user_id=user_id)
+    except UserDescription.DoesNotExist:
+        opis = ''
     context = {
-        'user': user
+        'user': user,
+        'user_art': user_art,
+        'opis': opis
     }
     return render(request, 'artists/user.html', context)
 

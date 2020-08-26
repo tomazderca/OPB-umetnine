@@ -114,13 +114,14 @@
                 </div>
             </div>
 
-            <hr class="mt-2 mb-2">
+                <hr class="mt-2 mb-2">
+                <span style="color: grey;">More from: <a href="#">{{ art.user_id }}</a></span>
+                <div class="row image-grid">
 
-            <a href="#"><span style="color: grey;">More from:</span> {{ art.user_id }}</a>
-            <div class="row image-grid">
-                <!-- mini galerija -->
-                {% for slika in user_art %}
-                {% if slika.id != artwork_id %}
+
+                    <!-- mini galerija -->
+                    {% for slika in user_art %}
+                        {% if slika.id != artwork_id %}
 
                 <a href="{% url 'artists:user-artwork' art.user_id.id slika.id %}" class="rounded image-bg"
                    style="background-image:url({{ slika.url }})">
