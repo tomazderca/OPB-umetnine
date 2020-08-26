@@ -1,7 +1,9 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.conf import settings
 
 from django.core.validators import MaxValueValidator
+from django.urls import reverse
 from django.utils import timezone
 
 
@@ -28,6 +30,14 @@ class UserDescription(models.Model):
         return self.description
 
 
+class Like(models.Model):
+    artwork = models.ForeignKey(Arts, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.user) + " likes " + str(self.artwork)
+
+
 class Comments(models.Model):
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     artwork_id = models.ForeignKey(Arts, on_delete=models.CASCADE)
@@ -49,9 +59,18 @@ class ArtworksTags(models.Model):
     artwork_id = models.ForeignKey(Arts, on_delete=models.CASCADE)
     tag_id = models.ForeignKey(Tags, on_delete=models.CASCADE)
 
-class ArtworkLikes(models.Model):
-    artwork_id = models.ForeignKey(Arts, on_delete=models.CASCADE)
-    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+#
+# class ArtworkLikes(models.Model):
+#     artwork_id = models.ForeignKey(Arts, on_delete=models.CASCADE)
+#     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+#     likes = models.IntegerField()
+    # likes = models.ManyToManyField('User', blank=True, related_name='artwork_likes')
+    #
+    # def __str__(self):
+    #     return str(self.artwork_id) + " liked by: " + str(self.likes)
+    #
+    # def get_api_like_url(self):
+    #     return reverse("artists:like-api-toggle", kwargs={'artwork_id': self.artwork_id})
 
 
 # --------------------------------------- staro, pustil zato, da mi ne javlja errorjev

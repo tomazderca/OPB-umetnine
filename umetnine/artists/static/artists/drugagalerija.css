@@ -73,3 +73,12 @@ padding-right: 1.1rem;
     position: relative;
 }
 }
+
+a.btn_liked {
+    color: red;
+}
+
+
+a.btn_liked:hover {
+    color: #9a0000;
+}

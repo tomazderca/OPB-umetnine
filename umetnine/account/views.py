@@ -42,12 +42,9 @@ def all_user_works(request):
 
 # uporabla sm kr star html, slike pa naloži pač od tistega od kirga maš id v urlju
 def all_certain_user_works(request, pk):
-    print("zdej gledam sam enga userja")
-    print(pk)
     queryset = Arts.objects.filter(user_id=pk)  # list of objects
     context = {'object_list': queryset, 'username': request.user.username}
     return render(request, 'account/all_user_works.html', context)
-
 
 
 def art_delete(request, pk):

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
 
     # added
     'crispy_forms',
+    'rest_framework',
 
     # custom
     'artists.apps.ArtistsConfig',

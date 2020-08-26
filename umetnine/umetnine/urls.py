@@ -16,7 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-# from account.views import LoginView
 from account import views as v
 
 urlpatterns = [
@@ -24,7 +23,7 @@ urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path('register/', v.register, name='register'),
 
-    path('', include('homepage.urls')),
+    path('unusedButHasTail/', include('homepage.urls')),
     path('user/', include('account.urls')),
     path('', include('artists.urls'))
 ]
