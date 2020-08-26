@@ -22,7 +22,7 @@ def register(request):
                                     password=form.cleaned_data['password1'],
                                     )
             login(request, new_user)
-            return redirect('/about')
+            return redirect('/user/profile/')
     else:
         form = RegisterForm()
 
@@ -40,43 +40,13 @@ def all_user_works(request):
     return render(request, 'account/all_user_works.html', context)
 
 
-# uporabla sm kr star html, slike pa naloži pač od tistega od kirga maš id v urlju
-def all_certain_user_works(request, pk):
-    queryset = Arts.objects.filter(user_id=pk)  # list of objects
-    context = {'object_list': queryset, 'username': request.user.username}
-    return render(request, 'account/all_user_works.html', context)
-
-
 def art_delete(request, pk):
-    art_to_delete = get_object_or_404(Arts, pk=pk)
+    art_to_delete = get_object_or_404(Arts, id=pk)
     try:
         art_to_delete.delete()
     finally:
         return redirect("/user/myworks")
-        # return redirect("{% url 'account:all_user_works %}")
-
-
-def profile(request):
-    if not request.user.is_authenticated:
-        html = "<h1>You are not logged in.</h1><a href='/login'>Log in.</a>"
-        return HttpResponse(html)
-    # za vpisane uporabnike pripravim pravi view
-    queryset = UserArtwork.objects.all()  # list of objects
-    if request.method == "POST":
-        form = AddArtForm(request.POST)
-        if form.is_valid():
-            new_art = form.save(commit=False)
-            new_art.author = request.user.username
-            new_art.save()
-            context = {'form': AddArtForm(), 'new_art': new_art, 'object_list': queryset}
-            return render(request, 'account/profile.html', context)
-        else:
-            print("zajebu")
-            return render(request, 'account/profile.html', {'form': AddArtForm()})
-    else:  # request je get
-        form = AddArtForm()
-        context = {'object_list': queryset, 'form': form}
-    return render(request, 'account/profile.html', context)
+        # return redirect("{% url 'account:all_user_works' %}")
 
 
 def profile_view(request):
@@ -98,7 +68,7 @@ def profile_view(request):
                 new_tag = Tags.objects.create(tag=tg)
                 ArtworksTags.objects.create(tag_id=new_tag, artwork_id=new_art)
             context = {'form': NewArtForm(), 'new_art': new_art, "form2": form2}
-            return render(request, 'account/profile.html', context)
+            return redirect('/user/myworks/')
         else:
             return render(request, 'account/profile.html', {'form': NewArtForm(), "form2": TagForm()})
     else:  # request je get
@@ -117,7 +87,8 @@ def edit_profile(request):
         form = EditProfileFrom(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('/user/profile')
+            # return redirect('/user/profile')
+            return redirect("{% url 'profile' %}")
     else:
         form = EditProfileFrom(instance=request.user)
         context = {'form': form}
@@ -129,4 +100,3 @@ def edit_profile(request):
 def logout(request):
     return render(request, 'account/logout.html', {})
 
-# ------------------------------

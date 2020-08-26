@@ -29,7 +29,7 @@
                             <!-- likes -->
                             <ul class="list-unstyled list-inline rating mb-0">
                                 <li class="list-inline-item"><i class="fa fa-heart"></i></li>
-                                <li class="list-inline-item"><p class="text-muted">{{ num_likes }}</p></li>
+                                <li class="list-inline-item"><p class="text-muted" id="like_label2">{{ num_likes }}</p></li>
                             </ul>
                             <!-- tags -->
                             <ul class="list-unstyled list-inline rating d-flex mb-0">
@@ -145,6 +145,7 @@
 
     var like_btn = document.getElementById("like_btn");
     var like_label = document.getElementById("like_label");
+    var like_label2 = document.getElementById("like_label2");
 
     function reqListener () {
         let data = JSON.parse(this.responseText);
@@ -156,6 +157,7 @@
             like_btn.classList.remove("btn_liked");
         }
         like_label.innerHTML = "" + data.num_likes;
+        like_label2.innerHTML = "" + data.num_likes;
     }
 
     like_btn.onclick = function () {
