@@ -32,7 +32,7 @@ class Comments(models.Model):
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     artwork_id = models.ForeignKey(Arts, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(default=timezone.now)
-    content = models.CharField(max_length=200)
+    content = models.CharField(max_length=1000)
 
     def __str__(self):
         return self.content
