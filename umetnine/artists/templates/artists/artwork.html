@@ -16,16 +16,14 @@
                         <button id="submit" class="btn btn-secondary" type="submit">Comment</button>
 
                     </form>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer interdum tortor at urna vehicula
-                    accumsan.
-                    Vestibulum lobortis lacinia dapibus. In et viverra nibh. Nulla facilisi. Vestibulum nec est ut nulla
-                    feugiat
-                    eleifend eget ut massa. Vivamus ac erat sed elit sodales malesuada. Suspendisse nec justo at mi
-                    varius
-                    lacinia.
-                    Integer et velit diam.
 
-                        {{ user.id }}
+                    {% for slika in user_art %}
+                        {{ slika }}
+
+
+
+                        {% endfor %}
+
                     </div>
 
                 </div>
@@ -37,7 +35,7 @@
                         <!-- Side navigation -->
                         <a href="#"><b>{{ art.title }}</b></a>
                         <!-- like button -->
-                        <a href="{% url 'artists:art_like' id %}">
+                        <a href="{% url 'artists:art_like' artwork_id %}">
                             <i class="fa fa-heart" aria-hidden="true"></i>
                             {{ art.likes }}
                         </a>
@@ -55,7 +53,7 @@
 
                     {#                    tle bi rad mel for zanko, ki gre ćez vse slike, ki jih je ta user naredu (do nekega maximuma, recimo 9)#}
 
-                    <a href="{% url 'artists:artwork' id %}" class="rounded image-bg"
+                    <a href="{% url 'artists:artwork' artwork_id %}" class="rounded image-bg"
                        style="background-image:url(https://images.pexels.com/photos/443446/pexels-photo-443446.jpeg)"
                        target="_blank">
                         <img class="image-bg-placeholder"
