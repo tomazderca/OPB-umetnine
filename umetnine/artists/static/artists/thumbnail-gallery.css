@@ -156,7 +156,7 @@ a.btn.btn-like:hover{
           flex: 0 0 auto;
   margin: 5px;
   width: calc(25% - 10px);
-    transition: transform 500ms;
+    transition: transform 300ms;
 }
 .image-bg-placeholder {
   height: 100%;
