@@ -4,8 +4,10 @@
 {% block content %}
     <div class="container-fluid">
         <div class="row">
-
+            <!-- stolpec slik, opisov, komentarjev -->
             <div class="col-md-10">
+
+                <!-- vrstica s sliko -->
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <a class="lightbox" href="{{ art.url }}">
@@ -14,20 +16,21 @@
                     </div>
                 </div>
 
+                <!-- vrstica opis, ipd -->
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <div class="card booking-card border-0">
                             <div class="card-body">
 
-                                <!-- Title -->
+                                <!-- naslov, avtor -->
                                 <h4 class="card-title font-weight-bold mb-1"><a>{{ art.title }}</a></h4>
                                 <h6 class="mb-3">by {{ art.user_id }}</h6>
-                                <!-- Data -->
+                                <!-- likes -->
                                 <ul class="list-unstyled list-inline rating mb-0">
                                     <li class="list-inline-item"><i class="fa fa-heart"></i></li>
                                     <li class="list-inline-item"><p class="text-muted">{{ art.likes }}</p></li>
                                 </ul>
-                                <!-- Text -->
+                                <!-- tags -->
                                 <ul class="list-unstyled list-inline rating d-flex mb-0">
                                     {% for tag in tagi %}
                                         <li class="list-inline-item mr-2">
@@ -36,7 +39,7 @@
                                         </li>
                                     {% endfor %}
                                 </ul>
-
+                                <!-- description -->
                                 <hr class="my-4">
                                 <p class="card-text">{{ art.description }}</p>
                                 <hr class="my-4">
@@ -45,19 +48,13 @@
                             </div>
 
                         </div>
-                        <!-- Card -->
+                        <!-- zaključek kartice z opisi -->
 
                     </div>
 
                 </div>
 
-
-                <div class="row">
-                    <div class="col-md-8">
-
-                    </div>
-                </div>
-
+                <!-- dodajanje komentarjev -->
                 <div class="row justify-content-center">
                     <div class="col-md-8 text-center">
                         <form method="POST">{% csrf_token %}
@@ -66,20 +63,20 @@
                         </form>
                     </div>
                 </div>
+
+                <!-- komentarji -->
                 {% for komentar in comments %}
                     <div class="row justify-content-center">
                         <div class="col-md-8">
                             <div class="be-comment">
                                 <div class="be-comment-content">
-
-				<span class="be-comment-name">
-					<a href="#">{{ komentar.user_id }}</a>
-					</span>
+                                    <span class="be-comment-name">
+                                        <a href="#">{{ komentar.user_id }}</a>
+                                    </span>
                                     <span class="be-comment-time">
-					<i class="fa fa-clock-o"></i>
-					{{ komentar.timestamp|date:"D, j M Y H:i:s" }}
-				</span>
-
+                                        <i class="fa fa-clock-o"></i>
+                                        {{ komentar.timestamp|date:"D, j. M Y, H:i:s" }}
+                                    </span>
                                     <p class="be-comment-text">
                                         {{ komentar.content }}
                                     </p>
@@ -90,12 +87,11 @@
                 {% endfor %}
             </div>
 
+            <!-- sidebar -->
             <div class="col-md-2 d-none d-lg-block">
                 <div class="row">
                     <div class="col-lg-12 sidenav">
-                        <!-- Side navigation -->
                         <a href="#"><b>{{ art.title }}</b></a>
-                        <!-- like button -->
                         <a href="{% url 'artists:art_like' art.user_id.id artwork_id %}">
                             <i class="fa fa-heart" aria-hidden="true"></i>
                             {{ art.likes }}
@@ -112,7 +108,7 @@
                 <div class="row image-grid">
 
 
-                    {# mini galerija #}
+                    <!-- mini galerija -->
                     {% for slika in user_art %}
                         {% if slika.id != artwork_id %}
 
@@ -129,27 +125,11 @@
                     {% endfor %}
 
 
-                    {# basic primer, če kej zlomim #}
-
-                    {#                    <a href="{{ art.url }}" class="image-bg"#}
-                    {#                       style="background-image:url(https://images.pexels.com/photos/443446/pexels-photo-443446.jpeg)"#}
-                    {#                       target="_blank">#}
-                    {#                        <img class="image-bg-placeholder"#}
-                    {#                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="#}
-                    {#                             alt=""/>#}
-                    {#                        <img class="image-bg-img sr-only"#}
-                    {#                             src="https://images.pexels.com/photos/443446/pexels-photo-443446.jpeg"#}
-                    {#                             alt="Cropped image as a background example"/>#}
-                    {#                    </a>#}
-
-
                 </div>
 
 
             </div>
-            <div class="=col-md-12">
-                <!-- Page content -->
-            </div>
+
         </div>
     </div>
 

@@ -71,7 +71,7 @@ def dynamic_user_lookup_view(request, id):
 def dynamic_artwork_lookup_view(request, user_id, artwork_id):
     art = Arts.objects.get(id=artwork_id)
     comments = Comments.objects.filter(artwork_id=artwork_id).order_by('-timestamp')
-    user_art = Arts.objects.filter(user_id=user_id).order_by('-likes')
+    user_art = Arts.objects.filter(user_id=user_id).order_by('-likes')[:9]
     tagi = ArtworksTags.objects.filter(artwork_id=artwork_id)
     if request.method == 'POST':
         form = CommentForm(request.POST)
