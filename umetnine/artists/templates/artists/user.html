@@ -91,6 +91,7 @@
             <hr class="mt-2 mb-2">
 
             <!-- mini galerija: more from -->
+        {% if user_liked %}
 
         <span style="color: grey;">What {{ user }} liked:</span>
                 <div class="card">
@@ -115,6 +116,7 @@
                         {% endfor %}
                     </div>
                 </div>
+        {% endif %}
 
 
 
