@@ -29,6 +29,12 @@ p{
     margin: 12px 0;
 }
 
+.smaller {
+    width: 40%;
+
+}
+
+
 #submit{
     width: 49%;
     float: left;

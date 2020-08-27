@@ -24,7 +24,12 @@
 
         <!-- left side -->
         <div class="col-md-6">
-            <h1>Welcome {{ user.get_username }}!</h1>
+            <h1>
+                <a class="front-page" href="{% url 'artists:user-user' user.id %}">
+                    <i class="fa fa-user-o" aria-hidden="true"></i>
+                </a>
+                Welcome {{ user.get_username }}!
+            </h1>
             <h3>Here is your information:</h3>
 
             <ul class="list-group list-group-flush">
@@ -46,25 +51,6 @@
                     type="button">
                 List of artwork added by me
             </button>
-
-
-            <!--            <button type="button" class="btn btn-default btn-lg">-->
-            <!--                <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Star-->
-            <!--            </button>-->
-
-            <!--            {% if object_list %}-->
-            <!--            <h3>List of artworks added by you:</h3>-->
-
-            <!--            <ul class="list-group list-group-flush">-->
-            <!--            {% for instance in object_list %}-->
-            <!--                {% if instance.author == user.username %}-->
-            <!--                <li class="list-group-item"><b>{{ instance }}</b><br>-->
-            <!--                {{ instance.year }}</li>-->
-            <!--                {% endif %}-->
-            <!--            {% endfor %}-->
-            <!--            </ul>-->
-<!--            {% endif %}-->
-
         </div>
 
         <!-- right side -->
