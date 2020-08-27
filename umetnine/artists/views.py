@@ -1,6 +1,7 @@
 from datetime import datetime
 from itertools import chain
 
+from django.http import HttpResponse, HttpResponseNotFound, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -93,7 +94,10 @@ def dynamic_user_lookup_view(request, user_id):
 
 
 def dynamic_artwork_lookup_view(request, user_id, artwork_id):
-    art = Arts.objects.get(id=artwork_id)
+    try:
+        art = Arts.objects.get(user_id=user_id, id=artwork_id)
+    except Arts.DoesNotExist:
+        raise Http404("No such artwork!")
     user = request.user
     comments = Comments.objects.filter(artwork_id=artwork_id).order_by('-timestamp')
     user_art = Arts.objects.filter(user_id=user_id).order_by('-likes').exclude(id=artwork_id)[:20]
@@ -157,7 +161,10 @@ def dynamic_artwork_lookup_view(request, user_id, artwork_id):
                    'art_liked': art_liked,
                    'liked_arts': liked_arts
                    }
-    return render(request, 'artists/artwork.html', context)
+    if art.user_id.id == user_id:
+        return render(request, 'artists/artwork.html', context)
+    else:
+        return HttpResponseNotFound('<h1>Page was found</h1>')
 
 def search(request):
     template = 'artists/search.html'
