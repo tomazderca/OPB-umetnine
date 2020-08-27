@@ -87,8 +87,7 @@ def edit_profile(request):
         form = EditProfileFrom(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            # return redirect('/user/profile')
-            return redirect("{% url 'profile' %}")
+            return redirect('/user/profile')
     else:
         form = EditProfileFrom(instance=request.user)
         context = {'form': form}
