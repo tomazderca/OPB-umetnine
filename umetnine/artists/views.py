@@ -88,7 +88,7 @@ def dynamic_artwork_lookup_view(request, user_id, artwork_id):
     art = Arts.objects.get(id=artwork_id)
     user = request.user
     comments = Comments.objects.filter(artwork_id=artwork_id).order_by('-timestamp')
-    user_art = Arts.objects.filter(user_id=user_id).order_by('-likes')[:20]
+    user_art = Arts.objects.filter(user_id=user_id).order_by('-likes').exclude(id=artwork_id)[:20]
     tagi = ArtworksTags.objects.filter(artwork_id=artwork_id)
     useri = User.objects.get(id=user_id)
     user_liked = Like.objects.filter(user=useri)

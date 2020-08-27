@@ -119,8 +119,8 @@
                 <hr class="mt-2 mb-2">
 
             {% if user_art %}
-                <span style="color: grey;">More from: <a
-                        href="{% url 'artists:user-user' user_id %}">{{ art.user_id }}</a></span>
+                <span style="color: grey;">More from <a
+                        href="{% url 'artists:user-user' user_id %}">{{ art.user_id }}</a>:</span>
 
                 <!-- mini galerija: more from -->
                 <div class="card">
