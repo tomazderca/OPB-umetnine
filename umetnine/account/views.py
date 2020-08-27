@@ -100,7 +100,10 @@ def edit_profile(request):
             form = EditProfileFrom()
             form2 = UserDescriptionForm()
     else:
-        old_description = UserDescription.objects.get(user_id_id=request.user.id)
+        try:
+            old_description = UserDescription.objects.get(user_id_id=request.user.id)
+        except Exception:
+            old_description = ""
         form = EditProfileFrom(instance=request.user)
         form2 = UserDescriptionForm(instance=old_description)
         context = {'form': form, 'form2': form2}
@@ -111,4 +114,3 @@ def edit_profile(request):
 
 def logout(request):
     return render(request, 'account/logout.html', {})
-

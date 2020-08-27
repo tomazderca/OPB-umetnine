@@ -34,6 +34,13 @@ class UserDescriptionForm(forms.ModelForm):
         fields = ['description']
 
 
+class UserDescriptionForm(forms.ModelForm):
+
+    class Meta:
+        model = UserDescription
+        fields = ['description']
+
+
 class NewArtForm(forms.ModelForm):
     title = forms.CharField(
         label='title',
