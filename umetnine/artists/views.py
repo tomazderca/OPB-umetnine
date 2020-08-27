@@ -59,6 +59,8 @@ def artwork_like_api_toggle(request, artwork_id):
 def dynamic_user_lookup_view(request, user_id):
     user_art = Arts.objects.filter(user_id=user_id)
     avatar = Arts.objects.filter(user_id=user_id).first()
+    useri = User.objects.get(id=user_id)
+    user_liked = Like.objects.filter(user=useri)
     likes = 0
     for art in user_art:
         likes += Like.objects.filter(artwork=art.id).count()
@@ -75,7 +77,9 @@ def dynamic_user_lookup_view(request, user_id):
         'user_art': user_art,
         'opis': opis,
         'avatar': avatar,
-        'likes': likes
+        'likes': likes,
+        'user_liked': user_liked,
+        'user_id': user_id
     }
     return render(request, 'artists/user.html', context)
 
@@ -84,10 +88,14 @@ def dynamic_artwork_lookup_view(request, user_id, artwork_id):
     art = Arts.objects.get(id=artwork_id)
     user = request.user
     comments = Comments.objects.filter(artwork_id=artwork_id).order_by('-timestamp')
-    user_art = Arts.objects.filter(user_id=user_id).order_by('-likes')[:9]
+    user_art = Arts.objects.filter(user_id=user_id).order_by('-likes')[:20]
     tagi = ArtworksTags.objects.filter(artwork_id=artwork_id)
     useri = User.objects.get(id=user_id)
     user_liked = Like.objects.filter(user=useri)
+    art_liked = Like.objects.filter(artwork=art)
+    liked_arts = Like.objects.filter(user__in=([lajker.user for lajker in art_liked])).distinct('artwork')[:20]
+
+
     liked = None
     if user.is_authenticated:
         liked = Like.objects.filter(artwork=art, user=user)
@@ -110,7 +118,9 @@ def dynamic_artwork_lookup_view(request, user_id, artwork_id):
                        'tagi': tagi,
                        'liked': liked,
                        'num_likes': num_likes,
-                       'user_liked': user_liked
+                       'user_liked': user_liked,
+                       'art_liked': art_liked,
+                       'liked_arts': liked_arts
                        }
         else:  # ne mores komentirati, ce nisi prijavljen
             context = {'art': art,
@@ -121,7 +131,9 @@ def dynamic_artwork_lookup_view(request, user_id, artwork_id):
                        'user_art': user_art,
                        'tagi': tagi,
                        'num_likes': num_likes,
-                       'user_liked': user_liked
+                       'user_liked': user_liked,
+                       'art_liked': art_liked,
+                       'liked_arts': liked_arts
                        }
     else:  # request je get
         context = {'art': art,
@@ -133,6 +145,8 @@ def dynamic_artwork_lookup_view(request, user_id, artwork_id):
                    'tagi': tagi,
                    'num_likes': num_likes,
                    'liked': liked,
-                   'user_liked': user_liked
+                   'user_liked': user_liked,
+                   'art_liked': art_liked,
+                   'liked_arts': liked_arts
                    }
     return render(request, 'artists/artwork.html', context)
