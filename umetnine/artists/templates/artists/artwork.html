@@ -113,31 +113,49 @@
 
                 </div>
             </div>
+            <hr class="mt-2 mb-2">
+            <span style="color: grey;">More from: <a href="{% url 'artists:user-user' user_id %}">{{ art.user_id }}</a></span>
 
-                <hr class="mt-2 mb-2">
-                <span style="color: grey;">More from: <a href="{% url 'artists:user-user' user_id %}">{{ art.user_id }}</a></span>
-                <div class="row image-grid">
-
-
-                    <!-- mini galerija -->
-                    {% for slika in user_art %}
-                        {% if slika.id != artwork_id %}
-
-                <a href="{% url 'artists:user-artwork' art.user_id.id slika.id %}" class="rounded image-bg"
-                   style="background-image:url({{ slika.url }})">
-                    <img class="image-bg-placeholder"
-                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
-                         alt=""/>
-                    <img class="image-bg-img sr-only"
-                         src="{{ slika.url }}"
-                         alt="Cropped image as a background example"/>
-                </a>
-                {% endif %}
+            <!-- mini galerija: more from -->
+            <div class="row image-grid">
+                {% for slika in user_art %}
+                    {% if slika.id != artwork_id %}
+                        <a href="{% url 'artists:user-artwork' art.user_id.id slika.id %}" class="rounded image-bg"
+                           style="background-image:url({{ slika.url }})">
+                            <img class="image-bg-placeholder"
+                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+                                 alt=""/>
+                            <img class="image-bg-img sr-only"
+                                 src="{{ slika.url }}"
+                                 alt="Cropped image as a background example"/>
+                        </a>
+                    {% endif %}
                 {% endfor %}
             </div>
 
-        </div>
+            <!-- mini galerija: User also liked -->
+        <span style="color: grey;">User also liked:</span>
+            <div class="row image-grid">
+                {% for slika in user_liked %}
 
+
+                        <a href="{% url 'artists:user-artwork' slika.user_id slika.id %}" class="rounded image-bg"
+                           style="background-image:url({{ slika.artwork.url }})">
+                            <img class="image-bg-placeholder"
+                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+                                 alt=""/>
+
+                            <img class="image-bg-img sr-only"
+                                 src="{{ slika.artwork.url }}"
+                                 alt="Cropped image as a background example"/>
+                        </a>
+
+                    {{ slika.user_id }}
+                {% endfor %}
+            </div>
+
+
+        </div>
     </div>
 </div>
 

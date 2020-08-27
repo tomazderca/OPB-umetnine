@@ -86,6 +86,7 @@ def dynamic_artwork_lookup_view(request, user_id, artwork_id):
     comments = Comments.objects.filter(artwork_id=artwork_id).order_by('-timestamp')
     user_art = Arts.objects.filter(user_id=user_id).order_by('-likes')[:9]
     tagi = ArtworksTags.objects.filter(artwork_id=artwork_id)
+    user_liked = Like.objects.filter(user=user_id)
     liked = None
     if user.is_authenticated:
         liked = Like.objects.filter(artwork=art, user=user)
@@ -107,7 +108,8 @@ def dynamic_artwork_lookup_view(request, user_id, artwork_id):
                        'user_art': user_art,
                        'tagi': tagi,
                        'liked': liked,
-                       'num_likes': num_likes
+                       'num_likes': num_likes,
+                       'user_liked': user_liked
                        }
         else:  # ne mores komentirati, ce nisi prijavljen
             context = {'art': art,
@@ -117,7 +119,8 @@ def dynamic_artwork_lookup_view(request, user_id, artwork_id):
                        'user_id': user_id,
                        'user_art': user_art,
                        'tagi': tagi,
-                       'num_likes': num_likes
+                       'num_likes': num_likes,
+                       'user_liked': user_liked
                        }
     else:  # request je get
         context = {'art': art,
@@ -128,6 +131,7 @@ def dynamic_artwork_lookup_view(request, user_id, artwork_id):
                    'user_art': user_art,
                    'tagi': tagi,
                    'num_likes': num_likes,
-                   'liked': liked
+                   'liked': liked,
+                   'user_liked': user_liked
                    }
     return render(request, 'artists/artwork.html', context)
