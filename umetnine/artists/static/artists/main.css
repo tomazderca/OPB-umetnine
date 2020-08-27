@@ -50,3 +50,15 @@ ul {
 a.btn_liked {
     color: red;
 }
+
+/* footer */
+footer.page-footer.font-small.mdb-color.pt-4 {
+/*    border-top: 1px black dotted;*/
+    background-color: #f8f9fa;
+    background-image: linear-gradient(transparent, #b4b4b4);
+    margin-top: 40px;
+}
+
+p.text.mb-1.font-weight-bold {
+    text-align: right;
+}

@@ -26,7 +26,6 @@ class UserDescription(models.Model):
     user_id = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     description = models.TextField(unique=False, null=False, blank=True)
 
-
     def __str__(self):
         return self.description
 
