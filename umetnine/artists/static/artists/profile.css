@@ -4,6 +4,10 @@
     background-color: #F8F9FA;
 }
 
+.zamik-zgoraj{
+    padding-top: 8px;
+}
+
 .content{
     background: linear-gradient(0deg, rgba(180,180,180,1) 0%, #F8F9FA 100%);
 }

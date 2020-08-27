@@ -76,7 +76,7 @@
                     <div class="be-comment">
                         <div class="be-comment-content">
                                     <span class="be-comment-name">
-                                        <a href="#">{{ komentar.user_id }}</a>
+                                        <a href="{% url 'artists:user-user' komentar.user_id.id %}">{{ komentar.user_id }}</a>
                                     </span>
                             <span class="be-comment-time">
                                         <i class="fa fa-clock-o"></i>
@@ -94,7 +94,7 @@
 
         <!-- sidebar -->
         <div class="col-md-2 d-none d-lg-block">
-            <div class="row">
+            <div class="card">
                 <div class="col-lg-12 sidenav">
                     <a href="#"><b>{{ art.title }}</b></a>
                     {% if user.is_authenticated %}
@@ -117,7 +117,8 @@
             <span style="color: grey;">More from: <a href="{% url 'artists:user-user' user_id %}">{{ art.user_id }}</a></span>
 
             <!-- mini galerija: more from -->
-            <div class="row image-grid">
+        <div class="card">
+            <div class="image-grid">
                 {% for slika in user_art %}
                     {% if slika.id != artwork_id %}
                         <a href="{% url 'artists:user-artwork' art.user_id.id slika.id %}" class="rounded image-bg"
@@ -132,10 +133,12 @@
                     {% endif %}
                 {% endfor %}
             </div>
+            </div>
 
             <!-- mini galerija: User also liked -->
         <span style="color: grey;">User also liked:</span>
-            <div class="row image-grid">
+        <div class="card">
+            <div class="image-grid">
                 {% for slika in user_liked %}
                     {% if slika.artwork.user_id.id != user_id %}
 
@@ -152,6 +155,7 @@
                         </a>
                     {% endif %}
                 {% endfor %}
+            </div>
             </div>
 
 
