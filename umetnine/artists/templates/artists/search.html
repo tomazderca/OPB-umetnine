@@ -2,13 +2,19 @@
 
 {% block content %}
 
+    {% for result in artby %}
+        {{ result }} 11
+    {% endfor %}
+
     {% for result in art %}
-        {{ result }}
+        {{ result }} 22
     {% endfor %}
 
     {% for result in artists %}
-        {{ result }}
+        {{ result }} 33
     {% endfor %}
+
+
 
 
 {% endblock %}

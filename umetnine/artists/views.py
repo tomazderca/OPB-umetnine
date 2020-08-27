@@ -30,6 +30,10 @@ class PostListView(ListView):
     ordering = ['-timestamp']
     paginate_by = 9
 
+    def get_ordering(self):
+        ordering = self.request.GET.get('ordering','-timestamp')
+        return ordering
+
 
 
 @api_view(['GET'])
@@ -62,7 +66,7 @@ def artwork_like_api_toggle(request, artwork_id):
 
 def dynamic_user_lookup_view(request, user_id):
     user_art = Arts.objects.filter(user_id=user_id)
-    avatar = Arts.objects.filter(user_id=user_id).first()
+    avatar = Arts.objects.filter(user_id=user_id).first() # trenutno zbere za avatar prvo slike #TODO
     useri = User.objects.get(id=user_id)
     user_liked = Like.objects.filter(user=useri)
     likes = 0
@@ -158,8 +162,10 @@ def dynamic_artwork_lookup_view(request, user_id, artwork_id):
 def search(request):
     template = 'artists/search.html'
     query = request.GET.get('q')
-    art = Arts.objects.filter(Q(title__contains=query) | Q(description__contains=query))
-    artist = User.objects.filter(Q(username__contains=query))
-    results = chain(art, artist)
+    art = Arts.objects.filter(Q(title__icontains=query) | Q(description__contains=query)).order_by('likes')
+    artist = User.objects.filter(Q(username__icontains=query))
+    art_by_user = Arts.objects.filter(user_id__in=([umet.id for umet in artist])).order_by('likes')
 
-    return render(request, template, {'art': art, 'artists': artist})
+
+
+    return render(request, template, {'art': art, 'artists': artist, 'artby':art_by_user})

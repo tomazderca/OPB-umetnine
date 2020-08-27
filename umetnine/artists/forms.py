@@ -59,3 +59,4 @@ class NewArtForm(forms.ModelForm):
             'description',
             'url'
         ]
+
