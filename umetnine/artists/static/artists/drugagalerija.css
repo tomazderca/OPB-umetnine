@@ -60,7 +60,21 @@ padding-right: 1.1rem;
     color: #fff;
     text-align: center;
     margin-bottom: 10px;
-    opacity: 0.8;
+    opacity: 0.9;
+}
+
+.atitle h1 {
+    color: #fff;
+    opacity: 0.9;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.atitle h6 {
+    color: #fff;
+    opacity: 0.5;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .centered {
@@ -73,7 +87,7 @@ padding-right: 1.1rem;
 .relativni {
     position: relative;
 }
-}
+
 
 a.btn_liked {
     color: red;
