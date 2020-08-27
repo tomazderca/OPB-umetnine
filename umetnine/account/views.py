@@ -35,8 +35,8 @@ def user_list(request):
 
 
 def all_user_works(request):
-    queryset = Arts.objects.filter(user_id=request.user.id)  # list of objects
-    context = {'object_list': queryset, 'username': request.user.username}
+    queryset = Arts.objects.filter(user_id=request.user.id).order_by('-timestamp')  # list of objects
+    context = {'object_list': queryset, 'user': request.user}
     return render(request, 'account/all_user_works.html', context)
 
 
@@ -87,8 +87,7 @@ def edit_profile(request):
         form = EditProfileFrom(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            # return redirect('/user/profile')
-            return redirect("{% url 'profile' %}")
+            return redirect('/user/profile')
     else:
         form = EditProfileFrom(instance=request.user)
         context = {'form': form}

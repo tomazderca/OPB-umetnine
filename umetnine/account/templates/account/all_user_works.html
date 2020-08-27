@@ -1,7 +1,7 @@
 {% extends "artists/base.html" %}
 {% block content %}
     <div class="gallery-container">
-        <h1>Art by {{ username }}</h1>
+        <h1>Art by {{ user.username }}</h1>
     </div>
 
     <div class="tz-gallery">
@@ -13,7 +13,7 @@
                         <img src="{{ art.url }}" alt="" class="img-thumbnail">
                     </a>
                     <div class="caption">
-                        <a class="mr-2" href="#">{{ art.title }}</a>
+                        <a class="mr-2" href="{% url 'artists:user-artwork' user.id art.id %}">{{ art.title }}</a>
                         <small class="text-muted">{{ art.timestamp }}</small>
 
                         <a href="{% url 'account:art_delete' art.id %}" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>

@@ -115,7 +115,7 @@
             </div>
 
                 <hr class="mt-2 mb-2">
-                <span style="color: grey;">More from: <a href="#">{{ art.user_id }}</a></span>
+                <span style="color: grey;">More from: <a href="{% url 'artists:user-user' user_id %}">{{ art.user_id }}</a></span>
                 <div class="row image-grid">
 
 
