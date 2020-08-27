@@ -1,15 +1,18 @@
 from datetime import datetime
+from itertools import chain
 
 from django.shortcuts import render, redirect, get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-
+from django.db.models import Q
 from .forms import CommentForm
 from .models import Arts, Comments, ArtworksTags, Like
 from .models import Arts, Comments, ArtworksTags, UserDescription
 from django.contrib.auth.models import User
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
+
+
 
 
 def uporabniki(request):
@@ -26,6 +29,7 @@ class PostListView(ListView):
     context_object_name = 'artworks'
     ordering = ['-timestamp']
     paginate_by = 9
+
 
 
 @api_view(['GET'])
@@ -150,3 +154,12 @@ def dynamic_artwork_lookup_view(request, user_id, artwork_id):
                    'liked_arts': liked_arts
                    }
     return render(request, 'artists/artwork.html', context)
+
+def search(request):
+    template = 'artists/search.html'
+    query = request.GET.get('q')
+    art = Arts.objects.filter(Q(title__contains=query) | Q(description__contains=query))
+    artist = User.objects.filter(Q(username__contains=query))
+    results = chain(art, artist)
+
+    return render(request, template, {'art': art, 'artists': artist})

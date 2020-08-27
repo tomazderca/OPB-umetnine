@@ -63,11 +63,11 @@
                     </div>
                 </li>
             </ul>
-            <form class="mx-2 my-auto d-inline w-100">
+            <form method="GET" class="mx-2 my-auto d-inline w-100" action={% url 'artists:search' %}>
             <div class="input-group">
-                <input type="text" id="search-bar" class="form-control border border-right-0" placeholder="Search...">
+                <input type="text" id="search-bar" class="form-control border border-right-0" placeholder="Search..." name="q" value="{{ request.GET.q }}">
                 <span class="input-group-append">
-                    <button class="btn btn-outline-secondary border border-left-0" type="button">
+                    <button class="btn btn-outline-secondary border border-left-0" type="submit">
                         <i class="fas fa-search"></i>
                     </button>
                 </span>
