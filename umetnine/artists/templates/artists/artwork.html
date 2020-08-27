@@ -137,9 +137,10 @@
         <span style="color: grey;">User also liked:</span>
             <div class="row image-grid">
                 {% for slika in user_liked %}
+                    {% if slika.artwork.user_id.id != user_id %}
 
 
-                        <a href="{% url 'artists:user-artwork' slika.user_id slika.id %}" class="rounded image-bg"
+                        <a href="{% url 'artists:user-artwork' slika.artwork.user_id.id slika.artwork.id %}" class="rounded image-bg"
                            style="background-image:url({{ slika.artwork.url }})">
                             <img class="image-bg-placeholder"
                                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -149,8 +150,7 @@
                                  src="{{ slika.artwork.url }}"
                                  alt="Cropped image as a background example"/>
                         </a>
-
-                    {{ slika.user_id }}
+                    {% endif %}
                 {% endfor %}
             </div>
 
