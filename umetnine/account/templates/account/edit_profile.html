@@ -24,6 +24,7 @@
             </div>
         </div>
         {{ form.email|as_crispy_field }}
+        {{ form2|crispy }}
         <button id="submit" class="btn btn-secondary" type="submit">Save</button>
         <button id ="cancel" class="btn btn-secondary" onclick="javascript:history.back();" type="reset">Cancel</button>
 

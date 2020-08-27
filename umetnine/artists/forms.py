@@ -1,6 +1,6 @@
 from django import forms
 
-from artists.models import Arts, Tags, Comments
+from artists.models import Arts, Tags, Comments, UserDescription
 
 
 class TagForm(forms.ModelForm):
@@ -25,6 +25,13 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comments
         fields = ['content']
+
+
+class UserDescriptionForm(forms.ModelForm):
+
+    class Meta:
+        model = UserDescription
+        fields = ['description']
 
 
 class NewArtForm(forms.ModelForm):

@@ -5,8 +5,8 @@ from django.http import HttpResponse
 # from django.views.generic import CreateView, TemplateView
 from datetime import datetime
 
-from artists.forms import NewArtForm, TagForm
-from artists.models import ArtworksTags, Tags, Arts
+from artists.forms import NewArtForm, TagForm, UserDescriptionForm
+from artists.models import ArtworksTags, Tags, Arts, UserDescription
 from .forms import RegisterForm, EditProfileFrom, AddArtForm
 
 # Create your views here.
@@ -85,12 +85,25 @@ def edit_profile(request):
     # za vpisane uporabnike pripravim pravi view
     if request.method == 'POST':
         form = EditProfileFrom(request.POST, instance=request.user)
-        if form.is_valid():
+        form2 = UserDescriptionForm(request.POST)
+
+        if form.is_valid() and form2.is_valid():
+            # dobro je izpolnjeno, posodobim bazo
+            obj, created = UserDescription.objects.update_or_create(
+                user_id_id=request.user.id,
+                defaults={'description': form2.cleaned_data['description']}
+            )
             form.save()
             return redirect('/user/profile')
+        else:
+            # ce formi niso dobro izpolnjeni
+            form = EditProfileFrom()
+            form2 = UserDescriptionForm()
     else:
+        old_description = UserDescription.objects.get(user_id_id=request.user.id)
         form = EditProfileFrom(instance=request.user)
-        context = {'form': form}
+        form2 = UserDescriptionForm(instance=old_description)
+        context = {'form': form, 'form2': form2}
         return render(request, 'account/edit_profile.html', context)
 
     return render(request, 'account/edit_profile.html', {})
