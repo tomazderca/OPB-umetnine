@@ -99,9 +99,9 @@
                     <a href="#"><b>{{ art.title }}</b></a>
                     {% if user.is_authenticated %}
                         {% if liked %}
-                            <a class="btn_liked" id="like_btn">
+                            <a class="btn_liked" id="like_btn" href="#">
                         {% else %}
-                            <a id="like_btn">
+                            <a id="like_btn" href="#">
                         {% endif %}
                         <i class="fa fa-heart" aria-hidden="true"></i>
                         <span id="like_label">{{ num_likes }}</span>

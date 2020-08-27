@@ -58,6 +58,10 @@ def artwork_like_api_toggle(request, artwork_id):
 
 def dynamic_user_lookup_view(request, user_id):
     user_art = Arts.objects.filter(user_id=user_id)
+    avatar = Arts.objects.filter(user_id=user_id).first()
+    likes = 0
+    for art in user_art:
+        likes += Like.objects.filter(artwork=art.id).count()
     try:
         user = User.objects.get(id=user_id)
     except User.DoesNotExist:
@@ -69,7 +73,9 @@ def dynamic_user_lookup_view(request, user_id):
     context = {
         'user': user,
         'user_art': user_art,
-        'opis': opis
+        'opis': opis,
+        'avatar': avatar,
+        'likes': likes
     }
     return render(request, 'artists/user.html', context)
 

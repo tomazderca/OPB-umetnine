@@ -26,6 +26,7 @@ class UserDescription(models.Model):
     user_id = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     description = models.TextField(unique=False, null=False, blank=True)
 
+
     def __str__(self):
         return self.description
 
@@ -58,6 +59,8 @@ class Tags(models.Model):
 class ArtworksTags(models.Model):
     artwork_id = models.ForeignKey(Arts, on_delete=models.CASCADE)
     tag_id = models.ForeignKey(Tags, on_delete=models.CASCADE)
+
+
 
 #
 # class ArtworkLikes(models.Model):

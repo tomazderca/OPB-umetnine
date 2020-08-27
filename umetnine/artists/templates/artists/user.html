@@ -1,10 +1,49 @@
 {% extends "artists/base.html" %}
 
 {% block content %}
-    <div class="gallery-container">
-        <h1>Made by {{ user }}</h1>
-    </div>
 
+
+
+
+<div class="em-background-box text-white content">
+  <div class="container-fluid">
+    <div class="text-center em-background-box-content">
+      <div class="wrapper">
+          {% if avatar %}
+  <img src="{{ avatar.url }}" alt="" />
+          {% else %}
+          <i class="fa fa-user fa-7x" alt="" style="color:black"></i>
+          {% endif %}
+
+</div>
+
+      <h1 class="thin">{{ user.username }}</h1>
+      <h4>
+        <span class="thin">{{ user.first_name }} {{ user.last_name }}</span>
+      </h4>
+    <div class="row justify-content-center">
+        <div class="col-md-2">
+
+        </div>
+    </div>
+        <h6>{{ likes }} likes</h6>
+    </div>
+  </div>
+</div>
+
+{% if opis %}
+    <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card booking-card siva">
+                        <div class="card-body">
+
+                            <h5 class="card-title font-weight-bold mb-1">MY BIO</h5>
+                            <p class="card-text">{{ opis|linebreaks }}</p>
+
+                        </div>
+                    </div>
+                </div>
+  {% endif %}
     <div class="container-fluid px--200 gallery text-center tz-gallery" id="gallery">
 
   <!-- Grid column -->
@@ -18,12 +57,9 @@
 
                         </div></a>
                 </div>
-{#                <a href={% url 'artists:user-artwork' art.user_id.id art.id %}>#}
-{#                        <img src="{{ art.url }}" alt="" class="img-thumbnail">#}
-{#                   </a>#}
+
             </div>
         {% endfor %}
     </div>
 
-{{ opis|linebreaks }}
 {% endblock %}
