@@ -1,8 +1,6 @@
 {% extends 'artists/base.html' %}
 
 {% block content %}
-
-
     <div class="container px--200 gallery text-center tz-gallery" id="gallery">
         {% if art %}
             {% for slika in art %}
@@ -27,30 +25,30 @@
             <span class="step-links pagination justify-content-center">
 
                             {% if art.has_previous %}
-                                <a class="btn btn-outline-info mb-4"
+                                <a class="btn btn-outline-info mb-4 zamikx"
                                    href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}&art_page=1{% if request.GET.artists_page %}&artists_page={{ request.GET.artists_page }}{% endif %}"><<</a>
-                                <a class="btn btn-outline-info mb-4"
+                                <a class="btn btn-outline-info mb-4 zamikx"
                                    href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}&art_page=
                                            {{ art.previous_page_number }}{% if request.GET.artists_page %}&artists_page={{ request.GET.artists_page }}{% endif %}"><</a>
                             {% endif %}
 
                 {% for num in art.paginator.page_range %}
                     {% if art.number == num %}
-                        <a class="btn btn-info mb-4"
+                        <a class="btn btn-info mb-4 zamikx"
                            href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}&art_page=
                                    {{ num }}{% if request.GET.artists_page %}&artists_page={{ request.GET.artists_page }}{% endif %}">{{ num }}</a>
                     {% elif num > art.number|add:'-3' and num < art.number|add:'3' %}
-                        <a class="btn btn-outline-info mb-4"
+                        <a class="btn btn-outline-info mb-4 zamikx"
                            href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}&art_page=
                                    {{ num }}{% if request.GET.artists_page %}&artists_page={{ request.GET.artists_page }}{% endif %}">{{ num }}</a>
                     {% endif %}
                 {% endfor %}
 
                 {% if art.has_next %}
-                    <a class="btn btn-outline-info mb-4"
+                    <a class="btn btn-outline-info mb-4 zamikx"
                        href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}&art_page=
                                {{ art.next_page_number }}{% if request.GET.artists_page %}&artists_page={{ request.GET.artists_page }}{% endif %}">></a>
-                    <a class="btn btn-outline-info mb-4"
+                    <a class="btn btn-outline-info mb-4 zamikx"
                        href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}&art_page=
                                {{ art.paginator.num_pages }}{% if request.GET.artists_page %}&artists_page={{ request.GET.artists_page }}{% endif %}">>></a>
                 {% endif %}

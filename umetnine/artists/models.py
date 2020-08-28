@@ -61,6 +61,7 @@ class ArtworksTags(models.Model):
 
 
 
+
 #
 # class ArtworkLikes(models.Model):
 #     artwork_id = models.ForeignKey(Arts, on_delete=models.CASCADE)

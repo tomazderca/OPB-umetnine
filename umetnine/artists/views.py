@@ -167,12 +167,17 @@ def dynamic_artwork_lookup_view(request, user_id, artwork_id):
 
 def search(request):
     template = 'artists/search.html'
-    query = request.GET.get('q')
-    # if not query.isspace() and query is not None and query !='':
+    query = request.GET.get('q', '')
+
+    if query.isspace() or query is None or query == '':
+        return redirect(request.META.get('HTTP_REFERER', '/'))
+
     artists = User.objects.filter(Q(username__icontains=query))
     arti = Arts.objects.filter(Q(title__icontains=query) | Q(description__contains=query)).order_by('likes')
     art_by_user = Arts.objects.filter(user_id__in=([umet.id for umet in artists])).order_by('likes')
-    art = list(set(chain(arti, art_by_user)))
+    tagi = ArtworksTags.objects.filter(tag_id__tag__iexact=query)
+    tagged_art = Arts.objects.filter(id__in=([tag.artwork_id.id for tag in tagi]))
+    art = list(set(chain(arti, art_by_user, tagged_art)))
 
     paginator_art = Paginator(art, 20)
     art_page = request.GET.get('art_page')
@@ -183,7 +188,6 @@ def search(request):
         art = paginator_art.page(1)
     except EmptyPage:
         art = paginator_art.page(paginator_art.num_pages)
-
 
     paginator_artists = Paginator(artists, 10)
     artists_page = request.GET.get('artists_page')
@@ -206,11 +210,11 @@ def search(request):
                'artists_page_obj': artists_page_obj,
                'query': query,
                'art_page': art_page,
-               'artists_page': artists_page
+               'artists_page': artists_page,
+               'tagi': tagged_art
                }
 
     return render(request, template, context)
-    # return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
 
