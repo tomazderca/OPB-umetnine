@@ -1,7 +1,7 @@
 from datetime import datetime
 from itertools import chain
 
-from django.http import HttpResponse, HttpResponseNotFound, Http404
+from django.http import HttpResponse, HttpResponseNotFound, Http404, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -168,11 +168,10 @@ def dynamic_artwork_lookup_view(request, user_id, artwork_id):
 
 def search(request):
     template = 'artists/search.html'
-    query = request.GET.get('q')
-    art = Arts.objects.filter(Q(title__icontains=query) | Q(description__contains=query)).order_by('likes')
-    artist = User.objects.filter(Q(username__icontains=query))
-    art_by_user = Arts.objects.filter(user_id__in=([umet.id for umet in artist])).order_by('likes')
-
-
-
-    return render(request, template, {'art': art, 'artists': artist, 'artby':art_by_user})
+    query = request.GET.get('q', None)
+    if query is not None and query !='':
+        art = Arts.objects.filter(Q(title__icontains=query) | Q(description__contains=query)).order_by('likes')
+        artist = User.objects.filter(Q(username__icontains=query))
+        art_by_user = Arts.objects.filter(user_id__in=([umet.id for umet in artist])).order_by('likes')
+        return render(request, template, {'art': art, 'artists': artist, 'artby':art_by_user})
+    return redirect(request.META.get('HTTP_REFERER', '/'))
