@@ -1,6 +1,7 @@
 from datetime import datetime
 from itertools import chain
 
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponse, HttpResponseNotFound, Http404, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from rest_framework.decorators import api_view
@@ -161,17 +162,52 @@ def dynamic_artwork_lookup_view(request, user_id, artwork_id):
                    'art_liked': art_liked,
                    'liked_arts': liked_arts
                    }
-    if art.user_id.id == user_id:
-        return render(request, 'artists/artwork.html', context)
-    else:
-        return HttpResponseNotFound('<h1>Page was found</h1>')
+    return render(request, 'artists/artwork.html', context)
+
 
 def search(request):
     template = 'artists/search.html'
-    query = request.GET.get('q', None)
-    if not query.isspace() and query is not None and query !='':
-        art = Arts.objects.filter(Q(title__icontains=query) | Q(description__contains=query)).order_by('likes')
-        artist = User.objects.filter(Q(username__icontains=query))
-        art_by_user = Arts.objects.filter(user_id__in=([umet.id for umet in artist])).order_by('likes')
-        return render(request, template, {'art': art, 'artists': artist, 'artby':art_by_user})
-    return redirect(request.META.get('HTTP_REFERER', '/'))
+    query = request.GET.get('q')
+    # if not query.isspace() and query is not None and query !='':
+
+    art = Arts.objects.filter(Q(title__icontains=query) | Q(description__contains=query)).order_by('likes')
+    paginator_art = Paginator(art, 10)
+    art_page = request.GET.get('art_page')
+
+    try:
+        art = paginator_art.page(art_page)
+    except PageNotAnInteger:
+        art = paginator_art.page(1)
+    except EmptyPage:
+        art = paginator_art.page(paginator_art.num_pages)
+
+    artists = User.objects.filter(Q(username__icontains=query))
+    paginator_artists = Paginator(artists, 10)
+    artists_page = request.GET.get('artists_page')
+
+    try:
+        artists = paginator_artists.page(artists_page)
+    except PageNotAnInteger:
+        artists = paginator_artists.page(1)
+    except EmptyPage:
+        artists = paginator_artists.page(paginator_artists.num_pages)
+
+    art_by_user = Arts.objects.filter(user_id__in=([umet.id for umet in artists])).order_by('likes')
+    art_page_obj = paginator_art.get_page(art_page)
+    artists_page_obj = paginator_artists.get_page(artists_page)
+
+    context = {'art': art,
+               'artists': artists,
+               'artby': art_by_user,
+               'art_page_obj': art_page_obj,
+               'artists_page_obj': artists_page_obj,
+               'query': query,
+               'art_page': art_page,
+               'artists_page': artists_page
+               }
+
+    return render(request, template, context)
+    # return redirect(request.META.get('HTTP_REFERER', '/'))
+
+
+
