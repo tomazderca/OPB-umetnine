@@ -30,9 +30,9 @@
 {#                    <a class="lightbox" href={% url 'artists:user-artwork' art.user_id.id art.id %}>#}
 {#                        <img src="{{ art.url }}" alt="" class="img-thumbnail">#}
 {#                    </a>#}
-                    <div class="caption">
-                        <a class="mr-2" href="#">{{ art.user_id }}</a>
-                        <small class="text-muted">{{ art.timestamp|date:"D, j. M Y, H:i:s" }}</small>
+{#                    <div class="caption">#}
+{#                        <a class="mr-2" href="#">{{ art.user_id }}</a>#}
+{#                        <small class="text-muted">{{ art.timestamp|date:"D, j. M Y, H:i:s" }}</small>#}
 {#                    </div>#}
 {#                </div>#}
 {#            </div>#}
@@ -40,7 +40,7 @@
 {#        </div>#}
 {#    </div>#}
 
-
+<div class="container mt-5">
     <p class="paginator" align="center">
     {% if is_paginated %}
         {% if page_obj.has_previous %}
@@ -60,5 +60,6 @@
         {% endif %}
     {% endif %}
         </p>
+</div>
 
 {% endblock content %}

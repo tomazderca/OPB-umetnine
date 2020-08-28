@@ -1,54 +1,106 @@
 {% extends 'artists/base.html' %}
 
 {% block content %}
-    <div class="container">
-        <div class="row">
 
-        <!-- art search -->
-            <div class="col-md-6">
-                {% if art %}
-                    <div class="col-md-12 well">
-                        {% for result in art %}
-                            {{ result }}
-                        {% endfor %}
-                        <span class="step-links pagination">
+
+    <div class="container px--200 gallery text-center tz-gallery" id="gallery">
+        {% if art %}
+            {% for slika in art %}
+                <div class="mb-3 pics animation all 2 thumbnail">
+                    <div class="img-container"><a class="lightbox"
+                                                  href={% url 'artists:user-artwork' slika.user_id.id slika.id %}>
+                        <img src={{ slika.url }} class="img-thumbnail">
+                        <div class="overlay">
+                            <div class="container my-auto centered atitle"><h1 class="atitle">{{ slika.title }}</h1>
+                                <br> <h6>by {{ slika.user_id }}</h6></div>
+                        </div></a>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+
+
+            <!-- TODO: linki so zdej ful predolgi, ker nimam več dveh searchov. Dela normalno, zgleda gorzn, mogoč popravim" -->
+            <!-- pagination -->
+
+            <div class="container mt-5">
+            <span class="step-links pagination justify-content-center">
+
                             {% if art.has_previous %}
-                                <a href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}&art_page={{ art.previous_page_number }}{% if request.GET.artists_page %}&artists_page={{ request.GET.artists_page }}{% endif %}"> previous </a>
+                                <a class="btn btn-outline-info mb-4"
+                                   href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}&art_page=1{% if request.GET.artists_page %}&artists_page={{ request.GET.artists_page }}{% endif %}"><<</a>
+                                <a class="btn btn-outline-info mb-4"
+                                   href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}&art_page=
+                                           {{ art.previous_page_number }}{% if request.GET.artists_page %}&artists_page={{ request.GET.artists_page }}{% endif %}"><</a>
                             {% endif %}
-                            <span class="current">
-                                Page {{ art.number }} of {{ art.paginator.num_pages }}
-                            </span>
-                            {% if art.has_next %}
-                                <a href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}&art_page={{ art.next_page_number }}{% if request.GET.artists_page %}&artists_page={{ request.GET.artists_page }}{% endif %}"> next </a>
-                            {% endif %}
-                        </span>
-                    </div>
-                {% endif %}
-            </div>
 
-        <!-- user search -->
-            <div class="col-md-6">
-                {% if artists %}
-                    <div class="col-md-12 well">
-                        {% for result in artists %}
-                            {{ result }}
-                        {% endfor %}
-                        <span class="step-links pagination">
-                            {% if artists.has_previous %}
-                                <a href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}{% if request.GET.art_page %}&art_page={{ request.GET.art_page }}{% endif %}&artists_page={{ artists.previous_page_number }}"> previous </a>
-                            {% endif %}
-                            <span class="current">
-                                Page {{ artists.number }} of {{ artists.paginator.num_pages }}
-                            </span>
-                            {% if artists.has_next %}
-                                <a href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}{% if request.GET.art_page %}&art_page={{ request.GET.art_page }}{% endif %}&artists_page={{ artists.next_page_number }}"> next </a>
-                            {% endif %}
-                        </span>
-                    </div>
+                {% for num in art.paginator.page_range %}
+                    {% if art.number == num %}
+                        <a class="btn btn-info mb-4"
+                           href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}&art_page=
+                                   {{ num }}{% if request.GET.artists_page %}&artists_page={{ request.GET.artists_page }}{% endif %}">{{ num }}</a>
+                    {% elif num > art.number|add:'-3' and num < art.number|add:'3' %}
+                        <a class="btn btn-outline-info mb-4"
+                           href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}&art_page=
+                                   {{ num }}{% if request.GET.artists_page %}&artists_page={{ request.GET.artists_page }}{% endif %}">{{ num }}</a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if art.has_next %}
+                    <a class="btn btn-outline-info mb-4"
+                       href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}&art_page=
+                               {{ art.next_page_number }}{% if request.GET.artists_page %}&artists_page={{ request.GET.artists_page }}{% endif %}">></a>
+                    <a class="btn btn-outline-info mb-4"
+                       href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}&art_page=
+                               {{ art.paginator.num_pages }}{% if request.GET.artists_page %}&artists_page={{ request.GET.artists_page }}{% endif %}">>></a>
                 {% endif %}
+
+                        </span>
             </div>
-        </div>
-    </div>
+        {% endif %}
+
+    {#            <!-- user search -->#}
+    {#            <div class="col-md-6">#}
+    {#                {% if artists %}#}
+    {#                    <div class="col-md-12 well">#}
+    {##}
+    {#                        {% for result in artists %}#}
+    {#                            {{ result }}#}
+    {#                        {% endfor %}#}
+    {#                    #}
+    {##}
+    {#                    <!-- pagination -->#}
+    {#                        <span class="step-links pagination justify-content-center">#}
+    {##}
+    {#                            {% if artists.has_previous %}#}
+    {#                                <a class="btn btn-outline-info mb-4"#}
+    {#                                   href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}{% if request.GET.art_page %}&art_page={{ request.GET.art_page }}{% endif %}&artists_page=1"><<</a>#}
+    {#                                <a class="btn btn-outline-info mb-4"#}
+    {#                                   href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}{% if request.GET.art_page %}&art_page={{ request.GET.art_page }}{% endif %}&artists_page={{ artists.previous_page_number }}"><</a>#}
+    {#                            {% endif %}#}
+    {##}
+    {#                            {% for num in artists.paginator.page_range %}#}
+    {#                                {% if artists.number == num %}#}
+    {#                                    <a class="btn btn-info mb-4"#}
+    {#                                       href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}{% if request.GET.art_page %}&art_page={{ request.GET.art_page }}{% endif %}&artists_page={{ num }}">{{ num }}</a>#}
+    {#                                {% elif num > artists.number|add:'-3' and num < artists.number|add:'3' %}#}
+    {#                                    <a class="btn btn-outline-info mb-4"#}
+    {#                                       href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}{% if request.GET.art_page %}&art_page={{ request.GET.art_page }}{% endif %}&artists_page={{ num }}">{{ num }}</a>#}
+    {#                                {% endif %}#}
+    {#                            {% endfor %}#}
+    {##}
+    {#                            {% if artists.has_next %}#}
+    {#                                <a class="btn btn-outline-info mb-4"#}
+    {#                                   href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}{% if request.GET.art_page %}&art_page={{ request.GET.art_page }}{% endif %}&artists_page={{ artists.next_page_number }}">></a>#}
+    {#                                <a class="btn btn-outline-info mb-4"#}
+    {#                                   href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}{% if request.GET.art_page %}&art_page={{ request.GET.art_page }}{% endif %}&artists_page={{ artists.paginator.num_pages }}">>></a>#}
+    {#                            {% endif %}#}
+    {##}
+    {#                        </span>#}
+    {#                    </div>#}
+    {#                {% endif %}#}
+    {#            </div>#}
+
 
 
 

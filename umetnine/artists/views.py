@@ -30,7 +30,7 @@ class PostListView(ListView):
     template_name = 'artists/uporabniki.html'
     context_object_name = 'artworks'
     ordering = ['-timestamp']
-    paginate_by = 9
+    paginate_by = 15
 
     def get_ordering(self):
         ordering = self.request.GET.get('ordering','-timestamp')
@@ -68,7 +68,7 @@ def artwork_like_api_toggle(request, artwork_id):
 
 def dynamic_user_lookup_view(request, user_id):
     user_art = Arts.objects.filter(user_id=user_id)
-    avatar = Arts.objects.filter(user_id=user_id).first() # trenutno zbere za avatar prvo slike #TODO
+    avatar = Arts.objects.filter(user_id=user_id).first() # TODO: trenutno zbere za avatar prvo slike
     useri = User.objects.get(id=user_id)
     user_liked = Like.objects.filter(user=useri)
     likes = 0
@@ -169,9 +169,12 @@ def search(request):
     template = 'artists/search.html'
     query = request.GET.get('q')
     # if not query.isspace() and query is not None and query !='':
+    artists = User.objects.filter(Q(username__icontains=query))
+    arti = Arts.objects.filter(Q(title__icontains=query) | Q(description__contains=query)).order_by('likes')
+    art_by_user = Arts.objects.filter(user_id__in=([umet.id for umet in artists])).order_by('likes')
+    art = list(set(chain(arti, art_by_user)))
 
-    art = Arts.objects.filter(Q(title__icontains=query) | Q(description__contains=query)).order_by('likes')
-    paginator_art = Paginator(art, 10)
+    paginator_art = Paginator(art, 20)
     art_page = request.GET.get('art_page')
 
     try:
@@ -181,7 +184,7 @@ def search(request):
     except EmptyPage:
         art = paginator_art.page(paginator_art.num_pages)
 
-    artists = User.objects.filter(Q(username__icontains=query))
+
     paginator_artists = Paginator(artists, 10)
     artists_page = request.GET.get('artists_page')
 
