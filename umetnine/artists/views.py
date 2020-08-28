@@ -217,4 +217,28 @@ def search(request):
     return render(request, template, context)
 
 
+# def all_users(request):
+#     template = 'artists/all_users.html'
+#     all_users = User.objects.all()
+#     all_arts = Arts.objects.all()
+#     all_liked = Like.objects.all()
+#
+#     context = {
+#         'all_users': all_users,
+#         'all_arts': all_arts,
+#         'all_liked': all_liked
+#
+#     }
+#
+
+    return render(request, template, context)
+
+class UsersListView(ListView):
+    model = User
+    template_name = 'artists/all_users.html'
+    context_object_name = 'all_users'
+    ordering = ['-username']
+    paginate_by = 20
+
+
 
