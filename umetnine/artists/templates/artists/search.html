@@ -13,13 +13,13 @@
                         {% endfor %}
                         <span class="step-links pagination">
                             {% if art.has_previous %}
-                                <a href="?art_page={{ art.previous_page_number }}&artists_page={{ request.GET.artists_page }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"> previous </a>
+                                <a href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}&art_page={{ art.previous_page_number }}{% if request.GET.artists_page %}&artists_page={{ request.GET.artists_page }}{% endif %}"> previous </a>
                             {% endif %}
                             <span class="current">
                                 Page {{ art.number }} of {{ art.paginator.num_pages }}
                             </span>
                             {% if art.has_next %}
-                                <a href="?art_page={{ art.next_page_number }}&artists_page={{ request.GET.artists_page }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"> next </a>
+                                <a href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}&art_page={{ art.next_page_number }}{% if request.GET.artists_page %}&artists_page={{ request.GET.artists_page }}{% endif %}"> next </a>
                             {% endif %}
                         </span>
                     </div>
@@ -35,13 +35,13 @@
                         {% endfor %}
                         <span class="step-links pagination">
                             {% if artists.has_previous %}
-                                <a href="?art_page={{ request.GET.art_page }}&artists_page={{ artists.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"> previous </a>
+                                <a href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}{% if request.GET.art_page %}&art_page={{ request.GET.art_page }}{% endif %}&artists_page={{ artists.previous_page_number }}"> previous </a>
                             {% endif %}
                             <span class="current">
                                 Page {{ artists.number }} of {{ artists.paginator.num_pages }}
                             </span>
                             {% if artists.has_next %}
-                                <a href="?art_page={{ request.GET.art_page }}&artists_page={{ artists.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"> next </a>
+                                <a href="?{% if request.GET.q %}q={{ request.GET.q }}{% endif %}{% if request.GET.art_page %}&art_page={{ request.GET.art_page }}{% endif %}&artists_page={{ artists.next_page_number }}"> next </a>
                             {% endif %}
                         </span>
                     </div>
