@@ -85,8 +85,8 @@ WSGI_APPLICATION = 'umetnine.wsgi.application'
 #     }
 # }
 
-with open('user-data.txt', 'r') as data:
-    username, password = data.readline().split()
+# with open('user-data.txt', 'r') as data:
+#     username, password = data.readline().split()
 
 # ----> PostgreSQL na solskem serverju:
 DATABASES = {
