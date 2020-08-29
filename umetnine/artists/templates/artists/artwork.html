@@ -37,9 +37,11 @@
                                 <ul class="list-unstyled list-inline rating d-flex mb-0">
                                     {% for tag in tagi %}
                                         <li class="list-inline-item mr-2">
+                                        <a href="{% url 'artists:tag-search' tag.tag_id.id %}">
                                             <button type="button"
                                                     class="btn btn-secondary btn-sm">{{ tag.tag_id }}
                                             </button>
+                                            </a>
                                         </li>
                                     {% endfor %}
                                 </ul>

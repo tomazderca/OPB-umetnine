@@ -1,0 +1,18 @@
+{% extends 'artists/base.html' %}
+
+{% block content %}
+        <div class="container px--200 gallery text-center tz-gallery" id="gallery">
+            {% for slika in tagged %}
+                <div class="mb-3 pics animation all 2 thumbnail">
+                    <div class="img-container"><a class="lightbox"
+                                                  href={% url 'artists:user-artwork' slika.artwork_id.user_id.id slika.artwork_id.id %}>
+                        <img src={{ slika.artwork_id.url }} class="img-thumbnail">
+                        <div class="overlay">
+                            <div class="container my-auto centered atitle"><h1 class="atitle">{{ slika.artwork_id.title }}</h1>
+                                <br> <h6>by {{ slika.artwork_id.user_id }}</h6></div>
+                        </div></a>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+{% endblock %}

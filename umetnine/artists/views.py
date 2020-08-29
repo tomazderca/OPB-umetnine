@@ -12,7 +12,7 @@ from rest_framework.response import Response
 from django.db import connection
 from django.db.models import Q, Sum, Count
 from .forms import CommentForm
-from .models import Arts, Comments, ArtworksTags, Like
+from .models import Arts, Comments, ArtworksTags, Like, Tags
 from .models import Arts, Comments, ArtworksTags, UserDescription
 from django.contrib.auth.models import User
 from django.views.generic import ListView, TemplateView
@@ -244,3 +244,21 @@ def all_users(request):
         'page': page
     }
     return render(request, template, context)
+
+def all_tags(request):
+    used_tags = ArtworksTags.objects.all().distinct('tag_id__tag')
+    template_name = 'artists/all_tags.html'
+    context = {
+        'tags': used_tags
+    }
+    return render(request, template_name, context)
+
+def tag_search(request, tag_id):
+    template_name = 'artists/tag_search.html'
+    tag_str = Tags.objects.get(id=tag_id)
+    similar_tags = Tags.objects.filter(tag=tag_str)
+    tagged = ArtworksTags.objects.filter(tag_id__in=([tagid.id for tagid in similar_tags]))
+    context = {
+        'tagged': tagged
+    }
+    return render(request, template_name, context)
