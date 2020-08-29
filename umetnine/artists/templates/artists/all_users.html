@@ -1,9 +1,10 @@
 {% extends 'artists/base.html' %}
 
+
 {% block content %}
 
     <div class="container">
-        <table class="table">
+        <table id="example" class="display" width="100%">
             <thead>
             <tr>
                 <th scope="col">Username</th>
@@ -13,12 +14,12 @@
             </tr>
             </thead>
             <tbody>
-            {% for user in all_users %}
+            {% for user in liked %}
             <tr>
-                <th scope="row">{{ user.username }}</th>
+                <th scope="row"><a href="{% url 'artists:user-user' user.id %}">{{ user.username }}</a></th>
                 <td>{{ user.email }}</td>
-                <td></td>
-                <td></td>
+                <td> {{ user.red }}</td>
+                <td>{{ user.suma }}</td>
             </tr>
             {% endfor %}
             </tbody>

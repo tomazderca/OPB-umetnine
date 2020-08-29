@@ -1,13 +1,16 @@
+from collections import namedtuple, defaultdict
 from datetime import datetime
 from itertools import chain
 
+from django.contrib.auth import get_user_model
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponse, HttpResponseNotFound, Http404, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from django.db.models import Q
+from django.db import connection
+from django.db.models import Q, Sum, Count
 from .forms import CommentForm
 from .models import Arts, Comments, ArtworksTags, Like
 from .models import Arts, Comments, ArtworksTags, UserDescription
@@ -73,7 +76,8 @@ def dynamic_user_lookup_view(request, user_id):
     user_liked = Like.objects.filter(user=useri)
     likes = 0
     for art in user_art:
-        likes += Like.objects.filter(artwork=art.id).count()
+        likes += art.likes
+        # likes += Like.objects.filter(artwork=art.id).count()
     try:
         user = User.objects.get(id=user_id)
     except User.DoesNotExist:
@@ -217,28 +221,26 @@ def search(request):
     return render(request, template, context)
 
 
-# def all_users(request):
-#     template = 'artists/all_users.html'
-#     all_users = User.objects.all()
-#     all_arts = Arts.objects.all()
-#     all_liked = Like.objects.all()
-#
-#     context = {
-#         'all_users': all_users,
-#         'all_arts': all_arts,
-#         'all_liked': all_liked
-#
-#     }
-#
+def all_users(request):
+    users = get_user_model().objects.annotate(
+        suma=Sum('arts__likes'),
+        red=Count('arts__id')
+    ).order_by('username')
 
+    paginator = Paginator(users, 20)
+    page = request.GET.get('page')
+
+    try:
+        page = paginator.page(page)
+    except PageNotAnInteger:
+        page = paginator.page(1)
+    except EmptyPage:
+        page = paginator.page(paginator.num_pages)
+
+
+    template = 'artists/all_users.html'
+    context = {
+        'liked': users,
+        'page': page
+    }
     return render(request, template, context)
-
-class UsersListView(ListView):
-    model = User
-    template_name = 'artists/all_users.html'
-    context_object_name = 'all_users'
-    ordering = ['-username']
-    paginate_by = 20
-
-
-

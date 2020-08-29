@@ -9,5 +9,5 @@ urlpatterns = [
     path('like/<int:artwork_id>/', views.artwork_like_api_toggle, name="api-like-toggle"),
     path('<int:user_id>/', views.dynamic_user_lookup_view, name='user-user'),
     path('search/', views.search, name="search"),
-    path('users-tags/', views.UsersListView.as_view(), name='all-users')
+    path('users-tags/', views.all_users, name='all-users')
 ]
