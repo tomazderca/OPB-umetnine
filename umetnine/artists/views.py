@@ -183,10 +183,10 @@ def search(request):
         return redirect(request.META.get('HTTP_REFERER', '/'))
 
     artists = User.objects.filter(Q(username__icontains=query))
-    arti = Arts.objects.filter(Q(title__icontains=query) | Q(description__contains=query) | title_qs).order_by('likes')
-    art_by_user = Arts.objects.filter(user_id__in=([umet.id for umet in artists])).order_by('likes')
+    arti = Arts.objects.filter(Q(title__icontains=query) | Q(description__contains=query) | title_qs)
+    art_by_user = Arts.objects.filter(user_id__in=([umet.id for umet in artists]))
     tagi = ArtworksTags.objects.filter(Q(tag_id__tag__iexact=query) | tag_qs)
-    tagged_art = Arts.objects.filter(id__in=([tag.artwork_id.id for tag in tagi])).order_by('likes')
+    tagged_art = Arts.objects.filter(id__in=([tag.artwork_id.id for tag in tagi]))
     art = list(set(chain(arti, art_by_user, tagged_art)))
 
     paginator_art = Paginator(art, 20)
