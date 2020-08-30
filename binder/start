@@ -1,6 +1,6 @@
 #!/bin/bash
 export DJANGO_PORT=8000
-export DJANGO_ROOT=${JUPYTERHUB_SERVICE_PREFIX}proxy/${DJANGO_PORT}/
+export SCRIPT_NAME=${JUPYTERHUB_SERVICE_PREFIX}proxy/${DJANGO_PORT}/
 export POSTGRES_PORT=443
 cd umetnine
 python manage.py runserver &

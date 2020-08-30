@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+ROOT_URL = os.environ.get('SCRIPT_NAME', '/')
 DB_PORT = os.environ.get('POSTGRES_PORT', 5432)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -26,7 +27,7 @@ SECRET_KEY = '_+im0gv)g7q$bn781tkxrc^e4$f5)7v&^^_$1w&5hw7kz-9my&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -137,12 +138,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = ROOT_URL + 'static/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = '/user/profile'
-LOGOUT_REDIRECT_URL = '/user/logout'
+LOGIN_REDIRECT_URL = ROOT_URL + 'user/profile'
+LOGOUT_REDIRECT_URL = ROOT_URL + 'user/logout'
 
 try:
     from local_settings import *
