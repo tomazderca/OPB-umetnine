@@ -66,7 +66,6 @@ def profile_view(request):
             for tg in all_tags:
                 new_tag = Tags.objects.create(tag=tg)
                 ArtworksTags.objects.create(tag_id=new_tag, artwork_id=new_art)
-            context = {'form': NewArtForm(), 'new_art': new_art, "form2": form2}
             return redirect('/user/myworks/')
         else:
             return render(request, 'account/profile.html', {'form': NewArtForm(), "form2": TagForm()})
@@ -88,7 +87,7 @@ def edit_profile(request):
 
         if form.is_valid() and form2.is_valid():
             # dobro je izpolnjeno, posodobim bazo
-            obj, created = UserDescription.objects.update_or_create(
+            UserDescription.objects.update_or_create(
                 user_id_id=request.user.id,
                 defaults={'description': form2.cleaned_data['description']}
             )

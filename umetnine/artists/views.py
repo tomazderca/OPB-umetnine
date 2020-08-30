@@ -136,6 +136,7 @@ def dynamic_artwork_lookup_view(request, user_id, artwork_id):
         liked = Like.objects.filter(artwork=art, user=user)
     num_likes = Like.objects.filter(artwork=art).count()
     if request.method == 'POST':
+        # napisem nov koment
         form = CommentForm(request.POST)
         if form.is_valid() and user.is_authenticated:
             new_comment = form.save(commit=False)

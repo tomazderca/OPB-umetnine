@@ -92,6 +92,7 @@
                                     <p class="be-comment-text" id="comment_{{ komentar.id }}">
                                         {{ komentar.content }}
                                     </p>
+
                                     <textarea id="comment_{{ komentar.id }}_edit" style="display:none;"></textarea>
 
                                 </div>
@@ -228,7 +229,7 @@
 
                 edit.style.display = "block";
                 para.style.display = "none";
-                edit.value = para.innerHTML;
+                edit.value = para.innerHTML.trim();
                 last_edit = id;
             }
             else {
