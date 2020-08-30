@@ -64,8 +64,10 @@ def profile_view(request):
             tags_input = form2.cleaned_data['tag']
             all_tags = set(tags_input.split(", "))
             for tg in all_tags:
-                new_tag = Tags.objects.create(tag=tg)
-                ArtworksTags.objects.create(tag_id=new_tag, artwork_id=new_art)
+                if not Tags.objects.filter(tag=tg).exists():
+                    # ce tak tag se ne obstaja, ga dodam v bazo
+                    new_tag = Tags.objects.create(tag=tg)
+                    ArtworksTags.objects.create(tag_id=new_tag, artwork_id=new_art)
             return redirect('/user/myworks/')
         else:
             return render(request, 'account/profile.html', {'form': NewArtForm(), "form2": TagForm()})
