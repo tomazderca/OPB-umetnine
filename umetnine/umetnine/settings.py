@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+FORCE_SCRIPT_NAME = os.environ.get('DJANGO_URL', None)
+DB_PORT = os.environ.get('POSTGRES_PORT', 5432)
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -24,7 +27,7 @@ SECRET_KEY = '_+im0gv)g7q$bn781tkxrc^e4$f5)7v&^^_$1w&5hw7kz-9my&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -85,18 +88,18 @@ WSGI_APPLICATION = 'umetnine.wsgi.application'
 #     }
 # }
 
-with open('user-data.txt', 'r') as data:
-    username, password = data.readline().split()
+#with open('user-data.txt', 'r') as data:
+#    username, password = data.readline().split()
 
 # ----> PostgreSQL na solskem serverju:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'sem2020_tomazd',
-        'USER': username,
-        'PASSWORD': password,
+        'USER': 'javnost',
+        'PASSWORD': 'javnogeslo',
         'HOST': 'baza.fmf.uni-lj.si',
-        'PORT': '5432'
+        'PORT': DB_PORT
     }
     
 }
@@ -135,12 +138,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = FORCE_SCRIPT_NAME + 'static/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = '/user/profile'
-LOGOUT_REDIRECT_URL = '/user/logout'
+LOGIN_REDIRECT_URL = FORCE_SCRIPT_NAME + 'user/profile'
+LOGOUT_REDIRECT_URL = FORCE_SCRIPT_NAME + 'user/logout'
 
 try:
     from local_settings import *
