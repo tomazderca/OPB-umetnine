@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+DB_PORT = os.environ.get('POSTGRES_PORT', 5432)
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -85,18 +87,18 @@ WSGI_APPLICATION = 'umetnine.wsgi.application'
 #     }
 # }
 
-with open('user-data.txt', 'r') as data:
-    username, password = data.readline().split()
+#with open('user-data.txt', 'r') as data:
+#    username, password = data.readline().split()
 
 # ----> PostgreSQL na solskem serverju:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'sem2020_tomazd',
-        'USER': username,
-        'PASSWORD': password,
+        'USER': 'javnost',
+        'PASSWORD': 'javnogeslo',
         'HOST': 'baza.fmf.uni-lj.si',
-        'PORT': '5432'
+        'PORT': DB_PORT
     }
     
 }
