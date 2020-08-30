@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
-ROOT_URL = os.environ.get('SCRIPT_NAME', '/')
+FORCE_SCRIPT_NAME = os.environ.get('DJANGO_URL', None)
 DB_PORT = os.environ.get('POSTGRES_PORT', 5432)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -138,12 +138,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = ROOT_URL + 'static/'
+STATIC_URL = FORCE_SCRIPT_NAME + 'static/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = ROOT_URL + 'user/profile'
-LOGOUT_REDIRECT_URL = ROOT_URL + 'user/logout'
+LOGIN_REDIRECT_URL = FORCE_SCRIPT_NAME + 'user/profile'
+LOGOUT_REDIRECT_URL = FORCE_SCRIPT_NAME + 'user/logout'
 
 try:
     from local_settings import *
