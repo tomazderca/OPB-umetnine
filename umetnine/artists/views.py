@@ -12,7 +12,7 @@ from rest_framework.response import Response
 
 from django.db import connection
 from django.db.models import Q, Sum, Count
-from .forms import CommentForm
+from .forms import CommentForm, EditCommentForm
 from .models import Arts, Comments, ArtworksTags, Like, Tags
 from .models import Arts, Comments, ArtworksTags, UserDescription
 from django.contrib.auth.models import User
@@ -71,6 +71,24 @@ def artwork_like_api_toggle(request, artwork_id):
     return Response({"message": "error"})
 
 
+@api_view(['GET'])
+def edit_comment_api(request, comment_id, new_comment):
+    if request.method == "GET":
+        comment_to_change = Comments.objects.get(id=comment_id)
+        user = request.user
+        if user.is_authenticated and user == comment_to_change.user_id:
+            comment_to_change.content = new_comment
+            comment_to_change.save()
+            data = {
+                "success": True,
+                "new-comment": comment_to_change.content
+            }
+            return Response(data)
+    else:
+    return Response({"message": "error"})
+
+
+
 def dynamic_user_lookup_view(request, user_id):
     user_art = Arts.objects.filter(user_id=user_id)
     avatar = Arts.objects.filter(user_id=user_id).first() # TODO: trenutno zbere za avatar prvo slike
@@ -113,7 +131,6 @@ def dynamic_artwork_lookup_view(request, user_id, artwork_id):
     user_liked = Like.objects.filter(user=useri)
     art_liked = Like.objects.filter(artwork=art)
     liked_arts = Like.objects.filter(user__in=([lajker.user for lajker in art_liked])).distinct('artwork')[:20]
-
 
     liked = None
     if user.is_authenticated:
@@ -251,6 +268,7 @@ def all_users(request):
     }
     return render(request, template, context)
 
+
 def all_tags(request):
     used_tags = ArtworksTags.objects.all().distinct('tag_id__tag')
     template_name = 'artists/all_tags.html'
@@ -258,6 +276,7 @@ def all_tags(request):
         'tags': used_tags
     }
     return render(request, template_name, context)
+
 
 def tag_search(request, tag_id):
     template_name = 'artists/tag_search.html'

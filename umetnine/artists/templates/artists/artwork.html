@@ -85,10 +85,15 @@
                                     <span class="be-comment-time">
                                         <i class="fa fa-clock-o"></i>
                                         {{ komentar.timestamp|date:"D, j. M Y, H:i:s" }}
+                                        {% if komentar.user_id == user %}
+                                        <a onclick="comment_edit('comment_{{ komentar.id }}', this)">Edit</a>
+                                        {% endif %}
                                     </span>
-                                    <p class="be-comment-text">
+                                    <p class="be-comment-text" id="comment_{{ komentar.id }}">
                                         {{ komentar.content }}
                                     </p>
+                                    <textarea id="comment_{{ komentar.id }}_edit" style="display:none;"></textarea>
+
                                 </div>
                             </div>
                         </div>
@@ -155,7 +160,6 @@
                         {% for slika in liked_arts %}
                             {% if slika.artwork.id != artwork_id  %} {% comment %}and slika.artwork.user_id.id != user_id{% endcomment %}
 
-
                                 <a href="{% url 'artists:user-artwork' slika.artwork.user_id.id slika.artwork.id %}"
                                    class="rounded image-bg"
                                    style="background-image:url({{ slika.artwork.url }})">
@@ -204,9 +208,58 @@
             oReq.send();
         }
 
+
+        ///comments
+
+        var last_edit = undefined;
+        function comment_edit (id, btn) {
+            let para = document.getElementById(id);
+            let edit = document.getElementById(id + "_edit");
+            if(!para || !edit)
+                return;
+
+            if(edit.style.display == "" || edit.style.display == "none") {
+                //vklopi urejanje
+                if(last_edit != undefined) {
+                    return;
+                    //comment_edit(last_edit);
+                }
+                btn.innerHTML = "Submit";
+
+                edit.style.display = "block";
+                para.style.display = "none";
+                edit.value = para.innerHTML;
+                last_edit = id;
+            }
+            else {
+
+                if(edit.value.length < 2) return;
+                if(edit.value.match(/[^(0-9a-zA-Z ČŠŽčšž)]/)) {
+                    alert("Only alphanumeric characters are allowed.");
+                    return;
+                }
+
+                //izklopi urejanje
+                btn.innerHTML = "Edit";
+                edit.style.display = "none";
+                para.style.display = "block";
+                para.innerHTML = edit.value;
+                last_edit = undefined;
+
+                //send request
+                var oReq = new XMLHttpRequest();
+                oReq.addEventListener("load", function () {
+                    console.log(JSON.parse(this.responseText));
+                });
+                let request_string = "/editcomment" + "/" + id.replace("comment_", "") + "/" + encodeURI(edit.value);
+                //console.log(request_string);
+                oReq.open("GET", request_string);
+                oReq.send();
+            }
+        }
+
     </script>
 
 
 {% endblock content %}
-
 

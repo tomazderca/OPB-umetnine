@@ -27,11 +27,10 @@ class CommentForm(forms.ModelForm):
         fields = ['content']
 
 
-class UserDescriptionForm(forms.ModelForm):
-
+class EditCommentForm(forms.ModelForm):
     class Meta:
-        model = UserDescription
-        fields = ['description']
+        model = Comments
+        fields = ['content']
 
 
 class UserDescriptionForm(forms.ModelForm):
