@@ -140,11 +140,12 @@ USE_TZ = True
 
 if FORCE_SCRIPT_NAME:
     STATIC_URL = FORCE_SCRIPT_NAME + 'static/'
+    LOGIN_REDIRECT_URL = FORCE_SCRIPT_NAME + 'user/profile'
+    LOGOUT_REDIRECT_URL = FORCE_SCRIPT_NAME + 'user/profile'
 else:
     STATIC_URL = '/static/'
-
-LOGIN_REDIRECT_URL = '/user/profile'
-LOGOUT_REDIRECT_URL = '/user/profile'
+    LOGIN_REDIRECT_URL = '/user/profile'
+    LOGOUT_REDIRECT_URL = '/user/logout'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
