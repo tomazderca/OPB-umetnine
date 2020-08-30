@@ -46,7 +46,6 @@ def art_delete(request, pk):
         art_to_delete.delete()
     finally:
         return redirect("/user/myworks")
-        # return redirect("{% url 'account:all_user_works' %}")
 
 
 def profile_view(request):
@@ -84,22 +83,28 @@ def edit_profile(request):
         return HttpResponse(html)
     # za vpisane uporabnike pripravim pravi view
     if request.method == 'POST':
+        print("post je, kul")
         form = EditProfileFrom(request.POST, instance=request.user)
         form2 = UserDescriptionForm(request.POST)
 
+        print("mam oba forma")
         if form.is_valid() and form2.is_valid():
+            print("dobro izpolnjena")
             # dobro je izpolnjeno, posodobim bazo
             obj, created = UserDescription.objects.update_or_create(
                 user_id_id=request.user.id,
                 defaults={'description': form2.cleaned_data['description']}
             )
             form.save()
+            print("ali sem naredila nov objekt?  -> ", created)
             return redirect('/user/profile')
         else:
+            print("ni dobro izpolnjeno")
             # ce formi niso dobro izpolnjeni
             form = EditProfileFrom()
             form2 = UserDescriptionForm()
     else:
+        print("tole je post")
         try:
             old_description = UserDescription.objects.get(user_id_id=request.user.id)
         except Exception:

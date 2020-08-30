@@ -14,14 +14,14 @@ p{
 
 .form-control{
     background: transparent;
-    border: 2px solid #efcc8d;
+    border: 2px solid #17a2b8;
 }
 
 .btn-secondary{
     width: 100%;
     float: left;
     border: 10px;
-    background: #daac25;
+    background: #17a2b8;
     padding: 10px;
     text-align: center;
     font-size: 20px;
@@ -61,7 +61,7 @@ a.button-edit{
     float: left;
     color: white;
     border: 10px;
-    background: #daac25;
+    background: #417bffc7;
     padding: 10px;
     text-align: center;
     font-size: 18px;

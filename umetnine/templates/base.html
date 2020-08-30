@@ -11,24 +11,27 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <!-- Awesome Fonts -->
-    <script src="https://kit.fontawesome.com/198eb0a8ac.js" crossorigin="anonymous"></script>
-    <meta charset="UTF-8">
-
-    <!-- Dodano za all-arts page -->
     <link rel="stylesheet" type="text/css" href="{% static 'artists/main.css' %}">
 
     <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.css">
+    <link rel="stylesheet" href="{% static 'artists/thumbnail-gallery.css' %}">
+    <link rel="stylesheet" href="{% static 'artists/koments.css' %}">
+    <link rel="stylesheet" href="{% static 'artists/drugagalerija.css' %}">
+    <link rel="stylesheet" href="{% static 'artists/profile.css' %}">
 
 
+    <!-- Awesome Fonts -->
+    <script src="https://kit.fontawesome.com/198eb0a8ac.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
 
     {% block css_import %}
+    <link rel="stylesheet" type="text/css" href="{% static 'artists/main.css' %}">
     {% endblock css_import %}
 
     {% block navbar %}
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2">
         <a class="navbar-brand" href="{% url 'artists:artists-uporabnik' %}">Umetnine</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -38,35 +41,28 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Artists
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'artists:artists-uporabnik' %}">by Alphabet</a>
-                        <a class="dropdown-item" href="#">by Genre</a>
-                        <a class="dropdown-item" href="#">by Year</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'artists:artists-uporabnik' %}" id="navbarDropdown">
                         Artworks
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">by Alphabet</a>
-                        <a class="dropdown-item" href="#">by Genre</a>
-                        <a class="dropdown-item" href="#">by Year</a>
-                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'artists:all-users' %}" id="navbarDropdown">
+                        Users
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'artists:all-tags' %}" id="navbarDropdown">
+                        Tags
+                    </a>
                 </li>
             </ul>
-            <form class="mx-2 my-auto d-inline w-100">
+            <form method="GET" class="mx-2 my-auto d-inline w-100" action="{% url 'artists:search' %}">
                 <div class="input-group">
                     <input type="text" id="search-bar" class="form-control border border-right-0"
-                           placeholder="Search...">
+                           placeholder="Search..." name="q" value="{{ request.GET.q }}">
                     <span class="input-group-append">
-                    <button class="btn btn-outline-secondary border border-left-0" type="button">
+                    <button class="btn btn-outline-secondary border border-left-0" type="submit">
                         <i class="fas fa-search"></i>
                     </button>
                 </span>
@@ -93,28 +89,30 @@
     </nav>
     {% endblock navbar %}
 
-    {% block naslov %}
-    <title>Umetnine</title>
-    {% endblock naslov %}
-
 </head>
 
 
 <body>
-<div class="container">
-    {% block content %}
 
-    {% endblock %}
+{% block content %}
+{% endblock %}
+
+
+<!-- Footer -->
+<div class="container justify-content-center mt-5">
+    <div class="row justify-content-center mt-5">
+        {% include 'footer.html' %}
+    </div>
 </div>
-
-
-<div class="foot">
-{% include 'footer.html' %}
-</div>
+<!-- Footer -->
 
 
 <!-- Optional JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+<script src="{% static 'artists/jq.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -125,5 +123,18 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+
+<!-- Lightbox Baguette-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+
+<script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+
+
+<script src="{% static 'artists/jq.js' %}"></script>
+
 </body>
 </html>
+

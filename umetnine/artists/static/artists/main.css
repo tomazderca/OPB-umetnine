@@ -70,3 +70,8 @@ footer.page-footer.font-small.mdb-color.pt-4 {
 p.text.mb-1.font-weight-bold {
     text-align: right;
 }
+
+
+footer.ftr.page-footer.font-small.pt-4.mt-5.border {
+    background-color: #ffffff38;
+}
