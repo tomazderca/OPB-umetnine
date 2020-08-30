@@ -84,7 +84,6 @@ def edit_comment_api(request, comment_id, new_comment):
                 "new-comment": comment_to_change.content
             }
             return Response(data)
-    else:
     return Response({"message": "error"})
 
 
