@@ -77,7 +77,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                         {% if user.is_authenticated %}
-                        <a class="dropdown-item" href="{% url 'account:profile' %}">Profile</a>
+                        <a class="dropdown-item" href="{% url 'artists:profile' %}">Profile</a>
                         <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
                         {% else %}
                         <a class="dropdown-item" href="{% url 'login' %}">Log in</a>

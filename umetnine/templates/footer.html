@@ -10,7 +10,7 @@
                 </p>
                 {% if user.is_authenticated %}
                 <p>
-                    <a href="{% url 'account:profile' %}">Your Account</a>
+                    <a href="{% url 'artists:profile' %}">Your Account</a>
                 </p>
                 <p>
                     <a href="{% url 'artists:user-user' user.id %}">Your front page</a>

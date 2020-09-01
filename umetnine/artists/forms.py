@@ -1,6 +1,36 @@
 from django import forms
+from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+from django.contrib.auth.models import User
 
 from artists.models import Arts, Tags, Comments, UserDescription
+
+
+class RegisterForm(UserCreationForm):
+    email = forms.EmailField(
+        label='Email',
+        widget=forms.EmailInput(attrs={'class': 'form-control'})
+    )
+
+    class Meta:
+        model = User
+        fields = [
+            'username',
+            'email',
+            'password1',
+            'password2',
+        ]
+
+
+class EditProfileFrom(UserChangeForm):
+    class Meta:
+        model = User
+        fields = [
+            'first_name',
+            'last_name',
+            'email',
+            'password'
+        ]
+        exclude = ['password']
 
 
 class TagForm(forms.ModelForm):
@@ -27,14 +57,7 @@ class CommentForm(forms.ModelForm):
         fields = ['content']
 
 
-class EditCommentForm(forms.ModelForm):
-    class Meta:
-        model = Comments
-        fields = ['content']
-
-
 class UserDescriptionForm(forms.ModelForm):
-
     class Meta:
         model = UserDescription
         fields = ['description']
@@ -58,4 +81,3 @@ class NewArtForm(forms.ModelForm):
             'description',
             'url'
         ]
-

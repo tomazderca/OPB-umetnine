@@ -7,7 +7,7 @@
 
 {% block css_import %}
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'account/style-edit.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'artists/style-edit.css' %}">
 <!--<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">-->
 {% endblock css_import %}
 
@@ -44,10 +44,10 @@
             </ul>
 
 
-            <button class="btn btn-secondary" onclick="location.href='{% url 'account:edit_profile' %}'" type="button">
+            <button class="btn btn-secondary" onclick="location.href='{% url 'artists:edit_profile' %}'" type="button">
                 Edit information
             </button>
-            <button class="btn btn-secondary" onclick="location.href='{% url 'account:all_user_works' %}'"
+            <button class="btn btn-secondary" onclick="location.href='{% url 'artists:all_user_works' %}'"
                     type="button">
                 List of artwork added by me
             </button>

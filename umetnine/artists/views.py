@@ -1,24 +1,22 @@
-from collections import namedtuple, defaultdict
 from datetime import datetime
 from functools import reduce
 from itertools import chain
+import operator
 
+from django.contrib.auth import authenticate, login
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.http import HttpResponse, HttpResponseNotFound, Http404, HttpResponseRedirect
+from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Q, Sum, Count
+from django.views.generic import ListView
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from django.db import connection
-from django.db.models import Q, Sum, Count
-from .forms import CommentForm, EditCommentForm
-from .models import Arts, Comments, ArtworksTags, Like, Tags
-from .models import Arts, Comments, ArtworksTags, UserDescription
-from django.contrib.auth.models import User
-from django.views.generic import ListView, TemplateView
-import operator
-
+from .forms import RegisterForm, EditProfileFrom
+from .forms import CommentForm, NewArtForm, TagForm, UserDescriptionForm
+from .models import Arts, Comments, ArtworksTags, UserDescription, Like, Tags
 
 
 
@@ -30,6 +28,109 @@ def uporabniki(request):
     return render(request, 'artists/uporabniki.html', context)
 
 
+def register(request):
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            new_user = authenticate(username=form.cleaned_data['username'],
+                                    password=form.cleaned_data['password1'],
+                                    )
+            login(request, new_user)
+            return redirect('/user/profile/')
+    else:
+        form = RegisterForm()
+
+    return render(request, 'artists/register.html', {'form': form})
+
+
+def user_list(request):
+    queryset = User.objects.all()  # list of objects
+    return render(request, 'artists/userList.html', {'object_list': queryset})
+
+
+def all_user_works(request):
+    queryset = Arts.objects.filter(user_id=request.user.id).order_by('-timestamp')  # list of objects
+    context = {'object_list': queryset, 'user': request.user}
+    return render(request, 'artists/all_user_works.html', context)
+
+
+def art_delete(request, pk):
+    art_to_delete = get_object_or_404(Arts, id=pk)
+    try:
+        art_to_delete.delete()
+    finally:
+        return redirect("/user/myworks")
+
+
+def profile_view(request):
+    if not request.user.is_authenticated:
+        html = "<h1>You are not logged in.</h1><a href='/login'>Log in.</a>"
+        return HttpResponse(html)
+    # za vpisane uporabnike pripravim pravi view
+    if request.method == "POST":
+        form = NewArtForm(request.POST)
+        form2 = TagForm(request.POST)
+        if form.is_valid() and form2.is_valid():
+            new_art = form.save(commit=False)
+            new_art.user_id = request.user
+            new_art.timestamp = datetime.now()
+            new_art.save()
+            tags_input = form2.cleaned_data['tag']
+            all_tags = set(tags_input.split(", "))
+            for tg in all_tags:
+                if not Tags.objects.filter(tag=tg).exists():
+                    # ce tak tag se ne obstaja, ga dodam v bazo
+                    new_tag = Tags.objects.create(tag=tg)
+                    ArtworksTags.objects.create(tag_id=new_tag, artwork_id=new_art)
+            # return
+            return redirect('/user/myworks/')
+        else:
+            return render(request, 'artists/profile.html', {'form': NewArtForm(), "form2": TagForm()})
+    else:  # request je get
+        form = NewArtForm()
+        form2 = TagForm()
+        context = {'form': form, "form2": form2}
+    return render(request, 'artists/profile.html', context)
+
+
+def edit_profile(request):
+    if not request.user.is_authenticated:
+        html = "<h1>You are not logged in.</h1><a href='/login'>Log in.</a>"
+        return HttpResponse(html)
+    # za vpisane uporabnike pripravim pravi view
+    if request.method == 'POST':
+        form = EditProfileFrom(request.POST, instance=request.user)
+        form2 = UserDescriptionForm(request.POST)
+        if form.is_valid() and form2.is_valid():
+            # dobro je izpolnjeno, posodobim bazo
+            UserDescription.objects.update_or_create(
+                user_id_id=request.user.id,
+                defaults={'description': form2.cleaned_data['description']}
+            )
+            form.save()
+            return redirect('/user/profile')
+        else:
+            # ce formi niso dobro izpolnjeni
+            form = EditProfileFrom()
+            form2 = UserDescriptionForm()
+    else:
+        try:
+            old_description = UserDescription.objects.get(user_id_id=request.user.id)
+            form2 = UserDescriptionForm(instance=old_description)
+        except Exception:
+            form2 = UserDescriptionForm()
+        form = EditProfileFrom(instance=request.user)
+        context = {'form': form, 'form2': form2}
+        return render(request, 'artists/edit_profile.html', context)
+
+    return render(request, 'artists/edit_profile.html', {})
+
+
+def logout(request):
+    return render(request, 'artists/logout.html', {})
+
+
 class PostListView(ListView):
     model = Arts
     template_name = 'artists/uporabniki.html'
@@ -38,9 +139,8 @@ class PostListView(ListView):
     paginate_by = 15
 
     def get_ordering(self):
-        ordering = self.request.GET.get('ordering','-timestamp')
+        ordering = self.request.GET.get('ordering', '-timestamp')
         return ordering
-
 
 
 @api_view(['GET'])
@@ -87,10 +187,9 @@ def edit_comment_api(request, comment_id, new_comment):
     return Response({"message": "error"})
 
 
-
 def dynamic_user_lookup_view(request, user_id):
     user_art = Arts.objects.filter(user_id=user_id)
-    avatar = Arts.objects.filter(user_id=user_id).first() # TODO: trenutno zbere za avatar prvo slike
+    avatar = Arts.objects.filter(user_id=user_id).first()  # TODO: trenutno zbere za avatar prvo slike
     useri = User.objects.get(id=user_id)
     user_liked = Like.objects.filter(user=useri)
     likes = 0
@@ -259,7 +358,6 @@ def all_users(request):
         page = paginator.page(1)
     except EmptyPage:
         page = paginator.page(paginator.num_pages)
-
 
     template = 'artists/all_users.html'
     context = {

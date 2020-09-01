@@ -16,8 +16,8 @@
                         <a class="mr-2" href="{% url 'artists:user-artwork' user.id art.id %}">{{ art.title }}</a>
                         <small class="text-muted">{{ art.timestamp }}</small>
 
-                        <a href="{% url 'account:art_delete' art.id %}" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
-                        <!--<form action="{% url 'account:art_delete' art.id %}" method="post">
+                        <a href="{% url 'artists:art_delete' art.id %}" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+                        <!--<form action="{% url 'artists:art_delete' art.id %}" method="post">
                             {% csrf_token %}
                             <input type="submit" value="Delete"> -->
                         </form>
