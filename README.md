@@ -7,7 +7,7 @@ OPB projekt na temo umetnin in umetnikov
 
 ## Opis
 
-Umetnine je spletna aplikacija, ki uporabnikom omogoča enostavno brskanje med umetninami in njihovimi avtorji. Aplikacija omogoča, da se uporabnik registrira, oziroma prijavi, če že ima račun, kar mu omogoča, da tudi sam dodaja nove umetnine v bazo. Poleg tega ima tudi možnost komentiranja in všečkanja umetnin. Umetnine so opremljene tudi s ključnimi besedami, zato je mogoče tudi tematsko iskanje slik.
+Umetnine je spletna aplikacija, ki uporabnikom omogoča enostavno brskanje med umetninami in njihovimi avtorji. Aplikacija omogoča, da se uporabnik registrira, oziroma prijavi, če že ima račun, kar mu omogoča, da tudi sam dodaja nove umetnine v bazo. Poleg tega ima možnost komentiranja in všečkanja umetnin. Umetnine so opremljene s ključnimi besedami, zato je mogoče tematsko iskanje slik.
 
 ## Uporaba
 
