@@ -235,7 +235,7 @@
             else {
 
                 if(edit.value.length < 2) return;
-                if(edit.value.match(/[^(0-9a-zA-Z ČŠŽčšž)]/)) {
+                if(edit.value.match(/[^(0-9a-zA-Z ČŠŽčšž.,!?"-)]/)) {
                     alert("Only alphanumeric characters are allowed.");
                     return;
                 }
