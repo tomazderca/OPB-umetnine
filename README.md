@@ -2,7 +2,7 @@
 OPB projekt na temo umetnin in umetnikov
 
 ### Binder
-[![bottle.py](https://mybinder.org/v2/gh/tomazderca/OPB-umetnine/master?urlpath=proxy/8000/)
+[![bottle.py](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/tomazderca/OPB-umetnine/master?urlpath=proxy/8000/)
 
 
 #Opis
