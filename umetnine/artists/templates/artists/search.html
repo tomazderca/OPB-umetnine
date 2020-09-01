@@ -57,7 +57,21 @@
 
                         </span>
 </div>
-
+{% else %}
+    <div class="container mt-4">
+        <div class="row mt-4">
+            <div class="card m-auto mt-4 shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title">
+                        No results
+                    </h2>
+                    <p class="card-text">
+                        There were no results found matching your query: "{{ query }}"
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endif %}
 
 

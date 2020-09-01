@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <a class="lightbox" href="{{ art.url }}">
-                            <img src="{{ art.url }}" alt="" class="img-thumbnail img-fluid2">
+                            <img src="{{ art.url }}" alt="" class="img-thumbnail img-fluid2 shadow-sm">
                         </a>
                     </div>
                 </div>
@@ -20,7 +20,7 @@
                 <!-- vrstica opis, ipd -->
                 <div class="row justify-content-center">
                     <div class="col-md-8">
-                        <div class="card booking-card my-2">
+                        <div class="card booking-card my-2 shadow-sm">
                             <div class="card-body">
 
                                 <!-- naslov, avtor -->
@@ -46,9 +46,11 @@
                                     {% endfor %}
                                 </ul>
                                 <!-- description -->
+                            {% if art.description %}
                                 <hr class="my-4">
                                 <p class="card-text">{{ art.description }}</p>
-                                <hr class="my-4">
+                            {% endif %}
+
 
 
                             </div>
@@ -59,7 +61,7 @@
                 </div>
 
                 <!-- dodajanje komentarjev -->
-                <div class="row justify-content-center">
+                <div class="row justify-content-center mt-4">
                     <div class="col-md-8 text-center">
                         {% if user.is_authenticated %}
                             <form method="POST">{% csrf_token %}
@@ -77,7 +79,7 @@
                 {% for komentar in comments %}
                     <div class="row justify-content-center">
                         <div class="col-md-8">
-                            <div class="be-comment">
+                            <div class="be-comment shadow-sm">
                                 <div class="be-comment-content">
                                     <span class="be-comment-name">
                                         <a href="{% url 'artists:user-user' komentar.user_id.id %}">{{ komentar.user_id }}</a>
