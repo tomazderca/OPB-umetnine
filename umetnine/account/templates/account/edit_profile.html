@@ -27,8 +27,8 @@
         {{ form2|crispy }}
 
         <div>
-            <button id="submit" class="btn btn-secondary">Save</button>
-            <button id="cancel" class="btn btn-secondary" onclick="javascript:history.back();">Cancel</button>
+            <button id="submit" class="btn btn-secondary" onclick="{% url 'account:all_user_works' %}">Save</button>
+            <button id="cancel" type="reset" class="btn btn-secondary" onclick="javascript:history.back();">Cancel</button>
             <br><br>
         </div>
 

@@ -68,6 +68,7 @@ def profile_view(request):
                     # ce tak tag se ne obstaja, ga dodam v bazo
                     new_tag = Tags.objects.create(tag=tg)
                     ArtworksTags.objects.create(tag_id=new_tag, artwork_id=new_art)
+            # return
             return redirect('/user/myworks/')
         else:
             return render(request, 'account/profile.html', {'form': NewArtForm(), "form2": TagForm()})
@@ -86,7 +87,6 @@ def edit_profile(request):
     if request.method == 'POST':
         form = EditProfileFrom(request.POST, instance=request.user)
         form2 = UserDescriptionForm(request.POST)
-
         if form.is_valid() and form2.is_valid():
             # dobro je izpolnjeno, posodobim bazo
             UserDescription.objects.update_or_create(
