@@ -23,7 +23,5 @@ urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path('register/', v.register, name='register'),
 
-    # path('unusedButHasTail/', include('homepage.urls')),
-    # path('user/', include('artists.urls')),
     path('', include('artists.urls'))
 ]
