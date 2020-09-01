@@ -143,7 +143,7 @@ if FORCE_SCRIPT_NAME:
     LOGIN_REDIRECT_URL = FORCE_SCRIPT_NAME + 'user/profile'
     LOGOUT_REDIRECT_URL = FORCE_SCRIPT_NAME + 'user/logout'
 else:
-    STATIC_URL = '/static/'
+    STATIC_URL = 'static/'
     LOGIN_REDIRECT_URL = '/user/profile'
     LOGOUT_REDIRECT_URL = '/user/logout'
 
