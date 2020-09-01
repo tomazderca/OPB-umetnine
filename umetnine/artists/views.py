@@ -291,12 +291,14 @@ def search(request):
     template = 'artists/search.html'
     query = request.GET.get('q', '')
 
+    if query.isspace() or query is None or query == '':
+        return redirect(request.META.get('HTTP_REFERER', '/'))
+
     splitq = query.split()
     tag_qs = reduce(operator.or_, (Q(tag_id__tag__iexact=x) for x in splitq))
     title_qs = reduce(operator.and_, (Q(title__icontains=x) for x in splitq))
 
-    if query.isspace() or query is None or query == '':
-        return redirect(request.META.get('HTTP_REFERER', '/'))
+
 
     artists = User.objects.filter(Q(username__icontains=query))
     arti = Arts.objects.filter(Q(title__icontains=query) | Q(description__contains=query) | title_qs)
