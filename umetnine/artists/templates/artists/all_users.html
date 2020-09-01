@@ -19,7 +19,7 @@
                 <th scope="row"><a href="{% url 'artists:user-user' user.id %}">{{ user.username }}</a></th>
                 <td>{{ user.email }}</td>
                 <td> {{ user.red }}</td>
-                <td>{{ user.suma }}</td>
+                <td> {% if user.suma is None %} 0 {% else %}{{ user.suma }} {% endif %}</td>
             </tr>
             {% endfor %}
             </tbody>
