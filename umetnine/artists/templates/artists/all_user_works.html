@@ -10,7 +10,7 @@
         {% for art in object_list %}
             <div class="col-sm-6 col-md-4" align="center">
                 <div class="thumbnail">
-                    <a class="lightbox" href="{{ art.url }}">
+                    <a class="lightbox" href="{% url 'artists:user-artwork' art.user_id.id art.id %}">
                         <img src="{{ art.url }}" alt="" class="img-thumbnail">
                     </a>
                     <div class="caption">
