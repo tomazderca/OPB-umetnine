@@ -83,6 +83,9 @@ def profile_view(request):
                     # ce tak tag se ne obstaja, ga dodam v bazo
                     new_tag = Tags.objects.create(tag=tg)
                     ArtworksTags.objects.create(tag_id=new_tag, artwork_id=new_art)
+                else:
+                    old_tag = Tags.objects.get(tag=tg)
+                    ArtworksTags.objects.create(tag_id=old_tag, artwork_id=new_art)
             # return
             return redirect('/user/myworks/')
         else:
