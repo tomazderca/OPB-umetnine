@@ -4,6 +4,7 @@
         <h1>Art by {{ user.username }}</h1>
     </div>
 
+    <div class="container">
     <div class="tz-gallery">
         <div class="row">
         {% for art in object_list %}
@@ -26,6 +27,7 @@
             </div>
         {% endfor %}
         </div>
+    </div>
     </div>
 
     <p class="paginator">
